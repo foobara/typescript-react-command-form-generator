@@ -6,6 +6,12 @@ GIT
     foobara (0.0.1)
 
 GIT
+  remote: https://github.com/foobara/files-generator.git
+  revision: 036cbc7c677b30b145027853f831da0df852e9f2
+  specs:
+    foobara-files-generator (0.1.0)
+
+GIT
   remote: https://github.com/foobara/rubocop-rules.git
   revision: ea100ea86b708a441ef66ce0861dc72237316f2a
   specs:
@@ -139,6 +145,7 @@ PLATFORMS
 DEPENDENCIES
   foobara!
   foobara-command-generator!
+  foobara-files-generator!
   foobara-rubocop-rules!
   foobara-spec-helpers!
   foobara-util!

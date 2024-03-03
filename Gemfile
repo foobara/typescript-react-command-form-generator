@@ -8,6 +8,8 @@ gem "foobara", git: "foobara", branch: "main"
 
 # gem "foobara-dotenv-loader", github: "foobara/dotenv-loader"
 # gem "foobara-dotenv-loader", path: "../dotenv-loader"
+gem "foobara-files-generator", github: "foobara/files-generator"
+# gem "foobara-files-generator", path: "../files-generator"
 # gem "foobara-rack-connector", github: "rack-connector", branch: "main"
 # gem "foobara-rack-connector", path: "..-connector", branch: "main"
 # gem "foobara-redis-crud-driver", github: "foobara/redis-crud-driver"
