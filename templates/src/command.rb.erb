@@ -1,6 +1,8 @@
-<% module_path.each do |part| %>
+<% module_path[..-2].each do |part| %>
 module <%= part %>
 <% end %>
+
+class <%= module_path.last %>
   # class SomeError < RuntimeError
   #   class << self
   #     def context_type_declaration

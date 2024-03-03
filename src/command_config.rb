@@ -9,18 +9,22 @@ module Foobara
           description :string
           organization_name :string, :allow_nil
           domain_name :string, :allow_nil
-          module_path [:string]
+          full_module_name :string
         end
 
+        attr_accessor :module_path
+
         def initialize(attributes = nil, options = {})
-          module_path = attributes[:module_path]
+          full_module_name = attributes[:full_module_name]
+          module_path = full_module_name&.split("::")
           command_name = attributes[:command_name]
           description = attributes[:description]
           organization_name = attributes[:organization_name]
           domain_name = attributes[:domain_name]
 
-          if organization_name.nil? && domain_name.nil? && module_path.nil?
-            module_path = command_name.split("::")
+          if organization_name.nil? && domain_name.nil? && full_module_name.nil?
+            full_module_name = command_name
+            module_path = full_module_name.split("::")
 
             *prefix, command_name = module_path
 
@@ -37,10 +41,12 @@ module Foobara
               description:,
               organization_name:,
               domain_name:,
-              module_path:
+              full_module_name:
             },
             options
           )
+
+          self.module_path = module_path
         end
       end
     end

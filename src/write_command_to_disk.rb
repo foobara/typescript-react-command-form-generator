@@ -1,4 +1,4 @@
-require_relative "generate_empty_ruby_project"
+require_relative "generate_command"
 
 module Foobara
   module Generators
@@ -32,7 +32,7 @@ module Foobara
         end
 
         def default_output_directory
-          command_config.org_slash_domain
+          "."
         end
 
         def generate_file_contents
@@ -47,14 +47,14 @@ module Foobara
         end
 
         def rubocop_autocorrect
+          # :nocov:
           Open3.popen3("bundle exec rubocop -A") do |_stdin, _stdout, stderr, wait_thr|
             exit_status = wait_thr.value
             unless exit_status.success?
-              # :nocov:
               raise "could not rubocop -A. #{stderr.read}"
-              # :nocov:
             end
           end
+          # :nocov:
         end
       end
     end

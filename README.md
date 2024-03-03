@@ -1,9 +1,9 @@
-# Foobara::EmptyRubyProjectGenerator
+# Foobara::CommandGenerator
 
 TODO: Delete this and the text below, and describe your gem
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library
-into a gem. Put your Ruby code in the file `lib/foobara/empty_ruby_project_generator`. To experiment with that code,
+into a gem. Put your Ruby code in the file `lib/foobara/command_generator`. To experiment with that code,
 run `bin/console` for an interactive prompt.
 
 ## Installation
@@ -43,7 +43,7 @@ push git commits and the created tag, and push the `.gem` file to [rubygems.org]
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub
-at https://github.com/[USERNAME]/foobara-empty_ruby_project_generator.
+at https://github.com/[USERNAME]/foobara-command-generator.
 
 ## License
 
