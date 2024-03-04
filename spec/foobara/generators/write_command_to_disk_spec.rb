@@ -30,7 +30,7 @@ RSpec.describe Foobara::Generators::CommandGenerator::WriteCommandToDisk do
     it "contains base files" do
       expect(outcome).to be_success
 
-      expect(result.keys).to include("src/some_org/some_domain/some_command.rb")
+      expect(command.paths_to_source_code.keys).to include("src/some_org/some_domain/some_command.rb")
     end
   end
 
