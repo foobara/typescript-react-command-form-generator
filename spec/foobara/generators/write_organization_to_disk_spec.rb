@@ -15,7 +15,7 @@ RSpec.describe Foobara::Generators::OrganizationGenerator::WriteOrganizationToDi
       description: "whatever"
     }
   end
-  let(:organization_name) { "SomeOrg::SomeDomain::SomeOrganization" }
+  let(:organization_name) { "SomeOrg" }
   let(:output_directory) { "#{__dir__}/../../../tmp/organization_test_suite_output" }
 
   before do
@@ -30,7 +30,7 @@ RSpec.describe Foobara::Generators::OrganizationGenerator::WriteOrganizationToDi
     it "contains base files" do
       expect(outcome).to be_success
 
-      expect(organization.paths_to_source_code.keys).to include("src/some_org/some_domain/some_organization.rb")
+      expect(organization.paths_to_source_code.keys).to include("src/some_org.rb")
     end
   end
 
