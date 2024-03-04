@@ -6,7 +6,7 @@ module Foobara
       class CommandConfig < Foobara::Model
         attributes do
           command_name :string, :required
-          description :string
+          description :string, :allow_nil
           organization_name :string, :allow_nil
           domain_name :string, :allow_nil
           full_module_name :string
