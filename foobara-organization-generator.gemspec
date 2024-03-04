@@ -1,13 +1,13 @@
 require_relative "src/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "foobara-command-generator"
-  spec.version = Foobara::Generators::CommandGenerator::VERSION
+  spec.name = "foobara-organization-generator"
+  spec.version = Foobara::Generators::OrganizationGenerator::VERSION
   spec.authors = ["Miles Georgi"]
   spec.email = ["azimux@gmail.com"]
 
-  spec.summary = "Generates Foobara commands"
-  spec.homepage = "https://github.com/foobara/generators-command-generator"
+  spec.summary = "Generates Foobara organizations"
+  spec.homepage = "https://github.com/foobara/generators-organization-generator"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.2.2"
 

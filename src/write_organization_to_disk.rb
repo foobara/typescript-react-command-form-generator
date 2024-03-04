@@ -1,19 +1,19 @@
-require_relative "generate_command"
+require_relative "generate_organization"
 
 module Foobara
   module Generators
-    module CommandGenerator
-      class WriteCommandToDisk < Foobara::Generators::WriteGeneratedFilesToDisk
+    module OrganizationGenerator
+      class WriteOrganizationToDisk < Foobara::Generators::WriteGeneratedFilesToDisk
         class << self
           def generator_key
-            "command"
+            "organization"
           end
         end
 
-        depends_on GenerateCommand
+        depends_on GenerateOrganization
 
         inputs do
-          command_config CommandConfig, :required
+          organization_config OrganizationConfig, :required
           # TODO: should be able to delete this and inherit it
           output_directory :string
         end
@@ -37,8 +37,8 @@ module Foobara
         end
 
         def generate_file_contents
-          # TODO: just pass this in as the inputs instead of the command??
-          self.paths_to_source_code = run_subcommand!(GenerateCommand, command_config.attributes)
+          # TODO: just pass this in as the inputs instead of the organization??
+          self.paths_to_source_code = run_subcommand!(GenerateOrganization, organization_config.attributes)
         end
 
         def run_post_generation_tasks

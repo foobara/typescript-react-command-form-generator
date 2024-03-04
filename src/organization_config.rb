@@ -2,10 +2,10 @@ require "English"
 
 module Foobara
   module Generators
-    module CommandGenerator
-      class CommandConfig < Foobara::Model
+    module OrganizationGenerator
+      class OrganizationConfig < Foobara::Model
         attributes do
-          command_name :string, :required
+          organization_name :string, :required
           description :string, :allow_nil
           organization_name :string, :allow_nil
           domain_name :string, :allow_nil
@@ -17,16 +17,16 @@ module Foobara
         def initialize(attributes = nil, options = {})
           full_module_name = attributes[:full_module_name]
           module_path = full_module_name&.split("::")
-          command_name = attributes[:command_name]
+          organization_name = attributes[:organization_name]
           description = attributes[:description]
           organization_name = attributes[:organization_name]
           domain_name = attributes[:domain_name]
 
           if organization_name.nil? && domain_name.nil? && full_module_name.nil?
-            full_module_name = command_name
+            full_module_name = organization_name
             module_path = full_module_name.split("::")
 
-            *prefix, command_name = module_path
+            *prefix, organization_name = module_path
 
             *organization_parts, domain_name = prefix
 
@@ -37,7 +37,7 @@ module Foobara
 
           super(
             {
-              command_name:,
+              organization_name:,
               description:,
               organization_name:,
               domain_name:,

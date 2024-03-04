@@ -1,16 +1,16 @@
 require "pathname"
 
-require_relative "command_config"
+require_relative "organization_config"
 
 module Foobara
   module Generators
-    module CommandGenerator
-      class GenerateCommand < Foobara::Generators::Generate
+    module OrganizationGenerator
+      class GenerateOrganization < Foobara::Generators::Generate
         class MissingManifestError < RuntimeError; end
 
         possible_error MissingManifestError
 
-        inputs CommandConfig
+        inputs OrganizationConfig
 
         def execute
           add_initial_elements_to_generate
@@ -25,7 +25,7 @@ module Foobara
         attr_accessor :manifest_data
 
         def base_generator
-          Generators::CommandGenerator
+          Generators::OrganizationGenerator
         end
 
         # TODO: delegate this to base_generator
@@ -37,11 +37,11 @@ module Foobara
         end
 
         def add_initial_elements_to_generate
-          elements_to_generate << command_config
+          elements_to_generate << organization_config
         end
 
-        def command_config
-          @command_config ||= CommandConfig.new(inputs)
+        def organization_config
+          @organization_config ||= OrganizationConfig.new(inputs)
         end
       end
     end

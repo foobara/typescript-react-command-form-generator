@@ -1,23 +1,23 @@
-RSpec.describe Foobara::Generators::CommandGenerator::GenerateCommand do
-  let(:command_name) { "SomeOrg::SomeDomain::SomeCommand" }
+RSpec.describe Foobara::Generators::OrganizationGenerator::GenerateOrganization do
+  let(:organization_name) { "SomeOrg::SomeDomain::SomeOrganization" }
 
   let(:inputs) do
     {
-      command_name:,
+      organization_name:,
       description: "whatever"
     }
   end
-  let(:command) { described_class.new(inputs) }
-  let(:outcome) { command.run }
+  let(:organization) { described_class.new(inputs) }
+  let(:outcome) { organization.run }
   let(:result) { outcome.result }
 
-  it "generates a command" do
+  it "generates a organization" do
     expect(outcome).to be_success
 
-    command_file = result["src/some_org/some_domain/some_command.rb"]
-    expect(command_file).to include("module SomeOrg")
-    expect(command_file).to include("module SomeDomain")
-    expect(command_file).to include("class SomeCommand")
+    organization_file = result["src/some_org/some_domain/some_organization.rb"]
+    expect(organization_file).to include("module SomeOrg")
+    expect(organization_file).to include("module SomeDomain")
+    expect(organization_file).to include("class SomeOrganization")
   end
 
   context "with all options" do
@@ -26,21 +26,21 @@ RSpec.describe Foobara::Generators::CommandGenerator::GenerateCommand do
 
     let(:inputs) do
       {
-        command_name: "SomeCommand",
+        organization_name: "SomeOrganization",
         description: "whatever",
         organization_name: "SomeOrg",
         domain_name: "SomeDomain",
-        full_module_name: "SomeOrg::SomeDomain::SomeCommand"
+        full_module_name: "SomeOrg::SomeDomain::SomeOrganization"
       }
     end
 
-    it "generates a command using the given options" do
+    it "generates a organization using the given options" do
       expect(outcome).to be_success
 
-      command_file = result["src/some_org/some_domain/some_command.rb"]
-      expect(command_file).to include("module SomeOrg")
-      expect(command_file).to include("module SomeDomain")
-      expect(command_file).to include("class SomeCommand")
+      organization_file = result["src/some_org/some_domain/some_organization.rb"]
+      expect(organization_file).to include("module SomeOrg")
+      expect(organization_file).to include("module SomeDomain")
+      expect(organization_file).to include("class SomeOrganization")
     end
   end
 end
