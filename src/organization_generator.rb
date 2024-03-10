@@ -35,17 +35,6 @@ module Foobara
           def templates_dir
             "#{__dir__}/../templates"
           end
-
-          # TODO: promote this up to base project
-          def ==(other)
-            # :nocov:
-            self.class == other.class && organization_config == other.organization_config
-            # :nocov:
-          end
-
-          def hash
-            organization_config.hash
-          end
         end
       end
     end
