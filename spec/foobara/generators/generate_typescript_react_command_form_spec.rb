@@ -7,8 +7,8 @@ RSpec.describe Foobara::Generators::TypescriptReactCommandFormGenerator::Generat
       description: "whatever"
     }
   end
-  let(:typescript_react_command_form) { described_class.new(inputs) }
-  let(:outcome) { typescript_react_command_form.run }
+  let(:command) { described_class.new(inputs) }
+  let(:outcome) { command.run }
   let(:result) { outcome.result }
 
   it "generates a typescript_react_command_form" do

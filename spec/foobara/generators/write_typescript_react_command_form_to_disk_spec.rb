@@ -1,6 +1,6 @@
 RSpec.describe Foobara::Generators::TypescriptReactCommandFormGenerator::WriteTypescriptReactCommandFormToDisk do
-  let(:typescript_react_command_form) { described_class.new(inputs) }
-  let(:outcome) { typescript_react_command_form.run }
+  let(:command) { described_class.new(inputs) }
+  let(:outcome) { command.run }
   let(:result) { outcome.result }
   let(:errors) { outcome.errors }
   let(:inputs) do
@@ -30,7 +30,7 @@ RSpec.describe Foobara::Generators::TypescriptReactCommandFormGenerator::WriteTy
     it "contains base files" do
       expect(outcome).to be_success
 
-      expect(typescript_react_command_form.paths_to_source_code.keys).to include("src/some_org.rb")
+      expect(command.paths_to_source_code.keys).to include("src/some_org.rb")
     end
   end
 
@@ -43,8 +43,8 @@ RSpec.describe Foobara::Generators::TypescriptReactCommandFormGenerator::WriteTy
       end
 
       it "writes files to the current directory" do
-        typescript_react_command_form.cast_and_validate_inputs
-        expect(typescript_react_command_form.output_directory).to eq(".")
+        command.cast_and_validate_inputs
+        expect(command.output_directory).to eq(".")
       end
     end
   end
