@@ -19,10 +19,7 @@ RSpec.describe Foobara::Generators::TypescriptReactCommandFormGenerator::WriteTy
   let(:output_directory) { "#{__dir__}/../../../tmp/typescript_react_command_form_test_suite_output" }
 
   before do
-    # rubocop:disable RSpec/AnyInstance
-    allow_any_instance_of(described_class).to receive(:git_commit).and_return(nil)
-    allow_any_instance_of(described_class).to receive(:rubocop_autocorrect).and_return(nil)
-    # rubocop:enable RSpec/AnyInstance
+    allow(command).to receive_messages(git_commit: nil, rubocop_autocorrect: nil)
     FileUtils.rm_rf output_directory
   end
 
