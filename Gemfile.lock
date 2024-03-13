@@ -1,6 +1,6 @@
 GIT
   remote: foobara
-  revision: f97443e06569b022bae15c2b8c1b0c136fc3edf0
+  revision: d805289417ebfac955e16f89568f7fd1f8961a29
   branch: main
   specs:
     foobara (0.0.1)
@@ -34,7 +34,7 @@ GIT
 PATH
   remote: .
   specs:
-    foobara-organization-generator (0.0.1)
+    foobara-typescript-react-command-form-generator (0.0.1)
 
 GEM
   remote: https://rubygems.org/
@@ -145,9 +145,9 @@ PLATFORMS
 DEPENDENCIES
   foobara!
   foobara-files-generator!
-  foobara-organization-generator!
   foobara-rubocop-rules!
   foobara-spec-helpers!
+  foobara-typescript-react-command-form-generator!
   foobara-util!
   guard-rspec
   pry

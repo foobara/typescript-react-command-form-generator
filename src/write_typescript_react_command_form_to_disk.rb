@@ -1,19 +1,19 @@
-require_relative "generate_organization"
+require_relative "generate_typescript_react_command_form"
 
 module Foobara
   module Generators
-    module OrganizationGenerator
-      class WriteOrganizationToDisk < Foobara::Generators::WriteGeneratedFilesToDisk
+    module TypescriptReactCommandFormGenerator
+      class WriteTypescriptReactCommandFormToDisk < Foobara::Generators::WriteGeneratedFilesToDisk
         class << self
           def generator_key
-            "organization"
+            "typescript_react_command_form"
           end
         end
 
-        depends_on GenerateOrganization
+        depends_on GenerateTypescriptReactCommandForm
 
         inputs do
-          organization_config OrganizationConfig, :required
+          typescript_react_command_form_config TypescriptReactCommandFormConfig, :required
           # TODO: should be able to delete this and inherit it
           output_directory :string
         end
@@ -35,8 +35,9 @@ module Foobara
         end
 
         def generate_file_contents
-          # TODO: just pass this in as the inputs instead of the organization??
-          self.paths_to_source_code = run_subcommand!(GenerateOrganization, organization_config.attributes)
+          # TODO: just pass this in as the inputs instead of the typescript_react_command_form??
+          self.paths_to_source_code = run_subcommand!(GenerateTypescriptReactCommandForm,
+                                                      typescript_react_command_form_config.attributes)
         end
 
         def run_post_generation_tasks

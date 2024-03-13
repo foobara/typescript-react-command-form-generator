@@ -1,14 +1,14 @@
 module Foobara
   module Generators
-    module OrganizationGenerator
+    module TypescriptReactCommandFormGenerator
       module Generators
-        class OrganizationGenerator < Foobara::FilesGenerator
+        class TypescriptReactCommandFormGenerator < Foobara::FilesGenerator
           class << self
             def manifest_to_generator_classes(manifest)
               case manifest
-              when OrganizationConfig
+              when TypescriptReactCommandFormConfig
                 [
-                  Generators::OrganizationGenerator
+                  Generators::TypescriptReactCommandFormGenerator
                 ]
               else
                 # :nocov:
@@ -19,7 +19,7 @@ module Foobara
           end
 
           def template_path
-            ["src", "organization.rb.erb"]
+            ["src", "typescript_react_command_form.rb.erb"]
           end
 
           def target_path
@@ -30,7 +30,7 @@ module Foobara
             ["src", *path, file]
           end
 
-          alias organization_config relevant_manifest
+          alias typescript_react_command_form_config relevant_manifest
 
           def templates_dir
             "#{__dir__}/../templates"
