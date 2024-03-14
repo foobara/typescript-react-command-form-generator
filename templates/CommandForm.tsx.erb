@@ -6,8 +6,8 @@ import { Result as <%= result_class_name %> } from "<%= path_to_root %><%= comma
 import { Error as <%= error_class_name %> } from "<%= path_to_root %><%= command_generator.import_path %>/Error"
 
 export default function <%= command_name %> (): JSX.Element {
-  <% non_colliding_inputs.each do |attribute_name, path, attribute_generator| %>
-    const [<%= attribute_name %>, set<%= attribute_name_upcase %>] = useState<<%= attribute_generator.ts_type %> | undefined>(undefined)
+  <% non_colliding_inputs.each do |flattened_attribute| %>
+    const [<%= flattened_attribute.name %>, set<%= flattened_attribute.name_upcase %>] = useState<<%= flattened_attribute.ts_type %> | undefined>(undefined)
   <% end %>
 
   const [result, setResult] = useState<string | null>(null)
@@ -44,8 +44,8 @@ export default function <%= command_name %> (): JSX.Element {
   return (
     <div className="CommandForm">
       <div>
-        <% html_input_generators.each do |input_generator| %>
-          <%= html_input_generator.generate %>
+        <% non_colliding_inputs.each do |flattened_attribute| %>
+          <%= flattened_attribute.html_input %>
         <% end %>
 
         <button onClick={run}><%= command_name_english %></button>

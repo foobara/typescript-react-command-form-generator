@@ -13,6 +13,7 @@ module Foobara
         inputs do
           raw_manifest :associative_array, :allow_nil
           manifest_url :string, :allow_nil
+          command_name :string, :required
           output_directory :string
         end
 
@@ -21,7 +22,6 @@ module Foobara
         def execute
           generate_typescript
           write_all_files_to_disk
-          run_post_generation_tasks
 
           stats
         end
@@ -37,6 +37,7 @@ module Foobara
         def generate_typescript
           # TODO: we need a way to allow values to be nil in type declarations
           inputs = raw_manifest ? { raw_manifest: } : { manifest_url: }
+          inputs.merge!(command_name:)
 
           self.paths_to_source_code = run_subcommand!(GenerateTypescriptReactCommandForm, inputs)
         end

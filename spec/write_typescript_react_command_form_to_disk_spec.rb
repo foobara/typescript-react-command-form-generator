@@ -6,7 +6,8 @@ RSpec.describe Foobara::Generators::TypescriptReactCommandFormGenerator::WriteTy
   let(:inputs) do
     {
       raw_manifest:,
-      output_directory:
+      output_directory:,
+      command_name:
     }
   end
   let(:command_name) { "SomeOrg::Auth::CreateUser" }
@@ -17,10 +18,9 @@ RSpec.describe Foobara::Generators::TypescriptReactCommandFormGenerator::WriteTy
   it "contains base files" do
     expect(outcome).to be_success
 
-    expect(command.paths_to_source_code["SomeOrg/index.ts"]).to include('export const organizationName = "SomeOrg"')
-    expect(command.paths_to_source_code["SomeOrg/Auth/index.ts"]).to include('export const domainName = "Auth"')
-
-    expect(File.exist?("#{output_directory}/foobara-generated.json")).to be true
+    expect(
+      command.paths_to_source_code["forms/SomeOrg/Auth/CreateUser/CreateUserForm.tsx"]
+    ).to include("const [firstName, setFirstName] = useState<string | undefined>(undefined)")
   end
 
   context "without a manifest or url" do
