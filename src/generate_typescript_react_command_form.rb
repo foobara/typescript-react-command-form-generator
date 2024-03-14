@@ -1,19 +1,36 @@
-require "pathname"
-
-require_relative "typescript_react_command_form_config"
-
 module Foobara
   module Generators
     module TypescriptReactCommandFormGenerator
-      class GenerateTypescriptReactCommandForm < Foobara::Generators::Generate
-        class MissingManifestError < RuntimeError; end
+      class GenerateTypescriptReactCommandForm < Foobara::RemoteGenerator::GenerateTypescript
+        class BadCommandNameError < Value::DataError
+          class << self
+            def context_type_declaration
+              {
+                bad_name: :string,
+                valid_names: [:string]
+              }
+            end
+          end
+        end
 
-        possible_error MissingManifestError
+        possible_error BadCommandNameError
 
-        inputs TypescriptReactCommandFormConfig
+        inputs do
+          raw_manifest :associative_array
+          manifest_url :string
+          command_name :string, :required
+        end
+
+        attr_accessor :manifest_data, :command_manifest
+
+        def base_generator
+          Generators::TypescriptReactCommandFormGenerator
+        end
 
         def execute
-          add_initial_elements_to_generate
+          load_manifest_if_needed
+          find_command_manifest
+          add_command_manifest_to_set_of_elements_to_generate
 
           each_element_to_generate do
             generate_element
@@ -22,26 +39,27 @@ module Foobara
           paths_to_source_code
         end
 
-        attr_accessor :manifest_data
+        def find_command_manifest
+          self.command_manifest = Manifest::Command.new(manifest_data, [:command, command_name])
+        rescue Manifest::InvalidPath => e
+          valid_keys = manifest_data["command"].keys.sort
+          message = "Invalid command name: #{command_name}. Expected one of #{valid_keys.join(", ")}"
+          error = BadCommandNameError.new(message:,
+                                          context: { bad_name: command_name,
+                                                     valid_names: valid_keys })
 
-        def base_generator
-          Generators::TypescriptReactCommandFormGenerator
+          add_input_error(error)
+          halt!
+        end
+
+        def add_command_manifest_to_set_of_elements_to_generate
+          elements_to_generate << command_manifest
         end
 
         # TODO: delegate this to base_generator
         def templates_dir
           # TODO: implement this?
-          # :nocov:
           "#{__dir__}/../templates"
-          # :nocov:
-        end
-
-        def add_initial_elements_to_generate
-          elements_to_generate << typescript_react_command_form_config
-        end
-
-        def typescript_react_command_form_config
-          @typescript_react_command_form_config ||= TypescriptReactCommandFormConfig.new(inputs)
         end
       end
     end

@@ -26,6 +26,12 @@ GIT
     foobara-spec-helpers (0.1.0)
 
 GIT
+  remote: https://github.com/foobara/typescript-remote-command-generator.git
+  revision: 6aeec0ade7f8d2903ed3cc1582589c7ba9c99977
+  specs:
+    foobara-typescript-remote-command-generator (0.0.1)
+
+GIT
   remote: https://github.com/foobara/util.git
   revision: b2e2e9c04d866b26c21b6e223bc359c76fcea0f8
   specs:
@@ -148,6 +154,7 @@ DEPENDENCIES
   foobara-rubocop-rules!
   foobara-spec-helpers!
   foobara-typescript-react-command-form-generator!
+  foobara-typescript-remote-command-generator!
   foobara-util!
   guard-rspec
   pry

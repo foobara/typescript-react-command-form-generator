@@ -20,6 +20,7 @@ gem "foobara-files-generator", github: "foobara/files-generator"
 # gem "foobara-resque-scheduler-connector", path: "../resque-scheduler-connector"
 # gem "foobara-sh-cli-connector", github: "foobara/sh-cli-connector"
 # gem "foobara-sh-cli-connector", path: "../sh-cli-connector"
+gem "foobara-typescript-remote-command-generator", github: "foobara/typescript-remote-command-generator"
 gem "foobara-util", github: "foobara/util"
 # gem "foobara-util", path: "../util"
 

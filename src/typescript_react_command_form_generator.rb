@@ -6,11 +6,12 @@ module Foobara
           class << self
             def manifest_to_generator_classes(manifest)
               case manifest
-              when TypescriptReactCommandFormConfig
+              when Manifest::Command
                 [
                   Generators::TypescriptReactCommandFormGenerator
                 ]
               else
+                binding.pry
                 # :nocov:
                 raise "Not sure how build a generator for a #{manifest}"
                 # :nocov:
@@ -19,18 +20,18 @@ module Foobara
           end
 
           def template_path
-            ["src", "typescript_react_command_form.rb.erb"]
+            "CommandForm.tsx.erb"
+          end
+
+          def command_generator
+            @command_generator ||= RemoteGenerator::Services::CommandGenerator.new(command_manifest)
           end
 
           def target_path
-            *path, file = module_path.map { |part| Util.underscore(part) }
-
-            file = "#{file}.rb"
-
-            ["src", *path, file]
+            ["forms", *scoped_full_path, command_name]
           end
 
-          alias typescript_react_command_form_config relevant_manifest
+          alias command_manifest relevant_manifest
 
           def templates_dir
             "#{__dir__}/../templates"

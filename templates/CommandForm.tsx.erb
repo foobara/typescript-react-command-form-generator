@@ -1,0 +1,60 @@
+import React, { useState } from 'react'
+
+import { <%= command_name %> } from "<%= path_to_root %><%= command_generator.import_path %>"
+import { Inputs as <%= inputs_class_name %> } from "<%= path_to_root %><%= command_generator.import_path %>/Inputs"
+import { Result as <%= result_class_name %> } from "<%= path_to_root %><%= command_generator.import_path %>/Result"
+import { Error as <%= error_class_name %> } from "<%= path_to_root %><%= command_generator.import_path %>/Error"
+
+export default function <%= command_name %> (): JSX.Element {
+  <% non_colliding_inputs.each do |attribute_name, path, attribute_generator| %>
+    const [<%= attribute_name %>, set<%= attribute_name_upcase %>] = useState<<%= attribute_generator.ts_type %> | undefined>(undefined)
+  <% end %>
+
+  const [result, setResult] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(null)
+
+  function toVoid (fn: () => Promise<void>): () => void {
+    return (): void => {
+      void (async (): Promise<void> => { await fn() })()
+    }
+  }
+
+  const run = toVoid(async (): Promise<void> => {
+    const inputs: <%= inputs_class_name %> = <%= populated_inputs_object %>
+
+    const command = new CalculateExponent(inputs)
+
+    try {
+      const outcome = await command.run()
+
+      if (outcome.isSuccess()) {
+        const result = outcome.result
+        setResult(`Result: ${JSON.stringify(result)}`)
+        setError(null)
+      } else {
+        setError(outcome.errorMessage)
+        setResult(null)
+      }
+    } catch (error) {
+      setError('Error executing command')
+      setResult(null)
+    }
+  })
+
+  return (
+    <div className="CommandForm">
+      <div>
+        <% html_input_generators.each do |input_generator| %>
+          <%= html_input_generator.generate %>
+        <% end %>
+
+        <button onClick={run}><%= command_name_english %></button>
+      </div>
+
+      {(result != null) && <p>{result}</p>}
+      {(error != null) && <p className="error-message">{error}</p>}
+    </div>
+  )
+}
+
+export default App
