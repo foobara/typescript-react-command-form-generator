@@ -13,7 +13,7 @@ module Foobara
           end
         end
 
-        possible_error BadCommandNameError
+        possible_input_error :command_name, BadCommandNameError
 
         inputs do
           raw_manifest :associative_array
@@ -44,9 +44,14 @@ module Foobara
         rescue Manifest::InvalidPath
           valid_keys = manifest_data["command"].keys.sort
           message = "Invalid command name: #{command_name}. Expected one of #{valid_keys.join(", ")}"
-          error = BadCommandNameError.new(message:,
-                                          context: { bad_name: command_name,
-                                                     valid_names: valid_keys })
+          error = BadCommandNameError.new(
+            message:,
+            context: {
+              bad_name: command_name,
+              valid_names: valid_keys
+            },
+            path: [:command_name]
+          )
 
           add_input_error(error)
           halt!
@@ -54,12 +59,6 @@ module Foobara
 
         def add_command_manifest_to_set_of_elements_to_generate
           elements_to_generate << command_manifest
-        end
-
-        # TODO: delegate this to base_generator
-        def templates_dir
-          # TODO: implement this?
-          "#{__dir__}/../templates"
         end
       end
     end

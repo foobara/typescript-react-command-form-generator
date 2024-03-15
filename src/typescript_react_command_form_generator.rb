@@ -33,62 +33,32 @@ module Foobara
           end
 
           def model_generators(type = inputs_type, initial = true)
-            if type.entity?
-              generator_class = if atom?
-                                  if initial
-                                    RemoteGenerator::Services::AtomEntityGenerator
-                                  else
-                                    RemoteGenerator::Services::UnloadedEntityGenerator
-                                  end
-                                elsif aggregate?
-                                  RemoteGenerator::Services::AggregateEntityGenerator
-                                else
-                                  RemoteGenerator::Services::EntityGenerator
-                                end
+            return @model_generators if defined?(@model_generators)
 
-              [generator_class.new(type.to_entity)]
-            elsif type.model?
-              generator_class = if atom?
-                                  RemoteGenerator::Services::AtomModelGenerator
-                                elsif aggregate?
-                                  RemoteGenerator::Services::AggregateModelGenerator
-                                else
-                                  RemoteGenerator::Services::ModelGenerator
-                                end
+            generators = if type.entity?
+                           generator_class = RemoteGenerator::Services::UnloadedEntityGenerator
+                           [generator_class.new(type.to_entity)]
+                         elsif type.model?
+                           generator_class = RemoteGenerator::Services::AtomModelGenerator
+                           [generator_class.new(type.to_model)]
+                         elsif type.type.to_sym == :attributes
+                           type.attribute_declarations.values.map do |attribute_declaration|
+                             model_generators(attribute_declaration, false)
+                           end.flatten.uniq
+                         elsif type.is_a?(Manifest::Array)
+                           if type.element_type
+                             model_generators(type.element_type, false)
+                           end
+                         else
+                           # TODO: handle tuples and associative arrays
+                           []
+                         end
 
-              [generator_class.new(type.to_model)]
-            elsif type.type.to_sym == :attributes
-              type.attribute_declarations.values.map do |attribute_declaration|
-                model_generators(attribute_declaration, false)
-              end.flatten.uniq
-            elsif type.is_a?(Manifest::Array)
-              if type.element_type
-                model_generators(type.element_type, false)
-              else
-                []
-              end
-            else
-              # TODO: handle tuples and associative arrays
-              []
+            if initial
+              @model_generators = generators
             end
-          end
 
-          def atom?
-            serializers&.any? { |s| s == "Foobara::CommandConnectors::Serializers::AtomicSerializer" }
-          end
-
-          def aggregate?
-            serializers&.any? { |s| s == "Foobara::CommandConnectors::Serializers::AggregateSerializer" }
-          end
-
-          def association_depth
-            if atom?
-              RemoteGenerator::AssociationDepth::ATOM
-            elsif aggregate?
-              RemoteGenerator::AssociationDepth::AGGREGATE
-            else
-              RemoteGenerator::AssociationDepth::AMBIGUOUS
-            end
+            generators
           end
 
           def dependencies
@@ -123,14 +93,18 @@ module Foobara
 
           def non_colliding_inputs(type_declaration = inputs_type, result = [], path = [])
             if type_declaration.attributes?
-              type_declaration.attribute_declarations.each_pair do |attribute_name, type_declaration|
-                non_colliding_inputs(type_declaration, result, [*path, attribute_name])
+              type_declaration.attribute_declarations.each_pair do |attribute_name, attribute_declaration|
+                non_colliding_inputs(attribute_declaration, result, [*path, attribute_name])
               end
             elsif type_declaration.entity?
               # TODO: figure out how to not pass self here...
               result << FlattenedAttribute.new(self, path, type_declaration.to_type.primary_key_type)
             elsif type_declaration.model?
               non_colliding_inputs(type_declaration.to_type.attributes_type, result, path)
+            elsif type_declaration.array?
+              if type_declaration.element_type
+                model_generators(type_declaration.element_type, false)
+              end
             else
               result << FlattenedAttribute.new(self, path, type_declaration)
             end

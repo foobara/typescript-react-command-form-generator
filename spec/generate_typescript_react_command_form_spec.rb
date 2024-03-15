@@ -26,4 +26,27 @@ RSpec.describe Foobara::Generators::TypescriptReactCommandFormGenerator::Generat
       expect(result.keys).to eq(["forms/NestedModels2/CreateNestedForm.tsx"])
     end
   end
+
+  context "when generating forms for all commands" do
+    it "can successfully generate forms for all commands" do
+      raw_manifest["command"].each_key do |command_name|
+        files_json = described_class.run!(raw_manifest:, command_name:)
+
+        expect(files_json).to be_a(Hash)
+        expect(files_json.size).to eq(1)
+        expect(files_json.keys.first).to include(command_name.gsub("::", "/"))
+        expect(files_json.values.first).to be_a(String)
+      end
+    end
+  end
+
+  context "when command_name is bad" do
+    let(:command_name) { "BadCommandName" }
+
+    it "gives a relevant error" do
+      expect(outcome).to_not be_success
+      expect(errors.size).to eq(1)
+      expect(outcome.errors_hash["data.command_name.bad_command_name"][:context][:bad_name]).to eq(command_name)
+    end
+  end
 end
