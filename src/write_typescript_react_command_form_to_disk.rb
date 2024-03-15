@@ -31,7 +31,9 @@ module Foobara
         end
 
         def default_output_directory
+          # :nocov:
           "src/domains"
+          # :nocov:
         end
 
         def generate_typescript

@@ -41,7 +41,7 @@ module Foobara
 
         def find_command_manifest
           self.command_manifest = Manifest::Command.new(manifest_data, [:command, command_name])
-        rescue Manifest::InvalidPath => e
+        rescue Manifest::InvalidPath
           valid_keys = manifest_data["command"].keys.sort
           message = "Invalid command name: #{command_name}. Expected one of #{valid_keys.join(", ")}"
           error = BadCommandNameError.new(message:,

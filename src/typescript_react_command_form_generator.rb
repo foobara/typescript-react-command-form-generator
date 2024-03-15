@@ -11,7 +11,9 @@ module Foobara
                   Generators::TypescriptReactCommandFormGenerator
                 ]
               else
+                # :nocov:
                 super
+                # :nocov:
               end
             end
           end
@@ -21,11 +23,80 @@ module Foobara
           end
 
           def target_path
-            ["forms", *scoped_full_path, "#{command_name}Form.tsx"]
+            *parts, command_name = scoped_full_path
+
+            ["forms", *parts, "#{command_name}Form.tsx"]
           end
 
           def command_generator
             @command_generator ||= RemoteGenerator::Services::CommandGenerator.new(command_manifest)
+          end
+
+          def model_generators(type = inputs_type, initial = true)
+            if type.entity?
+              generator_class = if atom?
+                                  if initial
+                                    RemoteGenerator::Services::AtomEntityGenerator
+                                  else
+                                    RemoteGenerator::Services::UnloadedEntityGenerator
+                                  end
+                                elsif aggregate?
+                                  RemoteGenerator::Services::AggregateEntityGenerator
+                                else
+                                  RemoteGenerator::Services::EntityGenerator
+                                end
+
+              [generator_class.new(type.to_entity)]
+            elsif type.model?
+              generator_class = if atom?
+                                  RemoteGenerator::Services::AtomModelGenerator
+                                elsif aggregate?
+                                  RemoteGenerator::Services::AggregateModelGenerator
+                                else
+                                  RemoteGenerator::Services::ModelGenerator
+                                end
+
+              [generator_class.new(type.to_model)]
+            elsif type.type.to_sym == :attributes
+              type.attribute_declarations.values.map do |attribute_declaration|
+                model_generators(attribute_declaration, false)
+              end.flatten.uniq
+            elsif type.is_a?(Manifest::Array)
+              if type.element_type
+                model_generators(type.element_type, false)
+              else
+                []
+              end
+            else
+              # TODO: handle tuples and associative arrays
+              []
+            end
+          end
+
+          def atom?
+            serializers&.any? { |s| s == "Foobara::CommandConnectors::Serializers::AtomicSerializer" }
+          end
+
+          def aggregate?
+            serializers&.any? { |s| s == "Foobara::CommandConnectors::Serializers::AggregateSerializer" }
+          end
+
+          def association_depth
+            if atom?
+              RemoteGenerator::AssociationDepth::ATOM
+            elsif aggregate?
+              RemoteGenerator::AssociationDepth::AGGREGATE
+            else
+              RemoteGenerator::AssociationDepth::AMBIGUOUS
+            end
+          end
+
+          def dependencies
+            [model_generators, *model_generators.map(&:dependencies)].flatten.uniq
+          end
+
+          def dependencies_to_generate
+            []
           end
 
           alias command_manifest relevant_manifest
@@ -52,28 +123,34 @@ module Foobara
 
           def non_colliding_inputs(type_declaration = inputs_type, result = [], path = [])
             if type_declaration.attributes?
-              inputs_type.attribute_declarations.each_pair do |attribute_name, type_declaration|
+              type_declaration.attribute_declarations.each_pair do |attribute_name, type_declaration|
                 non_colliding_inputs(type_declaration, result, [*path, attribute_name])
               end
             elsif type_declaration.entity?
               # TODO: figure out how to not pass self here...
               result << FlattenedAttribute.new(self, path, type_declaration.to_type.primary_key_type)
             elsif type_declaration.model?
-              result << non_colliding_inputs(type_declaration.to_type.attributes_type, result, path)
+              non_colliding_inputs(type_declaration.to_type.attributes_type, result, path)
             else
               result << FlattenedAttribute.new(self, path, type_declaration)
             end
 
             result
-          rescue => e
-            binding.pry
-            raise
           end
 
           def populated_inputs_object
             result = {}
 
             non_colliding_inputs.each do |flattened_attribute|
+              DataPath.set_value_at(result, flattened_attribute.name, flattened_attribute.path)
+            rescue DataPath::BadPathError
+              value = result
+              parts = flattened_attribute.path[..-2]
+
+              parts.each do |part|
+                value = value[part] ||= {}
+              end
+
               DataPath.set_value_at(result, flattened_attribute.name, flattened_attribute.path)
             end
 
@@ -98,7 +175,9 @@ module Foobara
             elsif result.is_a?(::String)
               result
             else
+              # :nocov:
               raise "Not sure how to handle #{result}"
+              # :nocov:
             end
           end
 
@@ -122,9 +201,6 @@ module Foobara
 
             def name_upcase
               [name[0].upcase, name[1..]].compact.join
-            rescue => e
-              binding.pry
-              raise
             end
 
             def ts_type

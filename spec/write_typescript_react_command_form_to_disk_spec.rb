@@ -19,7 +19,7 @@ RSpec.describe Foobara::Generators::TypescriptReactCommandFormGenerator::WriteTy
     expect(outcome).to be_success
 
     expect(
-      command.paths_to_source_code["forms/SomeOrg/Auth/CreateUser/CreateUserForm.tsx"]
+      command.paths_to_source_code["forms/SomeOrg/Auth/CreateUserForm.tsx"]
     ).to include("const [firstName, setFirstName] = useState<string | undefined>(undefined)")
   end
 

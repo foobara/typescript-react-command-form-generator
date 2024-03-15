@@ -16,6 +16,14 @@ RSpec.describe Foobara::Generators::TypescriptReactCommandFormGenerator::Generat
   it "contains base files" do
     expect(outcome).to be_success
 
-    expect(result.keys).to include("forms/SomeOrg/Auth/CreateUser/CreateUserForm.tsx")
+    expect(result.keys).to eq(["forms/SomeOrg/Auth/CreateUserForm.tsx"])
+  end
+
+  context "when command involves models" do
+    let(:command_name) { "NestedModels2::CreateNested" }
+
+    it "contains base files" do
+      expect(result.keys).to eq(["forms/NestedModels2/CreateNestedForm.tsx"])
+    end
   end
 end
