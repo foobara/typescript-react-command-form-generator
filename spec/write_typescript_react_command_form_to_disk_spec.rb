@@ -11,7 +11,7 @@ RSpec.describe Foobara::Generators::TypescriptReactCommandFormGenerator::WriteTy
     }
   end
   let(:command_name) { "SomeOrg::Auth::CreateUser" }
-  let(:output_directory) { "#{__dir__}/../../tmp/domains" }
+  let(:output_directory) { "#{__dir__}/../tmp/domains" }
   let(:raw_manifest_json) { File.read("spec/fixtures/foobara-manifest.json") }
   let(:raw_manifest) { JSON.parse(raw_manifest_json) }
 
