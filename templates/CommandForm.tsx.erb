@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 
-import { <%= command_name %> } from "<%= path_to_root %><%= command_generator.import_path %>"
-import { Inputs as <%= inputs_class_name %> } from "<%= path_to_root %><%= command_generator.import_path %>/Inputs"
-import { Result as <%= result_class_name %> } from "<%= path_to_root %><%= command_generator.import_path %>/Result"
-import { Error as <%= error_class_name %> } from "<%= path_to_root %><%= command_generator.import_path %>/Error"
+import { Outcome } from "<%= path_to_root %>/base/Outcome"
 
-export default function <%= command_name %> (): JSX.Element {
+import { <%= command_name %> } from "<%= path_to_root %><%= command_generator.import_path %>"
+import <%= inputs_class_name %> from "<%= path_to_root %><%= command_generator.import_path %>/Inputs"
+import <%= result_class_name %> from "<%= path_to_root %><%= command_generator.import_path %>/Result"
+import { Error as <%= error_class_name %> } from "<%= path_to_root %><%= command_generator.import_path %>/Errors"
+
+export default function <%= command_name %>Form (): JSX.Element {
   <% non_colliding_inputs.each do |flattened_attribute| %>
     const [<%= flattened_attribute.name %>, set<%= flattened_attribute.name_upcase %>] = useState<<%= flattened_attribute.ts_type %> | undefined>(undefined)
   <% end %>
@@ -20,15 +22,22 @@ export default function <%= command_name %> (): JSX.Element {
   }
 
   const run = toVoid(async (): Promise<void> => {
+    <% non_colliding_inputs.each do |flattened_attribute| %>
+      if (<%= flattened_attribute.name %> == null) {
+        // TODO: perform some kind of validation error
+        return
+      }
+    <% end %>
+
     const inputs: <%= inputs_class_name %> = <%= populated_inputs_object %>
 
-    const command = new CalculateExponent(inputs)
+    const command = new <%= command_name %>(inputs)
 
     try {
-      const outcome = await command.run()
+      const outcome: Outcome<<%= result_class_name %>, <%= error_class_name %>> = await command.run()
 
       if (outcome.isSuccess()) {
-        const result = outcome.result
+        const result: <%= result_class_name %> = outcome.result
         setResult(`Result: ${JSON.stringify(result)}`)
         setError(null)
       } else {
@@ -56,5 +65,3 @@ export default function <%= command_name %> (): JSX.Element {
     </div>
   )
 }
-
-export default App
