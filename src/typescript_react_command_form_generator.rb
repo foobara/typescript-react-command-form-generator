@@ -195,8 +195,7 @@ module Foobara
             def html_input
               # TODO: handle stuff like one_of, boolean, etc
               "<input
-              type=\"#{html_type}\"
-              value={#{name}}
+              value={#{name} ?? \"\"}
               onChange={(e) => { set#{name_upcase}(e.target.value) }}
               placeholder=\"#{name_english}\"
               />"
