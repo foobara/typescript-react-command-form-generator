@@ -1,6 +1,6 @@
 GIT
   remote: foobara
-  revision: 759973e29457db4a6563ea510ea0a749b400909a
+  revision: 9d507ed411aca4dcc747c0f61501c9b14cde3b13
   branch: main
   specs:
     foobara (0.0.1)
@@ -27,7 +27,7 @@ GIT
 
 GIT
   remote: https://github.com/foobara/typescript-remote-command-generator.git
-  revision: ea9a6cbb77129e6620db4bd819ead909bc217c59
+  revision: 378ddc89e6befb581210109f1b26f9e7641b8a96
   specs:
     foobara-typescript-remote-command-generator (0.0.1)
 

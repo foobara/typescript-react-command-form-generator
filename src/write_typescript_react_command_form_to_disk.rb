@@ -3,7 +3,7 @@ require_relative "generate_typescript_react_command_form"
 module Foobara
   module Generators
     module TypescriptReactCommandFormGenerator
-      class WriteTypescriptReactCommandFormToDisk < Foobara::Generators::WriteGeneratedFilesToDisk
+      class WriteTypescriptReactCommandFormToDisk < RemoteGenerator::WriteTypescriptToDisk
         class << self
           def generator_key
             "typescript-react-command-form"
@@ -22,6 +22,7 @@ module Foobara
         def execute
           generate_typescript
           write_all_files_to_disk
+          run_post_generation_tasks
 
           stats
         end
@@ -42,6 +43,10 @@ module Foobara
           inputs.merge!(command_name:)
 
           self.paths_to_source_code = run_subcommand!(GenerateTypescriptReactCommandForm, inputs)
+        end
+
+        def run_post_generation_tasks
+          eslint_fix
         end
       end
     end
