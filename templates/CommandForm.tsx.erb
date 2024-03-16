@@ -34,12 +34,13 @@ export default function <%= command_name %>Form (): JSX.Element {
     const command = new <%= command_name %>(inputs)
 
     try {
+      setResult("Thinking...")
+      setError(null)
       const outcome: Outcome<<%= result_class_name %>, <%= error_class_name %>> = await command.run()
 
       if (outcome.isSuccess()) {
         const result: <%= result_class_name %> = outcome.result
-        setResult(`Result: ${JSON.stringify(result)}`)
-        setError(null)
+        setResult(typeof result === 'string' ? result : JSON.stringify(result))
       } else {
         setError(outcome.errorMessage)
         setResult(null)
