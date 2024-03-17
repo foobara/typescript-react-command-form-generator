@@ -184,10 +184,6 @@ module Foobara
               )
             end
 
-            def html_type
-              ts_type
-            end
-
             def name_english
               Util.underscore(name).gsub("_", " ")
             end
