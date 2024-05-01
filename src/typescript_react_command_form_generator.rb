@@ -184,17 +184,42 @@ module Foobara
               )
             end
 
+            def has_default?
+              type_declaration.attribute? && default
+            end
+
+            def default
+              type_declaration.default
+            end
+
+            def ts_default
+              generator.value_to_ts_value(default)
+            end
+
             def name_english
               Util.underscore(name).gsub("_", " ")
             end
 
             def html_input
-              # TODO: handle stuff like one_of, boolean, etc
-              "<input
-              value={#{name} ?? \"\"}
-              onChange={(e) => { set#{name_upcase}(e.target.value) }}
-              placeholder=\"#{name_english}\"
-              />"
+              # TODO: handle boolean, etc
+              one_of = type_declaration.one_of
+
+              if one_of
+                ts_type = generator.foobara_type_to_ts_type(type_declaration)
+
+                "<select
+                  value={#{name} ?? \"\"}
+                  onChange={(e) => { set#{name_upcase}(e.target.value as #{ts_type}) }}
+                >
+                  #{one_of.map { |value| "<option value=\"#{value}\">#{value}</option>" }.join}
+                </select>"
+              else
+                "<input
+                    value={#{name} ?? \"\"}
+                    onChange={(e) => { set#{name_upcase}(e.target.value) }}
+                    placeholder=\"#{name_english}\"
+                  />"
+              end
             end
           end
         end

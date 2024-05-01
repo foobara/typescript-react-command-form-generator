@@ -9,7 +9,11 @@ import { Error as <%= error_class_name %> } from "<%= path_to_root %><%= command
 
 export default function <%= command_name %>Form (): JSX.Element {
   <% non_colliding_inputs.each do |flattened_attribute| %>
-    const [<%= flattened_attribute.name %>, set<%= flattened_attribute.name_upcase %>] = useState<<%= flattened_attribute.ts_type %> | undefined>(undefined)
+    <% if flattened_attribute.has_default? %>
+      const [<%= flattened_attribute.name %>, set<%= flattened_attribute.name_upcase %>] = useState<<%= flattened_attribute.ts_type %>>(<%= flattened_attribute.ts_default %>)
+    <% else %>
+      const [<%= flattened_attribute.name %>, set<%= flattened_attribute.name_upcase %>] = useState<<%= flattened_attribute.ts_type %> | undefined>(undefined)
+    <% end %>
   <% end %>
 
   const [result, setResult] = useState<string | null>(null)
