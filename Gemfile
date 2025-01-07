@@ -1,5 +1,7 @@
+require_relative "version"
+
 source "https://rubygems.org"
-ruby File.read("#{__dir__}/.ruby-version")
+ruby Foobara::Generators::TypescriptReactCommandFormGenerator::MINIMUM_RUBY_VERSION
 
 gemspec
 

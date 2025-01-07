@@ -1,3 +1,7 @@
+## [0.0.3] - 2025-01-07
+
+- Bump Ruby to 3.4.1
+
 ## [0.0.2] - 2024-06-21
 
 - Include hidden template files/directories in gem
