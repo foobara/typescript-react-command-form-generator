@@ -7,6 +7,10 @@ import <%= inputs_class_name %> from "<%= path_to_root %><%= command_generator.i
 import <%= result_class_name %> from "<%= path_to_root %><%= command_generator.import_path %>/Result"
 import { Error as <%= error_class_name %> } from "<%= path_to_root %><%= command_generator.import_path %>/Errors"
 
+<% dependency_roots.each do |dependency_root| %>
+import <%= dependency_root.import_destructure %> from "<%= path_to_root %><%= dependency_root.import_path %>"
+<% end %>
+
 export default function <%= command_name %>Form (): JSX.Element {
   <% non_colliding_inputs.each do |flattened_attribute| %>
     <% if flattened_attribute.has_default? %>

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    foobara-typescript-react-command-form-generator (0.0.4)
+    foobara-typescript-react-command-form-generator (0.0.5)
       foobara
       foobara-files-generator
       foobara-typescript-remote-command-generator
