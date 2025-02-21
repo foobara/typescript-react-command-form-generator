@@ -7,6 +7,10 @@ gemspec
 
 gem "rake"
 
+# gem "foobara", path: "../foobara"
+# gem "foobara-files-generator", path: "../files-generator"
+# gem "foobara-typescript-remote-command-generator", path: "../typescript-remote-command-generator"
+
 group :development do
   gem "foobara-rubocop-rules"
   gem "guard-rspec"

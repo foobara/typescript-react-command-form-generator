@@ -1,3 +1,8 @@
+## [0.0.4] - 2025-02-21
+
+- Bump Ruby to 3.4.2
+- Include custom types in form generator
+
 ## [0.0.3] - 2025-01-07
 
 - Bump Ruby to 3.4.1

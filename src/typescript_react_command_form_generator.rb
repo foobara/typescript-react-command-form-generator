@@ -32,37 +32,39 @@ module Foobara
             @command_generator ||= RemoteGenerator::Services::CommandGenerator.new(command_manifest)
           end
 
-          def model_generators(type = inputs_type, initial = true)
-            return @model_generators if defined?(@model_generators)
+          def type_generators(type_declaration = inputs_type, initial = true)
+            return @type_generators if defined?(@type_generators)
 
-            generators = if type.entity?
+            generators = if type_declaration.entity?
                            generator_class = RemoteGenerator::Services::UnloadedEntityGenerator
-                           [generator_class.new(type.to_entity)]
-                         elsif type.model?
+                           [generator_class.new(type_declaration.to_entity)]
+                         elsif type_declaration.model?
                            generator_class = RemoteGenerator::Services::AtomModelGenerator
-                           [generator_class.new(type.to_model)]
-                         elsif type.type.to_sym == :attributes
-                           type.attribute_declarations.values.map do |attribute_declaration|
-                             model_generators(attribute_declaration, false)
+                           [generator_class.new(type_declaration.to_model)]
+                         elsif type_declaration.type.to_sym == :attributes
+                           type_declaration.attribute_declarations.values.map do |attribute_declaration|
+                             type_generators(attribute_declaration, false)
                            end.flatten.uniq
-                         elsif type.is_a?(Manifest::Array)
-                           if type.element_type
-                             model_generators(type.element_type, false)
+                         elsif type_declaration.is_a?(Manifest::Array)
+                           if type_declaration.element_type
+                             type_generators(type_declaration.element_type, false)
                            end
+                         elsif type_declaration.custom?
+                           generator_for(type_declaration.to_type)
                          else
                            # TODO: handle tuples and associative arrays
                            []
                          end
 
             if initial
-              @model_generators = generators
+              @type_generators = generators
             end
 
             generators
           end
 
           def dependencies
-            [model_generators, *model_generators.map(&:dependencies)].flatten.uniq
+            [type_generators, *type_generators.map(&:dependencies)].flatten.uniq
           end
 
           def dependencies_to_generate
@@ -103,7 +105,7 @@ module Foobara
               non_colliding_inputs(type_declaration.to_type.attributes_type, result, path)
             elsif type_declaration.array?
               if type_declaration.element_type
-                model_generators(type_declaration.element_type, false)
+                type_generators(type_declaration.element_type, false)
               end
             else
               result << FlattenedAttribute.new(self, path, type_declaration)

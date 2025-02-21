@@ -49,4 +49,14 @@ RSpec.describe Foobara::Generators::TypescriptReactCommandFormGenerator::Generat
       expect(outcome.errors_hash["data.command_name.bad_command_name"][:context][:bad_name]).to eq(command_name)
     end
   end
+
+  context "when using a different manifest" do
+    let(:raw_manifest) { JSON.parse(File.read("spec/fixtures/answer-bot-manifest.json")) }
+    let(:command_name) { "Foobara::Ai::AnswerBot::Ask" }
+
+    it "is successful" do
+      expect(outcome).to be_success
+      expect(result.keys).to eq(["forms/Foobara/Ai/AnswerBot/AskForm.tsx"])
+    end
+  end
 end
