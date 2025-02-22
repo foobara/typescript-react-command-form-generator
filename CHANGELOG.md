@@ -1,8 +1,8 @@
+## [0.0.6] - 2025-02-21
+
+- Fix a bug where we don't use the name of a custom type when we could
+
 ## [0.0.5] - 2025-02-21
-
-- 
-
-## [0.0.4] - 2025-02-21
 
 - Bump Ruby to 3.4.2
 - Include custom types in form generator

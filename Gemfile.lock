@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    foobara-typescript-react-command-form-generator (0.0.5)
+    foobara-typescript-react-command-form-generator (0.0.6)
       foobara
       foobara-files-generator
       foobara-typescript-remote-command-generator
@@ -16,7 +16,7 @@ GEM
     diff-lcs (1.6.0)
     docile (1.4.1)
     ffi (1.17.1-x86_64-linux-gnu)
-    foobara (0.0.61)
+    foobara (0.0.62)
       bigdecimal
       foobara-util
     foobara-files-generator (0.0.5)
@@ -26,7 +26,7 @@ GEM
       rubocop-rspec
     foobara-spec-helpers (0.0.4)
       foobara-util
-    foobara-typescript-remote-command-generator (0.0.8)
+    foobara-typescript-remote-command-generator (0.0.9)
       foobara
       foobara-files-generator
     foobara-util (0.0.11)

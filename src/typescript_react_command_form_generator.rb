@@ -105,6 +105,7 @@ module Foobara
               non_colliding_inputs(type_declaration.to_type.attributes_type, result, path)
             elsif type_declaration.array?
               if type_declaration.element_type
+                # TODO: isn't this a no-op??
                 type_generators(type_declaration.element_type, false)
               end
             else
@@ -166,6 +167,25 @@ module Foobara
               self.type_declaration = type_declaration
             end
 
+            def custom?
+              type_declaration.custom?
+            end
+
+            def one_of
+              real_type_declaration.one_of
+            end
+
+            # TODO: something feels kind of wrong here, hmmm
+            def real_type_declaration
+              @real_type_declaration ||= if custom?
+                                           # We are dealing with a reference to a registered type
+                                           # so we need the declaration this type name was registered to
+                                           type_declaration.to_type.to_type_declaration_from_declaration_data
+                                         else
+                                           type_declaration
+                                         end
+            end
+
             def name
               first, *rest = path
 
@@ -187,11 +207,11 @@ module Foobara
             end
 
             def has_default?
-              type_declaration.attribute? && default
+              real_type_declaration.attribute? && default
             end
 
             def default
-              type_declaration.default
+              real_type_declaration.default
             end
 
             def ts_default
@@ -204,8 +224,6 @@ module Foobara
 
             def html_input
               # TODO: handle boolean, etc
-              one_of = type_declaration.one_of
-
               if one_of
                 ts_type = generator.foobara_type_to_ts_type(type_declaration)
 
