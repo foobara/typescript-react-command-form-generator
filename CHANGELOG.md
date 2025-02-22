@@ -1,3 +1,7 @@
+## [0.0.7] - 2025-02-21
+
+- import JSX in remote command form
+
 ## [0.0.6] - 2025-02-21
 
 - Fix a bug where we don't use the name of a custom type when we could
