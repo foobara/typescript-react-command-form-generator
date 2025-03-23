@@ -65,4 +65,16 @@ RSpec.describe Foobara::Generators::TypescriptReactCommandFormGenerator::Generat
       expect(ask_form_text).to match(/<select\s+value=\{model \?\? ""}/m)
     end
   end
+
+  context "when generating inputs for sensitive values" do
+    let(:raw_manifest) { JSON.parse(File.read("spec/fixtures/auth-manifest.json")) }
+    let(:command_name) { "Foobara::Auth::Register" }
+
+    it "uses a password input for sensitive values" do
+      expect(outcome).to be_success
+      expect(
+        result["forms/Foobara/Auth/RegisterForm.tsx"]
+      ).to match(/<input\s+type="password"\s+value=\{plaintextPassword/)
+    end
+  end
 end

@@ -1,3 +1,7 @@
+## [0.0.8] - 2025-03-22
+
+- Use password inputs for sensitive types
+
 ## [0.0.7] - 2025-02-21
 
 - import JSX in remote command form

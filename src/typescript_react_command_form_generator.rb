@@ -175,6 +175,10 @@ module Foobara
               real_type_declaration.one_of
             end
 
+            def sensitive?
+              type_declaration.sensitive?
+            end
+
             # TODO: something feels kind of wrong here, hmmm
             def real_type_declaration
               @real_type_declaration ||= if custom?
@@ -235,6 +239,7 @@ module Foobara
                 </select>"
               else
                 "<input
+                    #{"type=\"password\"" if sensitive?}
                     value={#{name} ?? \"\"}
                     onChange={(e) => { set#{name_upcase}(e.target.value) }}
                     placeholder=\"#{name_english}\"
