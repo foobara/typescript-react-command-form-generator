@@ -77,6 +77,10 @@ module Foobara
             "#{__dir__}/../templates"
           end
 
+          def empty_inputs?
+            inputs_type.empty?
+          end
+
           def inputs_class_name
             "#{command_name}Inputs"
           end

@@ -21,9 +21,7 @@ Gem::Specification.new do |spec|
   spec.metadata["source_code_uri"] = spec.homepage
   spec.metadata["changelog_uri"] = "#{spec.homepage}/blob/main/CHANGELOG.md"
 
-  spec.add_dependency "foobara"
-  spec.add_dependency "foobara-files-generator"
-  spec.add_dependency "foobara-typescript-remote-command-generator"
+  spec.add_dependency "foobara-typescript-remote-command-generator", "~> 0.0.1"
 
   spec.files = Dir[
     "lib/**/*",

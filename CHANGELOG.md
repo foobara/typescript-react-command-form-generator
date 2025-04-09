@@ -1,3 +1,7 @@
+## [0.0.9] - 2025-04-08
+
+- Don't make use of inputs for commands that don't have inputs
+
 ## [0.0.8] - 2025-03-22
 
 - Use password inputs for sensitive types

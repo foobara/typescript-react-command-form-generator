@@ -3,7 +3,9 @@ import React, { useState, JSX } from 'react'
 import { Outcome } from "<%= path_to_root %>/base/Outcome"
 
 import { <%= command_name %> } from "<%= path_to_root %><%= command_generator.import_path %>"
+<% unless empty_inputs? %>
 import <%= inputs_class_name %> from "<%= path_to_root %><%= command_generator.import_path %>/Inputs"
+<% end %>
 import <%= result_class_name %> from "<%= path_to_root %><%= command_generator.import_path %>/Result"
 import { Error as <%= error_class_name %> } from "<%= path_to_root %><%= command_generator.import_path %>/Errors"
 
@@ -37,9 +39,13 @@ export default function <%= command_name %>Form (): JSX.Element {
       }
     <% end %>
 
+    <% if empty_inputs? %>
+    const command = new <%= command_name %>()
+    <% else %>
     const inputs: <%= inputs_class_name %> = <%= populated_inputs_object %>
 
     const command = new <%= command_name %>(inputs)
+    <% end %>
 
     try {
       setResult("Thinking...")
