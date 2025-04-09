@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    foobara-typescript-react-command-form-generator (0.0.10)
+    foobara-typescript-react-command-form-generator (0.0.11)
       foobara-typescript-remote-command-generator (~> 0.0.1)
 
 GEM
@@ -14,7 +14,7 @@ GEM
     diff-lcs (1.6.1)
     docile (1.4.1)
     ffi (1.17.1-x86_64-linux-gnu)
-    foobara (0.0.95)
+    foobara (0.0.96)
       bigdecimal
       foobara-lru-cache (~> 0.0.2)
       foobara-util (~> 0.0.11)

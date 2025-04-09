@@ -242,10 +242,23 @@ module Foobara
                   #{one_of.map { |value| "<option value=\"#{value}\">#{value}</option>" }.join}
                 </select>"
               else
+                type = type_declaration.to_type
+
+                cast_value = if type.name.to_s == "integer" || type.extends_symbol?(:integer)
+                               "parseInt(e.target.value)"
+                             elsif type.name.to_s == "float" || type.extends_symbol?(:float)
+                               # TODO: test this path
+                               # :nocov:
+                               "parseFloat(e.target.value)"
+                               # :nocov:
+                             else
+                               "e.target.value"
+                             end
+
                 "<input
                     #{"type=\"password\"" if sensitive?}
                     value={#{name} ?? \"\"}
-                    onChange={(e) => { set#{name_upcase}(e.target.value) }}
+                    onChange={(e) => { set#{name_upcase}(#{cast_value}) }}
                     placeholder=\"#{name_english}\"
                   />"
               end

@@ -1,3 +1,8 @@
+## [0.0.11] - 2025-04-08
+
+- Print out stringified errors for unexpected errors
+- Cast e.target.value with parseInt/parseFloat when appropriate
+
 ## [0.0.10] - 2025-04-08
 
 - Do not double up hashes on Outcome import
