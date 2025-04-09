@@ -1,3 +1,7 @@
+## [0.0.10] - 2025-04-08
+
+- Do not double up hashes on Outcome import
+
 ## [0.0.9] - 2025-04-08
 
 - Don't make use of inputs for commands that don't have inputs
