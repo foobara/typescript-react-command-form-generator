@@ -60,7 +60,7 @@ export default function <%= command_name %>Form (): JSX.Element {
         setResult(null)
       }
     } catch (error) {
-      setError('Error executing command')
+      setError(`Error executing command: ${JSON.stringify(error)}`)
       setResult(null)
     }
   })
