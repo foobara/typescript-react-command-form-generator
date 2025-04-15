@@ -203,7 +203,7 @@ module Foobara
               first, *rest = path
 
               first = Util.camelize(first)
-              rest = rest.map { |part| Util.camelize(part) }
+              rest = rest.map { |part| Util.classify(part) }
 
               [first, *rest].join
             end

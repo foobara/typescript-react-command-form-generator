@@ -1,3 +1,8 @@
+## [0.0.12] - 2025-04-15
+
+- Fix non-camelized get/set useState names for nested types
+- Do not include Model/Entity classes in inputs types to simplify things for now
+
 ## [0.0.11] - 2025-04-08
 
 - Print out stringified errors for unexpected errors
