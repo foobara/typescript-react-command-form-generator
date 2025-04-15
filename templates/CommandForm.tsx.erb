@@ -6,6 +6,7 @@ import { <%= command_name %> } from "<%= path_to_root %><%= command_generator.im
 <% unless empty_inputs? %>
 import <%= inputs_class_name %> from "<%= path_to_root %><%= command_generator.import_path %>/Inputs"
 <% end %>
+<%# TODO: why isn't the result type handled via dependency_roots to avoid collisions with other types? %>
 import <%= result_class_name %> from "<%= path_to_root %><%= command_generator.import_path %>/Result"
 import { Error as <%= error_class_name %> } from "<%= path_to_root %><%= command_generator.import_path %>/Errors"
 

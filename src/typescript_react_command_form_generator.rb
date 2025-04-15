@@ -36,11 +36,16 @@ module Foobara
             return @type_generators if defined?(@type_generators)
 
             generators = if type_declaration.entity?
-                           generator_class = RemoteGenerator::Services::UnloadedEntityGenerator
-                           [generator_class.new(type_declaration.to_entity)]
+                           # For now, we'll not bother with entity/model classes in the inputs.
+                           # This simplifies things a bit re: form generation and setting UI
+                           # inputs into the inputs value.
+                           type_generators(type_declaration.to_type.primary_key_type, false)
+                           # generator_class = RemoteGenerator::Services::UnloadedEntityGenerator
+                           # [generator_class.new(type_declaration.to_entity)]
                          elsif type_declaration.model?
-                           generator_class = RemoteGenerator::Services::AtomModelGenerator
-                           [generator_class.new(type_declaration.to_model)]
+                           type_generators(type_declaration.to_type.attributes_type, false)
+                           # generator_class = RemoteGenerator::Services::AtomModelGenerator
+                           # [generator_class.new(type_declaration.to_model)]
                          elsif type_declaration.type.to_sym == :attributes
                            type_declaration.attribute_declarations.values.map do |attribute_declaration|
                              type_generators(attribute_declaration, false)
