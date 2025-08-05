@@ -35,7 +35,7 @@ module Foobara
           def type_generators(type_declaration = inputs_type, initial = true)
             return @type_generators if defined?(@type_generators)
 
-            generators = if type_declaration.entity?
+            generators = if type_declaration.detached_entity?
                            # For now, we'll not bother with entity/model classes in the inputs.
                            # This simplifies things a bit re: form generation and setting UI
                            # inputs into the inputs value.
@@ -107,7 +107,7 @@ module Foobara
               type_declaration.attribute_declarations.each_pair do |attribute_name, attribute_declaration|
                 non_colliding_inputs(attribute_declaration, result, [*path, attribute_name])
               end
-            elsif type_declaration.entity?
+            elsif type_declaration.detached_entity?
               # TODO: figure out how to not pass self here...
               result << FlattenedAttribute.new(self, path, type_declaration.to_type.primary_key_type)
             elsif type_declaration.model?
