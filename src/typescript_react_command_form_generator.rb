@@ -39,7 +39,10 @@ module Foobara
                            # For now, we'll not bother with entity/model classes in the inputs.
                            # This simplifies things a bit re: form generation and setting UI
                            # inputs into the inputs value.
+                           # TODO: test this path or delete it if unreachable!
+                           # :nocov:
                            type_generators(type_declaration.to_type.primary_key_type, false)
+                           # :nocov:
                            # generator_class = RemoteGenerator::Services::UnloadedEntityGenerator
                            # [generator_class.new(type_declaration.to_entity)]
                          elsif type_declaration.model?
@@ -109,7 +112,10 @@ module Foobara
               end
             elsif type_declaration.detached_entity?
               # TODO: figure out how to not pass self here...
+              # TODO: test this path or delete it if unreachable!
+              # :nocov:
               result << FlattenedAttribute.new(self, path, type_declaration.to_type.primary_key_type)
+              # :nocov:
             elsif type_declaration.model?
               non_colliding_inputs(type_declaration.to_type.attributes_type, result, path)
             elsif type_declaration.array?
@@ -257,7 +263,8 @@ module Foobara
                                "parseFloat(e.target.value)"
                                # :nocov:
                              else
-                               "e.target.value"
+                               ts_type = generator.foobara_type_to_ts_type(type_declaration)
+                               "e.target.value as #{ts_type}"
                              end
 
                 "<input

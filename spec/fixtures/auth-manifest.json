@@ -1,5 +1,362 @@
 {
   "command": {
+    "BlogWww::GetCurrentUser": {
+      "scoped_path": [
+        "BlogWww",
+        "GetCurrentUser"
+      ],
+      "scoped_name": "BlogWww::GetCurrentUser",
+      "scoped_short_name": "GetCurrentUser",
+      "scoped_prefix": [
+        "BlogWww"
+      ],
+      "scoped_full_path": [
+        "BlogWww",
+        "GetCurrentUser"
+      ],
+      "scoped_full_name": "BlogWww::GetCurrentUser",
+      "scoped_category": "command",
+      "reference": "BlogWww::GetCurrentUser",
+      "domain": "global_organization::global_domain",
+      "organization": "global_organization",
+      "parent": [
+        "domain",
+        "global_organization::global_domain"
+      ],
+      "types_depended_on": [
+        "Foobara::Auth::Types::Role",
+        "Foobara::Auth::Types::User",
+        "array",
+        "attributes",
+        "detached_entity",
+        "duck",
+        "email",
+        "integer",
+        "string",
+        "symbol"
+      ],
+      "inputs_types_depended_on": [
+        "array",
+        "attributes",
+        "duck",
+        "symbol"
+      ],
+      "result_types_depended_on": [
+        "Foobara::Auth::Types::Role",
+        "array",
+        "attributes",
+        "detached_entity",
+        "duck",
+        "email",
+        "integer",
+        "string",
+        "symbol"
+      ],
+      "errors_types_depended_on": [
+        "array",
+        "attributes",
+        "duck",
+        "symbol"
+      ],
+      "possible_errors": {
+        "data.cannot_cast": {
+          "category": "data",
+          "symbol": "cannot_cast",
+          "key": "data.cannot_cast",
+          "error": "Foobara::Value::Processor::Casting::CannotCastError",
+          "processor_class": "Foobara::Value::Processor::Casting",
+          "processor_manifest_data": {
+            "casting": {
+              "cast_to": {
+                "type": "attributes",
+                "element_type_declarations": {}
+              }
+            }
+          }
+        },
+        "data.unexpected_attributes": {
+          "category": "data",
+          "symbol": "unexpected_attributes",
+          "key": "data.unexpected_attributes",
+          "error": "attributes::SupportedProcessors::ElementTypeDeclarations::UnexpectedAttributesError",
+          "processor_class": "attributes::SupportedProcessors::ElementTypeDeclarations",
+          "processor_manifest_data": {
+            "element_type_declarations": {}
+          }
+        },
+        "runtime.unauthenticated": {
+          "category": "runtime",
+          "symbol": "unauthenticated",
+          "key": "runtime.unauthenticated",
+          "error": "Foobara::CommandConnector::UnauthenticatedError"
+        }
+      },
+      "inputs_type": {
+        "type": "attributes",
+        "element_type_declarations": {}
+      },
+      "description": null,
+      "result_type": {
+        "type": "Foobara::Auth::Types::User"
+      },
+      "result_transformers": [
+        {
+          "scoped_path": [
+            "SensitiveValueRemover",
+            "Foobara",
+            "Auth",
+            "Types",
+            "User"
+          ],
+          "scoped_name": "SensitiveValueRemover::Foobara::Auth::Types::User",
+          "scoped_short_name": "User",
+          "scoped_prefix": [
+            "SensitiveValueRemover",
+            "Foobara",
+            "Auth",
+            "Types"
+          ],
+          "scoped_full_path": [
+            "SensitiveValueRemover",
+            "Foobara",
+            "Auth",
+            "Types",
+            "User"
+          ],
+          "scoped_full_name": "SensitiveValueRemover::Foobara::Auth::Types::User",
+          "scoped_category": "processor",
+          "reference": "SensitiveValueRemover::Foobara::Auth::Types::User",
+          "domain": "global_organization::global_domain",
+          "organization": "global_organization",
+          "processor_class": "Foobara::Entity::SensitiveValueRemovers::Entity"
+        }
+      ],
+      "errors_transformers": [
+        {
+          "scoped_path": [
+            "Transformers",
+            "AuthErrorsTransformer"
+          ],
+          "scoped_name": "Transformers::AuthErrorsTransformer",
+          "scoped_short_name": "AuthErrorsTransformer",
+          "scoped_prefix": [
+            "Transformers"
+          ],
+          "scoped_full_path": [
+            "Foobara",
+            "CommandConnectors",
+            "Transformers",
+            "AuthErrorsTransformer"
+          ],
+          "scoped_full_name": "Foobara::CommandConnectors::Transformers::AuthErrorsTransformer",
+          "scoped_category": "processor_class",
+          "reference": "Foobara::CommandConnectors::Transformers::AuthErrorsTransformer",
+          "domain": "Foobara::CommandConnectors",
+          "organization": "Foobara",
+          "parent": [
+            "domain",
+            "Foobara::CommandConnectors"
+          ],
+          "name": "Foobara::CommandConnectors::Transformers::AuthErrorsTransformer",
+          "processor_type": "transformer"
+        }
+      ],
+      "serializers": [
+        "Foobara::CommandConnectors::Serializers::ErrorsSerializer",
+        "Foobara::CommandConnectors::Serializers::AtomicSerializer",
+        "Foobara::CommandConnectors::Serializers::JsonSerializer"
+      ],
+      "request_mutators": [
+        "Foobara::CommandConnectors::Http::SetInputToProcResult::Anon1"
+      ],
+      "requires_authentication": true,
+      "authenticator": {
+        "symbol": "bearer",
+        "explanation": "Expects an access token in authorization header in format of: Bearer <token>"
+      }
+    },
+    "ComputeExponent": {
+      "scoped_path": [
+        "ComputeExponent"
+      ],
+      "scoped_name": "ComputeExponent",
+      "scoped_short_name": "ComputeExponent",
+      "scoped_prefix": null,
+      "scoped_full_path": [
+        "ComputeExponent"
+      ],
+      "scoped_full_name": "ComputeExponent",
+      "scoped_category": "command",
+      "reference": "ComputeExponent",
+      "domain": "global_organization::global_domain",
+      "organization": "global_organization",
+      "parent": [
+        "domain",
+        "global_organization::global_domain"
+      ],
+      "types_depended_on": [
+        "array",
+        "attributes",
+        "duck",
+        "integer",
+        "number",
+        "symbol"
+      ],
+      "inputs_types_depended_on": [
+        "array",
+        "attributes",
+        "duck",
+        "integer",
+        "symbol"
+      ],
+      "result_types_depended_on": [
+        "array",
+        "attributes",
+        "duck",
+        "number",
+        "symbol"
+      ],
+      "errors_types_depended_on": [
+        "array",
+        "attributes",
+        "duck",
+        "symbol"
+      ],
+      "possible_errors": {
+        "data.base.cannot_cast": {
+          "path": [
+            "base"
+          ],
+          "category": "data",
+          "symbol": "cannot_cast",
+          "key": "data.base.cannot_cast",
+          "error": "Foobara::Value::Processor::Casting::CannotCastError",
+          "processor_manifest_data": {
+            "casting": {
+              "cast_to": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "data.cannot_cast": {
+          "category": "data",
+          "symbol": "cannot_cast",
+          "key": "data.cannot_cast",
+          "error": "Foobara::Value::Processor::Casting::CannotCastError",
+          "processor_class": "Foobara::Value::Processor::Casting",
+          "processor_manifest_data": {
+            "casting": {
+              "cast_to": {
+                "type": "attributes",
+                "element_type_declarations": {
+                  "base": {
+                    "type": "integer"
+                  },
+                  "exponent": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "data.exponent.cannot_cast": {
+          "path": [
+            "exponent"
+          ],
+          "category": "data",
+          "symbol": "cannot_cast",
+          "key": "data.exponent.cannot_cast",
+          "error": "Foobara::Value::Processor::Casting::CannotCastError",
+          "processor_manifest_data": {
+            "casting": {
+              "cast_to": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "data.unexpected_attributes": {
+          "category": "data",
+          "symbol": "unexpected_attributes",
+          "key": "data.unexpected_attributes",
+          "error": "attributes::SupportedProcessors::ElementTypeDeclarations::UnexpectedAttributesError",
+          "processor_class": "attributes::SupportedProcessors::ElementTypeDeclarations",
+          "processor_manifest_data": {
+            "element_type_declarations": {
+              "base": {
+                "type": "integer"
+              },
+              "exponent": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "runtime.unauthenticated": {
+          "category": "runtime",
+          "symbol": "unauthenticated",
+          "key": "runtime.unauthenticated",
+          "error": "Foobara::CommandConnector::UnauthenticatedError"
+        }
+      },
+      "inputs_type": {
+        "type": "attributes",
+        "element_type_declarations": {
+          "base": {
+            "type": "integer"
+          },
+          "exponent": {
+            "type": "integer"
+          }
+        }
+      },
+      "description": null,
+      "result_type": {
+        "type": "integer"
+      },
+      "errors_transformers": [
+        {
+          "scoped_path": [
+            "Transformers",
+            "AuthErrorsTransformer"
+          ],
+          "scoped_name": "Transformers::AuthErrorsTransformer",
+          "scoped_short_name": "AuthErrorsTransformer",
+          "scoped_prefix": [
+            "Transformers"
+          ],
+          "scoped_full_path": [
+            "Foobara",
+            "CommandConnectors",
+            "Transformers",
+            "AuthErrorsTransformer"
+          ],
+          "scoped_full_name": "Foobara::CommandConnectors::Transformers::AuthErrorsTransformer",
+          "scoped_category": "processor_class",
+          "reference": "Foobara::CommandConnectors::Transformers::AuthErrorsTransformer",
+          "domain": "Foobara::CommandConnectors",
+          "organization": "Foobara",
+          "parent": [
+            "domain",
+            "Foobara::CommandConnectors"
+          ],
+          "name": "Foobara::CommandConnectors::Transformers::AuthErrorsTransformer",
+          "processor_type": "transformer"
+        }
+      ],
+      "serializers": [
+        "Foobara::CommandConnectors::Serializers::ErrorsSerializer",
+        "Foobara::CommandConnectors::Serializers::AtomicSerializer",
+        "Foobara::CommandConnectors::Serializers::JsonSerializer"
+      ],
+      "requires_authentication": true,
+      "authenticator": {
+        "symbol": "bearer",
+        "explanation": "Expects an access token in authorization header in format of: Bearer <token>"
+      }
+    },
     "Foobara::Auth::Login": {
       "scoped_path": [
         "Login"
@@ -22,7 +379,6 @@
         "Foobara::Auth"
       ],
       "types_depended_on": [
-        "Foobara::Auth::Types::User",
         "array",
         "attributes",
         "duck",
@@ -32,11 +388,9 @@
         "symbol"
       ],
       "inputs_types_depended_on": [
-        "Foobara::Auth::Types::User",
         "array",
         "attributes",
         "duck",
-        "integer",
         "string",
         "symbol"
       ],
@@ -44,7 +398,6 @@
         "array",
         "attributes",
         "duck",
-        "string",
         "symbol"
       ],
       "errors_types_depended_on": [
@@ -68,18 +421,6 @@
               "cast_to": {
                 "type": "attributes",
                 "element_type_declarations": {
-                  "user": {
-                    "allow_nil": true,
-                    "type": "Foobara::Auth::Types::User"
-                  },
-                  "username": {
-                    "allow_nil": true,
-                    "type": "string"
-                  },
-                  "email": {
-                    "allow_nil": true,
-                    "type": "string"
-                  },
                   "username_or_email": {
                     "allow_nil": true,
                     "type": "string"
@@ -87,38 +428,11 @@
                   "plaintext_password": {
                     "sensitive_exposed": true,
                     "type": "string"
-                  },
-                  "token_ttl": {
-                    "type": "integer"
-                  },
-                  "refresh_token_ttl": {
-                    "type": "integer"
                   }
                 },
                 "required": [
                   "plaintext_password"
-                ],
-                "defaults": {
-                  "token_ttl": 1800,
-                  "refresh_token_ttl": 604800
-                }
-              }
-            }
-          }
-        },
-        "data.email.cannot_cast": {
-          "path": [
-            "email"
-          ],
-          "category": "data",
-          "symbol": "cannot_cast",
-          "key": "data.email.cannot_cast",
-          "error": "Foobara::Value::Processor::Casting::CannotCastError",
-          "processor_manifest_data": {
-            "casting": {
-              "cast_to": {
-                "allow_nil": true,
-                "type": "string"
+                ]
               }
             }
           }
@@ -165,38 +479,6 @@
             ]
           }
         },
-        "data.refresh_token_ttl.cannot_cast": {
-          "path": [
-            "refresh_token_ttl"
-          ],
-          "category": "data",
-          "symbol": "cannot_cast",
-          "key": "data.refresh_token_ttl.cannot_cast",
-          "error": "Foobara::Value::Processor::Casting::CannotCastError",
-          "processor_manifest_data": {
-            "casting": {
-              "cast_to": {
-                "type": "integer"
-              }
-            }
-          }
-        },
-        "data.token_ttl.cannot_cast": {
-          "path": [
-            "token_ttl"
-          ],
-          "category": "data",
-          "symbol": "cannot_cast",
-          "key": "data.token_ttl.cannot_cast",
-          "error": "Foobara::Value::Processor::Casting::CannotCastError",
-          "processor_manifest_data": {
-            "casting": {
-              "cast_to": {
-                "type": "integer"
-              }
-            }
-          }
-        },
         "data.unexpected_attributes": {
           "category": "data",
           "symbol": "unexpected_attributes",
@@ -205,64 +487,12 @@
           "processor_class": "attributes::SupportedProcessors::ElementTypeDeclarations",
           "processor_manifest_data": {
             "element_type_declarations": {
-              "user": {
-                "allow_nil": true,
-                "type": "Foobara::Auth::Types::User"
-              },
-              "username": {
-                "allow_nil": true,
-                "type": "string"
-              },
-              "email": {
-                "allow_nil": true,
-                "type": "string"
-              },
               "username_or_email": {
                 "allow_nil": true,
                 "type": "string"
               },
               "plaintext_password": {
                 "sensitive_exposed": true,
-                "type": "string"
-              },
-              "token_ttl": {
-                "type": "integer"
-              },
-              "refresh_token_ttl": {
-                "type": "integer"
-              }
-            }
-          }
-        },
-        "data.user.cannot_cast": {
-          "path": [
-            "user"
-          ],
-          "category": "data",
-          "symbol": "cannot_cast",
-          "key": "data.user.cannot_cast",
-          "error": "Foobara::Value::Processor::Casting::CannotCastError",
-          "processor_manifest_data": {
-            "casting": {
-              "cast_to": {
-                "allow_nil": true,
-                "type": "Foobara::Auth::Types::User"
-              }
-            }
-          }
-        },
-        "data.username.cannot_cast": {
-          "path": [
-            "username"
-          ],
-          "category": "data",
-          "symbol": "cannot_cast",
-          "key": "data.username.cannot_cast",
-          "error": "Foobara::Value::Processor::Casting::CannotCastError",
-          "processor_manifest_data": {
-            "casting": {
-              "cast_to": {
-                "allow_nil": true,
                 "type": "string"
               }
             }
@@ -308,25 +538,14 @@
         }
       },
       "depends_on": [
-        "Foobara::Auth::CreateToken",
+        "Foobara::Auth::BuildAccessToken",
+        "Foobara::Auth::CreateRefreshToken",
         "Foobara::Auth::FindUser",
         "Foobara::Auth::VerifyPassword"
       ],
       "inputs_type": {
         "type": "attributes",
         "element_type_declarations": {
-          "user": {
-            "allow_nil": true,
-            "type": "Foobara::Auth::Types::User"
-          },
-          "username": {
-            "allow_nil": true,
-            "type": "string"
-          },
-          "email": {
-            "allow_nil": true,
-            "type": "string"
-          },
           "username_or_email": {
             "allow_nil": true,
             "type": "string"
@@ -334,45 +553,176 @@
           "plaintext_password": {
             "sensitive_exposed": true,
             "type": "string"
-          },
-          "token_ttl": {
-            "type": "integer"
-          },
-          "refresh_token_ttl": {
-            "type": "integer"
           }
         },
         "required": [
           "plaintext_password"
-        ],
-        "defaults": {
-          "token_ttl": 1800,
-          "refresh_token_ttl": 604800
-        }
+        ]
       },
       "description": null,
       "result_type": {
         "type": "attributes",
-        "element_type_declarations": {
-          "access_token": {
-            "sensitive_exposed": true,
-            "type": "string"
-          },
-          "refresh_token": {
-            "sensitive_exposed": true,
-            "type": "string"
+        "element_type_declarations": {}
+      },
+      "inputs_transformers": [
+        {
+          "scoped_path": [
+            "plaintext_password__username_or_email"
+          ],
+          "scoped_name": "plaintext_password__username_or_email",
+          "scoped_short_name": "plaintext_password__username_or_email",
+          "scoped_prefix": null,
+          "scoped_full_path": [
+            "plaintext_password__username_or_email"
+          ],
+          "scoped_full_name": "plaintext_password__username_or_email",
+          "scoped_category": "processor",
+          "reference": "plaintext_password__username_or_email",
+          "domain": "global_organization::global_domain",
+          "organization": "global_organization",
+          "processor_class": "Foobara::AttributesTransformers::Only::plaintext_password__username_or_email"
+        }
+      ],
+      "serializers": [
+        "Foobara::CommandConnectors::Serializers::ErrorsSerializer",
+        "Foobara::CommandConnectors::Serializers::AtomicSerializer",
+        "Foobara::CommandConnectors::Serializers::JsonSerializer"
+      ],
+      "response_mutators": [
+        "Foobara::AuthHttp::MoveRefreshTokenToCookie",
+        "Foobara::AuthHttp::MoveAccessTokenToHeader"
+      ],
+      "authenticator": {
+        "symbol": "bearer",
+        "explanation": "Expects an access token in authorization header in format of: Bearer <token>"
+      }
+    },
+    "Foobara::Auth::Logout": {
+      "scoped_path": [
+        "Logout"
+      ],
+      "scoped_name": "Logout",
+      "scoped_short_name": "Logout",
+      "scoped_prefix": null,
+      "scoped_full_path": [
+        "Foobara",
+        "Auth",
+        "Logout"
+      ],
+      "scoped_full_name": "Foobara::Auth::Logout",
+      "scoped_category": "command",
+      "reference": "Foobara::Auth::Logout",
+      "domain": "Foobara::Auth",
+      "organization": "Foobara",
+      "parent": [
+        "domain",
+        "Foobara::Auth"
+      ],
+      "types_depended_on": [
+        "Foobara::Auth::token_state",
+        "array",
+        "attributes",
+        "duck",
+        "symbol"
+      ],
+      "inputs_types_depended_on": [
+        "array",
+        "attributes",
+        "duck",
+        "symbol"
+      ],
+      "result_types_depended_on": [
+        "array",
+        "attributes",
+        "symbol"
+      ],
+      "errors_types_depended_on": [
+        "Foobara::Auth::token_state",
+        "array",
+        "attributes",
+        "duck",
+        "symbol"
+      ],
+      "possible_errors": {
+        "data.cannot_cast": {
+          "category": "data",
+          "symbol": "cannot_cast",
+          "key": "data.cannot_cast",
+          "error": "Foobara::Value::Processor::Casting::CannotCastError",
+          "processor_class": "Foobara::Value::Processor::Casting",
+          "processor_manifest_data": {
+            "casting": {
+              "cast_to": {
+                "type": "attributes",
+                "element_type_declarations": {}
+              }
+            }
           }
         },
-        "required": [
-          "access_token",
-          "refresh_token"
-        ]
+        "data.unexpected_attributes": {
+          "category": "data",
+          "symbol": "unexpected_attributes",
+          "key": "data.unexpected_attributes",
+          "error": "attributes::SupportedProcessors::ElementTypeDeclarations::UnexpectedAttributesError",
+          "processor_class": "attributes::SupportedProcessors::ElementTypeDeclarations",
+          "processor_manifest_data": {
+            "element_type_declarations": {}
+          }
+        },
+        "foobara::auth::verify_token>runtime.expired_token": {
+          "runtime_path": [
+            "foobara::auth::verify_token"
+          ],
+          "category": "runtime",
+          "symbol": "expired_token",
+          "key": "foobara::auth::verify_token>runtime.expired_token",
+          "error": "Foobara::Auth::VerifyToken::ExpiredTokenError"
+        },
+        "foobara::auth::verify_token>runtime.inactive_token": {
+          "runtime_path": [
+            "foobara::auth::verify_token"
+          ],
+          "category": "runtime",
+          "symbol": "inactive_token",
+          "key": "foobara::auth::verify_token>runtime.inactive_token",
+          "error": "Foobara::Auth::VerifyToken::InactiveTokenError"
+        },
+        "foobara::auth::verify_token>runtime.token_does_not_exist": {
+          "runtime_path": [
+            "foobara::auth::verify_token"
+          ],
+          "category": "runtime",
+          "symbol": "token_does_not_exist",
+          "key": "foobara::auth::verify_token>runtime.token_does_not_exist",
+          "error": "Foobara::Auth::VerifyToken::TokenDoesNotExistError"
+        }
+      },
+      "depends_on": [
+        "Foobara::Auth::VerifyToken"
+      ],
+      "inputs_type": {
+        "type": "attributes",
+        "element_type_declarations": {}
+      },
+      "description": null,
+      "result_type": {
+        "type": "duck"
       },
       "serializers": [
         "Foobara::CommandConnectors::Serializers::ErrorsSerializer",
         "Foobara::CommandConnectors::Serializers::AtomicSerializer",
         "Foobara::CommandConnectors::Serializers::JsonSerializer"
-      ]
+      ],
+      "response_mutators": [
+        "Foobara::AuthHttp::ClearAccessTokenHeader"
+      ],
+      "request_mutators": [
+        "Foobara::AuthHttp::SetRefreshTokenFromCookie"
+      ],
+      "authenticator": {
+        "symbol": "bearer",
+        "explanation": "Expects an access token in authorization header in format of: Bearer <token>"
+      }
     },
     "Foobara::Auth::RefreshLogin": {
       "scoped_path": [
@@ -396,29 +746,22 @@
         "Foobara::Auth"
       ],
       "types_depended_on": [
-        "Foobara::Auth::Types::User",
         "Foobara::Auth::token_state",
         "array",
         "attributes",
         "duck",
-        "integer",
-        "string",
         "symbol"
       ],
       "inputs_types_depended_on": [
-        "Foobara::Auth::Types::User",
         "array",
         "attributes",
         "duck",
-        "integer",
-        "string",
         "symbol"
       ],
       "result_types_depended_on": [
         "array",
         "attributes",
         "duck",
-        "string",
         "symbol"
       ],
       "errors_types_depended_on": [
@@ -426,7 +769,6 @@
         "array",
         "attributes",
         "duck",
-        "string",
         "symbol"
       ],
       "possible_errors": {
@@ -440,104 +782,7 @@
             "casting": {
               "cast_to": {
                 "type": "attributes",
-                "element_type_declarations": {
-                  "user": {
-                    "type": "Foobara::Auth::Types::User"
-                  },
-                  "refresh_token_text": {
-                    "sensitive": true,
-                    "type": "string"
-                  },
-                  "token_ttl": {
-                    "type": "integer"
-                  },
-                  "refresh_token_ttl": {
-                    "type": "integer"
-                  }
-                },
-                "required": [
-                  "refresh_token_text",
-                  "user"
-                ],
-                "defaults": {
-                  "token_ttl": 1800,
-                  "refresh_token_ttl": 604800
-                }
-              }
-            }
-          }
-        },
-        "data.missing_required_attribute": {
-          "category": "data",
-          "symbol": "missing_required_attribute",
-          "key": "data.missing_required_attribute",
-          "error": "attributes::SupportedValidators::Required::MissingRequiredAttributeError",
-          "processor_class": "Foobara::Value::Processor::Pipeline",
-          "processor_manifest_data": {
-            "pipeline": null
-          }
-        },
-        "data.refresh_token_text.cannot_cast": {
-          "path": [
-            "refresh_token_text"
-          ],
-          "category": "data",
-          "symbol": "cannot_cast",
-          "key": "data.refresh_token_text.cannot_cast",
-          "error": "Foobara::Value::Processor::Casting::CannotCastError",
-          "processor_manifest_data": {
-            "casting": {
-              "cast_to": {
-                "sensitive": true,
-                "type": "string"
-              }
-            }
-          }
-        },
-        "data.refresh_token_text.missing_required_attribute": {
-          "path": [
-            "refresh_token_text"
-          ],
-          "category": "data",
-          "symbol": "missing_required_attribute",
-          "key": "data.refresh_token_text.missing_required_attribute",
-          "error": "attributes::SupportedValidators::Required::MissingRequiredAttributeError",
-          "processor_class": "attributes::SupportedValidators::Required",
-          "processor_manifest_data": {
-            "required": [
-              "refresh_token_text",
-              "user"
-            ]
-          }
-        },
-        "data.refresh_token_ttl.cannot_cast": {
-          "path": [
-            "refresh_token_ttl"
-          ],
-          "category": "data",
-          "symbol": "cannot_cast",
-          "key": "data.refresh_token_ttl.cannot_cast",
-          "error": "Foobara::Value::Processor::Casting::CannotCastError",
-          "processor_manifest_data": {
-            "casting": {
-              "cast_to": {
-                "type": "integer"
-              }
-            }
-          }
-        },
-        "data.token_ttl.cannot_cast": {
-          "path": [
-            "token_ttl"
-          ],
-          "category": "data",
-          "symbol": "cannot_cast",
-          "key": "data.token_ttl.cannot_cast",
-          "error": "Foobara::Value::Processor::Casting::CannotCastError",
-          "processor_manifest_data": {
-            "casting": {
-              "cast_to": {
-                "type": "integer"
+                "element_type_declarations": {}
               }
             }
           }
@@ -549,106 +794,7 @@
           "error": "attributes::SupportedProcessors::ElementTypeDeclarations::UnexpectedAttributesError",
           "processor_class": "attributes::SupportedProcessors::ElementTypeDeclarations",
           "processor_manifest_data": {
-            "element_type_declarations": {
-              "user": {
-                "type": "Foobara::Auth::Types::User"
-              },
-              "refresh_token_text": {
-                "sensitive": true,
-                "type": "string"
-              },
-              "token_ttl": {
-                "type": "integer"
-              },
-              "refresh_token_ttl": {
-                "type": "integer"
-              }
-            }
-          }
-        },
-        "data.user.cannot_cast": {
-          "path": [
-            "user"
-          ],
-          "category": "data",
-          "symbol": "cannot_cast",
-          "key": "data.user.cannot_cast",
-          "error": "Foobara::Value::Processor::Casting::CannotCastError",
-          "processor_manifest_data": {
-            "casting": {
-              "cast_to": {
-                "type": "entity",
-                "name": "Types::User",
-                "model_module": "Foobara::Auth",
-                "model_class": "Foobara::Auth::Types::User",
-                "model_base_class": "Foobara::Entity",
-                "attributes_declaration": {
-                  "type": "attributes",
-                  "element_type_declarations": {
-                    "id": {
-                      "type": "integer"
-                    },
-                    "username": {
-                      "type": "string"
-                    },
-                    "email": {
-                      "type": "email"
-                    },
-                    "roles": {
-                      "type": "array",
-                      "element_type_declaration": {
-                        "type": "Foobara::Auth::Types::Role"
-                      }
-                    },
-                    "api_keys": {
-                      "type": "array",
-                      "element_type_declaration": {
-                        "type": "Foobara::Auth::Types::Token"
-                      },
-                      "sensitive": true
-                    },
-                    "refresh_tokens": {
-                      "type": "array",
-                      "element_type_declaration": {
-                        "type": "Foobara::Auth::Types::Token"
-                      },
-                      "sensitive": true
-                    },
-                    "password_secret": {
-                      "sensitive": true,
-                      "allow_nil": true,
-                      "type": "Foobara::Auth::Types::Secret"
-                    }
-                  },
-                  "required": [
-                    "email",
-                    "username"
-                  ],
-                  "defaults": {
-                    "roles": [],
-                    "api_keys": [],
-                    "refresh_tokens": []
-                  }
-                },
-                "primary_key": "id"
-              }
-            }
-          }
-        },
-        "data.user.missing_required_attribute": {
-          "path": [
-            "user"
-          ],
-          "category": "data",
-          "symbol": "missing_required_attribute",
-          "key": "data.user.missing_required_attribute",
-          "error": "attributes::SupportedValidators::Required::MissingRequiredAttributeError",
-          "processor_class": "attributes::SupportedValidators::Required",
-          "processor_manifest_data": {
-            "required": [
-              "refresh_token_text",
-              "user"
-            ]
+            "element_type_declarations": {}
           }
         },
         "foobara::auth::verify_token>runtime.expired_token": {
@@ -669,72 +815,71 @@
           "key": "foobara::auth::verify_token>runtime.inactive_token",
           "error": "Foobara::Auth::VerifyToken::InactiveTokenError"
         },
+        "foobara::auth::verify_token>runtime.token_does_not_exist": {
+          "runtime_path": [
+            "foobara::auth::verify_token"
+          ],
+          "category": "runtime",
+          "symbol": "token_does_not_exist",
+          "key": "foobara::auth::verify_token>runtime.token_does_not_exist",
+          "error": "Foobara::Auth::VerifyToken::TokenDoesNotExistError"
+        },
         "runtime.invalid_refresh_token": {
           "category": "runtime",
           "symbol": "invalid_refresh_token",
           "key": "runtime.invalid_refresh_token",
           "error": "Foobara::Auth::RefreshLogin::InvalidRefreshTokenError"
-        },
-        "runtime.refresh_token_not_owned_by_user": {
-          "category": "runtime",
-          "symbol": "refresh_token_not_owned_by_user",
-          "key": "runtime.refresh_token_not_owned_by_user",
-          "error": "Foobara::Auth::RefreshLogin::RefreshTokenNotOwnedByUser"
         }
       },
       "depends_on": [
-        "Foobara::Auth::CreateToken",
+        "Foobara::Auth::BuildAccessToken",
+        "Foobara::Auth::CreateRefreshToken",
         "Foobara::Auth::VerifyToken"
       ],
       "inputs_type": {
         "type": "attributes",
-        "element_type_declarations": {
-          "user": {
-            "type": "Foobara::Auth::Types::User"
-          },
-          "refresh_token_text": {
-            "sensitive": true,
-            "type": "string"
-          },
-          "token_ttl": {
-            "type": "integer"
-          },
-          "refresh_token_ttl": {
-            "type": "integer"
-          }
-        },
-        "required": [
-          "refresh_token_text",
-          "user"
-        ],
-        "defaults": {
-          "token_ttl": 1800,
-          "refresh_token_ttl": 604800
-        }
+        "element_type_declarations": {}
       },
       "description": null,
       "result_type": {
         "type": "attributes",
-        "element_type_declarations": {
-          "access_token": {
-            "sensitive_exposed": true,
-            "type": "string"
-          },
-          "refresh_token": {
-            "sensitive_exposed": true,
-            "type": "string"
-          }
-        },
-        "required": [
-          "access_token",
-          "refresh_token"
-        ]
+        "element_type_declarations": {}
       },
+      "inputs_transformers": [
+        {
+          "scoped_path": [
+            "refresh_token"
+          ],
+          "scoped_name": "refresh_token",
+          "scoped_short_name": "refresh_token",
+          "scoped_prefix": null,
+          "scoped_full_path": [
+            "refresh_token"
+          ],
+          "scoped_full_name": "refresh_token",
+          "scoped_category": "processor",
+          "reference": "refresh_token",
+          "domain": "global_organization::global_domain",
+          "organization": "global_organization",
+          "processor_class": "Foobara::AttributesTransformers::Only::refresh_token"
+        }
+      ],
       "serializers": [
         "Foobara::CommandConnectors::Serializers::ErrorsSerializer",
         "Foobara::CommandConnectors::Serializers::AtomicSerializer",
         "Foobara::CommandConnectors::Serializers::JsonSerializer"
-      ]
+      ],
+      "response_mutators": [
+        "Foobara::AuthHttp::MoveRefreshTokenToCookie",
+        "Foobara::AuthHttp::MoveAccessTokenToHeader"
+      ],
+      "request_mutators": [
+        "Foobara::AuthHttp::SetRefreshTokenFromCookie"
+      ],
+      "authenticator": {
+        "symbol": "bearer",
+        "explanation": "Expects an access token in authorization header in format of: Bearer <token>"
+      }
     },
     "Foobara::Auth::Register": {
       "scoped_path": [
@@ -758,11 +903,14 @@
         "Foobara::Auth"
       ],
       "types_depended_on": [
+        "Foobara::Auth::Types::Role",
         "Foobara::Auth::Types::User",
         "array",
         "attributes",
+        "detached_entity",
         "duck",
         "email",
+        "integer",
         "string",
         "symbol"
       ],
@@ -775,7 +923,15 @@
         "symbol"
       ],
       "result_types_depended_on": [
-        "Foobara::Auth::Types::User"
+        "Foobara::Auth::Types::Role",
+        "array",
+        "attributes",
+        "detached_entity",
+        "duck",
+        "email",
+        "integer",
+        "string",
+        "symbol"
       ],
       "errors_types_depended_on": [
         "array",
@@ -799,6 +955,7 @@
                     "type": "string"
                   },
                   "email": {
+                    "allow_nil": true,
                     "type": "email"
                   },
                   "plaintext_password": {
@@ -808,7 +965,6 @@
                   }
                 },
                 "required": [
-                  "email",
                   "username"
                 ]
               }
@@ -826,6 +982,7 @@
           "processor_manifest_data": {
             "casting": {
               "cast_to": {
+                "allow_nil": true,
                 "type": "email"
               }
             }
@@ -901,22 +1058,6 @@
           "error": "email::Validators::FirstPartHasBadCharacters::FirstPartHasBadCharactersError",
           "processor_manifest_data": {
             "first_part_has_bad_characters": true
-          }
-        },
-        "data.email.missing_required_attribute": {
-          "path": [
-            "email"
-          ],
-          "category": "data",
-          "symbol": "missing_required_attribute",
-          "key": "data.email.missing_required_attribute",
-          "error": "attributes::SupportedValidators::Required::MissingRequiredAttributeError",
-          "processor_class": "attributes::SupportedValidators::Required",
-          "processor_manifest_data": {
-            "required": [
-              "email",
-              "username"
-            ]
           }
         },
         "data.email.must_have_an_at_sign": {
@@ -995,6 +1136,7 @@
                 "type": "string"
               },
               "email": {
+                "allow_nil": true,
                 "type": "email"
               },
               "plaintext_password": {
@@ -1032,7 +1174,6 @@
           "processor_class": "attributes::SupportedValidators::Required",
           "processor_manifest_data": {
             "required": [
-              "email",
               "username"
             ]
           }
@@ -1049,6 +1190,7 @@
             "type": "string"
           },
           "email": {
+            "allow_nil": true,
             "type": "email"
           },
           "plaintext_password": {
@@ -1058,7 +1200,6 @@
           }
         },
         "required": [
-          "email",
           "username"
         ]
       },
@@ -1066,6 +1207,25 @@
       "result_type": {
         "type": "Foobara::Auth::Types::User"
       },
+      "inputs_transformers": [
+        {
+          "scoped_path": [
+            "email__plaintext_password__username"
+          ],
+          "scoped_name": "email__plaintext_password__username",
+          "scoped_short_name": "email__plaintext_password__username",
+          "scoped_prefix": null,
+          "scoped_full_path": [
+            "email__plaintext_password__username"
+          ],
+          "scoped_full_name": "email__plaintext_password__username",
+          "scoped_category": "processor",
+          "reference": "email__plaintext_password__username",
+          "domain": "global_organization::global_domain",
+          "organization": "global_organization",
+          "processor_class": "Foobara::AttributesTransformers::Only::email__plaintext_password__username"
+        }
+      ],
       "result_transformers": [
         {
           "scoped_path": [
@@ -1095,15 +1255,18 @@
           "reference": "SensitiveValueRemover::Foobara::Auth::Types::User",
           "domain": "global_organization::global_domain",
           "organization": "global_organization",
-          "processor_class": "Foobara::Entity::SensitiveValueRemovers::Entity",
-          "declaration_data": "#<Foobara::DetachedEntityType:0x00007fc3a434a520>"
+          "processor_class": "Foobara::Entity::SensitiveValueRemovers::Entity"
         }
       ],
       "serializers": [
         "Foobara::CommandConnectors::Serializers::ErrorsSerializer",
         "Foobara::CommandConnectors::Serializers::AtomicSerializer",
         "Foobara::CommandConnectors::Serializers::JsonSerializer"
-      ]
+      ],
+      "authenticator": {
+        "symbol": "bearer",
+        "explanation": "Expects an access token in authorization header in format of: Bearer <token>"
+      }
     }
   },
   "domain": {
@@ -1129,6 +1292,7 @@
       ],
       "commands": [
         "Foobara::Auth::Login",
+        "Foobara::Auth::Logout",
         "Foobara::Auth::RefreshLogin",
         "Foobara::Auth::Register"
       ],
@@ -1153,7 +1317,10 @@
         "organization",
         "global_organization"
       ],
-      "commands": [],
+      "commands": [
+        "BlogWww::GetCurrentUser",
+        "ComputeExponent"
+      ],
       "types": [
         "array",
         "associative_array",
@@ -1329,64 +1496,16 @@
         "array",
         "attributes",
         "duck",
-        "string",
         "symbol"
       ],
       "category": "runtime",
       "symbol": "invalid_refresh_token",
       "context_type_declaration": {
         "type": "attributes",
-        "element_type_declarations": {
-          "refresh_token_id": {
-            "type": "string"
-          }
-        }
+        "element_type_declarations": {}
       },
       "is_fatal": true,
       "error_class": "Foobara::Auth::RefreshLogin::InvalidRefreshTokenError",
-      "base_error": "Foobara::RuntimeError"
-    },
-    "Foobara::Auth::RefreshLogin::RefreshTokenNotOwnedByUser": {
-      "scoped_path": [
-        "RefreshTokenNotOwnedByUser"
-      ],
-      "scoped_name": "RefreshTokenNotOwnedByUser",
-      "scoped_short_name": "RefreshTokenNotOwnedByUser",
-      "scoped_prefix": null,
-      "scoped_full_path": [
-        "Foobara",
-        "Auth",
-        "RefreshLogin",
-        "RefreshTokenNotOwnedByUser"
-      ],
-      "scoped_full_name": "Foobara::Auth::RefreshLogin::RefreshTokenNotOwnedByUser",
-      "scoped_category": "error",
-      "reference": "Foobara::Auth::RefreshLogin::RefreshTokenNotOwnedByUser",
-      "domain": "Foobara::Auth",
-      "organization": "Foobara",
-      "parent": [
-        "command",
-        "Foobara::Auth::RefreshLogin"
-      ],
-      "types_depended_on": [
-        "array",
-        "attributes",
-        "duck",
-        "string",
-        "symbol"
-      ],
-      "category": "runtime",
-      "symbol": "refresh_token_not_owned_by_user",
-      "context_type_declaration": {
-        "type": "attributes",
-        "element_type_declarations": {
-          "refresh_token_id": {
-            "type": "string"
-          }
-        }
-      },
-      "is_fatal": true,
-      "error_class": "Foobara::Auth::RefreshLogin::RefreshTokenNotOwnedByUser",
       "base_error": "Foobara::RuntimeError"
     },
     "Foobara::Auth::VerifyToken::ExpiredTokenError": {
@@ -1478,6 +1597,127 @@
       "is_fatal": true,
       "error_class": "Foobara::Auth::VerifyToken::InactiveTokenError",
       "base_error": "Foobara::RuntimeError"
+    },
+    "Foobara::Auth::VerifyToken::TokenDoesNotExistError": {
+      "scoped_path": [
+        "VerifyToken",
+        "TokenDoesNotExistError"
+      ],
+      "scoped_name": "VerifyToken::TokenDoesNotExistError",
+      "scoped_short_name": "TokenDoesNotExistError",
+      "scoped_prefix": [
+        "VerifyToken"
+      ],
+      "scoped_full_path": [
+        "Foobara",
+        "Auth",
+        "VerifyToken",
+        "TokenDoesNotExistError"
+      ],
+      "scoped_full_name": "Foobara::Auth::VerifyToken::TokenDoesNotExistError",
+      "scoped_category": "error",
+      "reference": "Foobara::Auth::VerifyToken::TokenDoesNotExistError",
+      "domain": "Foobara::Auth",
+      "organization": "Foobara",
+      "parent": [
+        "domain",
+        "Foobara::Auth"
+      ],
+      "types_depended_on": [
+        "array",
+        "attributes",
+        "duck",
+        "symbol"
+      ],
+      "category": "runtime",
+      "symbol": "token_does_not_exist",
+      "context_type_declaration": {
+        "type": "attributes",
+        "element_type_declarations": {}
+      },
+      "is_fatal": true,
+      "error_class": "Foobara::Auth::VerifyToken::TokenDoesNotExistError",
+      "base_error": "Foobara::RuntimeError"
+    },
+    "Foobara::CommandConnector::CommandConnectorError": {
+      "scoped_path": [
+        "CommandConnector",
+        "CommandConnectorError"
+      ],
+      "scoped_name": "CommandConnector::CommandConnectorError",
+      "scoped_short_name": "CommandConnectorError",
+      "scoped_prefix": [
+        "CommandConnector"
+      ],
+      "scoped_full_path": [
+        "Foobara",
+        "CommandConnector",
+        "CommandConnectorError"
+      ],
+      "scoped_full_name": "Foobara::CommandConnector::CommandConnectorError",
+      "scoped_category": "error",
+      "reference": "Foobara::CommandConnector::CommandConnectorError",
+      "domain": "global_organization::global_domain",
+      "organization": "global_organization",
+      "parent": [
+        "organization",
+        "Foobara"
+      ],
+      "types_depended_on": [
+        "array",
+        "attributes",
+        "duck",
+        "symbol"
+      ],
+      "category": "runtime",
+      "symbol": "command_connector",
+      "context_type_declaration": {
+        "type": "attributes",
+        "element_type_declarations": {}
+      },
+      "is_fatal": true,
+      "error_class": "Foobara::CommandConnector::CommandConnectorError",
+      "base_error": "Foobara::RuntimeError"
+    },
+    "Foobara::CommandConnector::UnauthenticatedError": {
+      "scoped_path": [
+        "CommandConnector",
+        "UnauthenticatedError"
+      ],
+      "scoped_name": "CommandConnector::UnauthenticatedError",
+      "scoped_short_name": "UnauthenticatedError",
+      "scoped_prefix": [
+        "CommandConnector"
+      ],
+      "scoped_full_path": [
+        "Foobara",
+        "CommandConnector",
+        "UnauthenticatedError"
+      ],
+      "scoped_full_name": "Foobara::CommandConnector::UnauthenticatedError",
+      "scoped_category": "error",
+      "reference": "Foobara::CommandConnector::UnauthenticatedError",
+      "domain": "global_organization::global_domain",
+      "organization": "global_organization",
+      "parent": [
+        "organization",
+        "Foobara"
+      ],
+      "types_depended_on": [
+        "array",
+        "attributes",
+        "duck",
+        "symbol"
+      ],
+      "category": "runtime",
+      "symbol": "unauthenticated",
+      "context_type_declaration": {
+        "type": "attributes",
+        "element_type_declarations": {}
+      },
+      "is_fatal": true,
+      "error_class": "Foobara::CommandConnector::UnauthenticatedError",
+      "base_error": "Foobara::CommandConnector::CommandConnectorError"
     },
     "Foobara::RuntimeError": {
       "scoped_path": [
@@ -3058,6 +3298,278 @@
     }
   },
   "processor_class": {
+    "Foobara::AttributesTransformers": {
+      "scoped_path": [
+        "AttributesTransformers"
+      ],
+      "scoped_name": "AttributesTransformers",
+      "scoped_short_name": "AttributesTransformers",
+      "scoped_prefix": null,
+      "scoped_full_path": [
+        "Foobara",
+        "AttributesTransformers"
+      ],
+      "scoped_full_name": "Foobara::AttributesTransformers",
+      "scoped_category": "processor_class",
+      "reference": "Foobara::AttributesTransformers",
+      "domain": "global_organization::global_domain",
+      "organization": "global_organization",
+      "parent": [
+        "organization",
+        "Foobara"
+      ],
+      "name": "Foobara::AttributesTransformers",
+      "processor_type": "transformer"
+    },
+    "Foobara::AttributesTransformers::Only": {
+      "scoped_path": [
+        "Only"
+      ],
+      "scoped_name": "Only",
+      "scoped_short_name": "Only",
+      "scoped_prefix": null,
+      "scoped_full_path": [
+        "Foobara",
+        "AttributesTransformers",
+        "Only"
+      ],
+      "scoped_full_name": "Foobara::AttributesTransformers::Only",
+      "scoped_category": "processor_class",
+      "reference": "Foobara::AttributesTransformers::Only",
+      "domain": "global_organization::global_domain",
+      "organization": "global_organization",
+      "parent": [
+        "processor_class",
+        "Foobara::AttributesTransformers"
+      ],
+      "name": "Foobara::AttributesTransformers::Only",
+      "processor_type": "transformer"
+    },
+    "Foobara::AttributesTransformers::Only::email__plaintext_password__username": {
+      "scoped_path": [
+        "email__plaintext_password__username"
+      ],
+      "scoped_name": "email__plaintext_password__username",
+      "scoped_short_name": "email__plaintext_password__username",
+      "scoped_prefix": null,
+      "scoped_full_path": [
+        "Foobara",
+        "AttributesTransformers",
+        "Only",
+        "email__plaintext_password__username"
+      ],
+      "scoped_full_name": "Foobara::AttributesTransformers::Only::email__plaintext_password__username",
+      "scoped_category": "processor_class",
+      "reference": "Foobara::AttributesTransformers::Only::email__plaintext_password__username",
+      "domain": "global_organization::global_domain",
+      "organization": "global_organization",
+      "parent": [
+        "processor_class",
+        "Foobara::AttributesTransformers::Only"
+      ],
+      "name": "Anonymous",
+      "processor_type": "transformer"
+    },
+    "Foobara::AttributesTransformers::Only::plaintext_password__username_or_email": {
+      "scoped_path": [
+        "plaintext_password__username_or_email"
+      ],
+      "scoped_name": "plaintext_password__username_or_email",
+      "scoped_short_name": "plaintext_password__username_or_email",
+      "scoped_prefix": null,
+      "scoped_full_path": [
+        "Foobara",
+        "AttributesTransformers",
+        "Only",
+        "plaintext_password__username_or_email"
+      ],
+      "scoped_full_name": "Foobara::AttributesTransformers::Only::plaintext_password__username_or_email",
+      "scoped_category": "processor_class",
+      "reference": "Foobara::AttributesTransformers::Only::plaintext_password__username_or_email",
+      "domain": "global_organization::global_domain",
+      "organization": "global_organization",
+      "parent": [
+        "processor_class",
+        "Foobara::AttributesTransformers::Only"
+      ],
+      "name": "Anonymous",
+      "processor_type": "transformer"
+    },
+    "Foobara::AttributesTransformers::Only::refresh_token": {
+      "scoped_path": [
+        "refresh_token"
+      ],
+      "scoped_name": "refresh_token",
+      "scoped_short_name": "refresh_token",
+      "scoped_prefix": null,
+      "scoped_full_path": [
+        "Foobara",
+        "AttributesTransformers",
+        "Only",
+        "refresh_token"
+      ],
+      "scoped_full_name": "Foobara::AttributesTransformers::Only::refresh_token",
+      "scoped_category": "processor_class",
+      "reference": "Foobara::AttributesTransformers::Only::refresh_token",
+      "domain": "global_organization::global_domain",
+      "organization": "global_organization",
+      "parent": [
+        "processor_class",
+        "Foobara::AttributesTransformers::Only"
+      ],
+      "name": "Anonymous",
+      "processor_type": "transformer"
+    },
+    "Foobara::AuthHttp::ClearAccessTokenHeader": {
+      "scoped_path": [
+        "ClearAccessTokenHeader"
+      ],
+      "scoped_name": "ClearAccessTokenHeader",
+      "scoped_short_name": "ClearAccessTokenHeader",
+      "scoped_prefix": null,
+      "scoped_full_path": [
+        "Foobara",
+        "AuthHttp",
+        "ClearAccessTokenHeader"
+      ],
+      "scoped_full_name": "Foobara::AuthHttp::ClearAccessTokenHeader",
+      "scoped_category": "processor_class",
+      "reference": "Foobara::AuthHttp::ClearAccessTokenHeader",
+      "domain": "Foobara::AuthHttp",
+      "organization": "Foobara",
+      "parent": [
+        "domain",
+        "Foobara::AuthHttp"
+      ],
+      "name": "Foobara::AuthHttp::ClearAccessTokenHeader",
+      "processor_type": "mutator"
+    },
+    "Foobara::AuthHttp::MoveAccessTokenToHeader": {
+      "scoped_path": [
+        "MoveAccessTokenToHeader"
+      ],
+      "scoped_name": "MoveAccessTokenToHeader",
+      "scoped_short_name": "MoveAccessTokenToHeader",
+      "scoped_prefix": null,
+      "scoped_full_path": [
+        "Foobara",
+        "AuthHttp",
+        "MoveAccessTokenToHeader"
+      ],
+      "scoped_full_name": "Foobara::AuthHttp::MoveAccessTokenToHeader",
+      "scoped_category": "processor_class",
+      "reference": "Foobara::AuthHttp::MoveAccessTokenToHeader",
+      "domain": "Foobara::AuthHttp",
+      "organization": "Foobara",
+      "parent": [
+        "domain",
+        "Foobara::AuthHttp"
+      ],
+      "name": "Foobara::AuthHttp::MoveAccessTokenToHeader",
+      "processor_type": "mutator"
+    },
+    "Foobara::AuthHttp::MoveRefreshTokenToCookie": {
+      "scoped_path": [
+        "MoveRefreshTokenToCookie"
+      ],
+      "scoped_name": "MoveRefreshTokenToCookie",
+      "scoped_short_name": "MoveRefreshTokenToCookie",
+      "scoped_prefix": null,
+      "scoped_full_path": [
+        "Foobara",
+        "AuthHttp",
+        "MoveRefreshTokenToCookie"
+      ],
+      "scoped_full_name": "Foobara::AuthHttp::MoveRefreshTokenToCookie",
+      "scoped_category": "processor_class",
+      "reference": "Foobara::AuthHttp::MoveRefreshTokenToCookie",
+      "domain": "Foobara::AuthHttp",
+      "organization": "Foobara",
+      "parent": [
+        "domain",
+        "Foobara::AuthHttp"
+      ],
+      "name": "Foobara::AuthHttp::MoveRefreshTokenToCookie",
+      "processor_type": "mutator"
+    },
+    "Foobara::AuthHttp::SetRefreshTokenFromCookie": {
+      "scoped_path": [
+        "SetRefreshTokenFromCookie"
+      ],
+      "scoped_name": "SetRefreshTokenFromCookie",
+      "scoped_short_name": "SetRefreshTokenFromCookie",
+      "scoped_prefix": null,
+      "scoped_full_path": [
+        "Foobara",
+        "AuthHttp",
+        "SetRefreshTokenFromCookie"
+      ],
+      "scoped_full_name": "Foobara::AuthHttp::SetRefreshTokenFromCookie",
+      "scoped_category": "processor_class",
+      "reference": "Foobara::AuthHttp::SetRefreshTokenFromCookie",
+      "domain": "Foobara::AuthHttp",
+      "organization": "Foobara",
+      "parent": [
+        "domain",
+        "Foobara::AuthHttp"
+      ],
+      "name": "Foobara::AuthHttp::SetRefreshTokenFromCookie",
+      "processor_type": "mutator"
+    },
+    "Foobara::CommandConnectors::Http::SetInputToProcResult": {
+      "scoped_path": [
+        "Http",
+        "SetInputToProcResult"
+      ],
+      "scoped_name": "Http::SetInputToProcResult",
+      "scoped_short_name": "SetInputToProcResult",
+      "scoped_prefix": [
+        "Http"
+      ],
+      "scoped_full_path": [
+        "Foobara",
+        "CommandConnectors",
+        "Http",
+        "SetInputToProcResult"
+      ],
+      "scoped_full_name": "Foobara::CommandConnectors::Http::SetInputToProcResult",
+      "scoped_category": "processor_class",
+      "reference": "Foobara::CommandConnectors::Http::SetInputToProcResult",
+      "domain": "Foobara::CommandConnectors",
+      "organization": "Foobara",
+      "parent": [
+        "domain",
+        "Foobara::CommandConnectors"
+      ],
+      "name": "Foobara::CommandConnectors::Http::SetInputToProcResult",
+      "processor_type": "mutator"
+    },
+    "Foobara::CommandConnectors::Http::SetInputToProcResult::Anon1": {
+      "scoped_path": [
+        "Anon1"
+      ],
+      "scoped_name": "Anon1",
+      "scoped_short_name": "Anon1",
+      "scoped_prefix": null,
+      "scoped_full_path": [
+        "Foobara",
+        "CommandConnectors",
+        "Http",
+        "SetInputToProcResult",
+        "Anon1"
+      ],
+      "scoped_full_name": "Foobara::CommandConnectors::Http::SetInputToProcResult::Anon1",
+      "scoped_category": "processor_class",
+      "reference": "Foobara::CommandConnectors::Http::SetInputToProcResult::Anon1",
+      "domain": "Foobara::CommandConnectors",
+      "organization": "Foobara",
+      "parent": [
+        "processor_class",
+        "Foobara::CommandConnectors::Http::SetInputToProcResult"
+      ],
+      "name": "Anonymous",
+      "processor_type": "mutator"
+    },
     "Foobara::CommandConnectors::Serializers::AtomicSerializer": {
       "scoped_path": [
         "Serializers",
@@ -3591,31 +4103,58 @@
       "name": "Foobara::BuiltinTypes::DetachedEntity::Casters::Hash",
       "processor_type": "caster"
     },
-    "detached_entity::Validators::AttributesDeclaration": {
+    "detached_entity::Casters::PrimaryKey": {
       "scoped_path": [
-        "Validators",
-        "AttributesDeclaration"
+        "Casters",
+        "PrimaryKey"
       ],
-      "scoped_name": "Validators::AttributesDeclaration",
-      "scoped_short_name": "AttributesDeclaration",
+      "scoped_name": "Casters::PrimaryKey",
+      "scoped_short_name": "PrimaryKey",
       "scoped_prefix": [
-        "Validators"
+        "Casters"
       ],
       "scoped_full_path": [
         "detached_entity",
-        "Validators",
-        "AttributesDeclaration"
+        "Casters",
+        "PrimaryKey"
       ],
-      "scoped_full_name": "detached_entity::Validators::AttributesDeclaration",
+      "scoped_full_name": "detached_entity::Casters::PrimaryKey",
       "scoped_category": "processor_class",
-      "reference": "detached_entity::Validators::AttributesDeclaration",
+      "reference": "detached_entity::Casters::PrimaryKey",
       "domain": "global_organization::global_domain",
       "organization": "global_organization",
       "parent": [
         "type",
         "detached_entity"
       ],
-      "name": "Foobara::BuiltinTypes::DetachedEntity::Validators::AttributesDeclaration",
+      "name": "Foobara::BuiltinTypes::DetachedEntity::Casters::PrimaryKey",
+      "processor_type": "caster"
+    },
+    "detached_entity::Validators::ModelInstanceIsValid": {
+      "scoped_path": [
+        "Validators",
+        "ModelInstanceIsValid"
+      ],
+      "scoped_name": "Validators::ModelInstanceIsValid",
+      "scoped_short_name": "ModelInstanceIsValid",
+      "scoped_prefix": [
+        "Validators"
+      ],
+      "scoped_full_path": [
+        "detached_entity",
+        "Validators",
+        "ModelInstanceIsValid"
+      ],
+      "scoped_full_name": "detached_entity::Validators::ModelInstanceIsValid",
+      "scoped_category": "processor_class",
+      "reference": "detached_entity::Validators::ModelInstanceIsValid",
+      "domain": "global_organization::global_domain",
+      "organization": "global_organization",
+      "parent": [
+        "type",
+        "detached_entity"
+      ],
+      "name": "Foobara::BuiltinTypes::DetachedEntity::Validators::ModelInstanceIsValid",
       "processor_type": "processor"
     },
     "duck::SupportedCasters::AllowNil": {
@@ -4056,31 +4595,31 @@
       "name": "Foobara::BuiltinTypes::Entity::Casters::PrimaryKey",
       "processor_type": "caster"
     },
-    "entity::Validators::AttributesDeclaration": {
+    "entity::Validators::ModelInstanceIsValid": {
       "scoped_path": [
         "Validators",
-        "AttributesDeclaration"
+        "ModelInstanceIsValid"
       ],
-      "scoped_name": "Validators::AttributesDeclaration",
-      "scoped_short_name": "AttributesDeclaration",
+      "scoped_name": "Validators::ModelInstanceIsValid",
+      "scoped_short_name": "ModelInstanceIsValid",
       "scoped_prefix": [
         "Validators"
       ],
       "scoped_full_path": [
         "entity",
         "Validators",
-        "AttributesDeclaration"
+        "ModelInstanceIsValid"
       ],
-      "scoped_full_name": "entity::Validators::AttributesDeclaration",
+      "scoped_full_name": "entity::Validators::ModelInstanceIsValid",
       "scoped_category": "processor_class",
-      "reference": "entity::Validators::AttributesDeclaration",
+      "reference": "entity::Validators::ModelInstanceIsValid",
       "domain": "global_organization::global_domain",
       "organization": "global_organization",
       "parent": [
         "type",
         "entity"
       ],
-      "name": "Foobara::BuiltinTypes::Entity::Validators::AttributesDeclaration",
+      "name": "Foobara::BuiltinTypes::Entity::Validators::ModelInstanceIsValid",
       "processor_type": "processor"
     },
     "integer::Casters::String": {
@@ -4164,31 +4703,31 @@
       "name": "Foobara::BuiltinTypes::Model::SupportedTransformers::Mutable",
       "processor_type": "transformer"
     },
-    "model::Validators::AttributesDeclaration": {
+    "model::Validators::ModelInstanceIsValid": {
       "scoped_path": [
         "Validators",
-        "AttributesDeclaration"
+        "ModelInstanceIsValid"
       ],
-      "scoped_name": "Validators::AttributesDeclaration",
-      "scoped_short_name": "AttributesDeclaration",
+      "scoped_name": "Validators::ModelInstanceIsValid",
+      "scoped_short_name": "ModelInstanceIsValid",
       "scoped_prefix": [
         "Validators"
       ],
       "scoped_full_path": [
         "model",
         "Validators",
-        "AttributesDeclaration"
+        "ModelInstanceIsValid"
       ],
-      "scoped_full_name": "model::Validators::AttributesDeclaration",
+      "scoped_full_name": "model::Validators::ModelInstanceIsValid",
       "scoped_category": "processor_class",
-      "reference": "model::Validators::AttributesDeclaration",
+      "reference": "model::Validators::ModelInstanceIsValid",
       "domain": "global_organization::global_domain",
       "organization": "global_organization",
       "parent": [
         "type",
         "model"
       ],
-      "name": "Foobara::BuiltinTypes::Model::Validators::AttributesDeclaration",
+      "name": "Foobara::BuiltinTypes::Model::Validators::ModelInstanceIsValid",
       "processor_type": "processor"
     },
     "number::SupportedValidators::Max": {
@@ -4533,7 +5072,7 @@
           "entity::Casters::PrimaryKey"
         ],
         "validator_classes": [
-          "entity::Validators::AttributesDeclaration"
+          "entity::Validators::ModelInstanceIsValid"
         ]
       },
       "attributes_type": {
@@ -4602,6 +5141,7 @@
               "type": "string"
             },
             "email": {
+              "allow_nil": true,
               "type": "email"
             },
             "roles": {
@@ -4612,7 +5152,6 @@
             }
           },
           "required": [
-            "email",
             "username"
           ],
           "defaults": {
@@ -4631,11 +5170,11 @@
           "processor_manifest_data": {
             "casting": {
               "cast_to": {
-                "type": "entity",
+                "type": "detached_entity",
                 "name": "Types::User",
                 "model_module": "Foobara::Auth",
                 "model_class": "Foobara::Auth::Types::User",
-                "model_base_class": "Foobara::Entity",
+                "model_base_class": "Foobara::DetachedEntity",
                 "attributes_declaration": {
                   "type": "attributes",
                   "element_type_declarations": {
@@ -4646,6 +5185,7 @@
                       "type": "string"
                     },
                     "email": {
+                      "allow_nil": true,
                       "type": "email"
                     },
                     "roles": {
@@ -4653,35 +5193,13 @@
                       "element_type_declaration": {
                         "type": "Foobara::Auth::Types::Role"
                       }
-                    },
-                    "api_keys": {
-                      "type": "array",
-                      "element_type_declaration": {
-                        "type": "Foobara::Auth::Types::Token"
-                      },
-                      "sensitive": true
-                    },
-                    "refresh_tokens": {
-                      "type": "array",
-                      "element_type_declaration": {
-                        "type": "Foobara::Auth::Types::Token"
-                      },
-                      "sensitive": true
-                    },
-                    "password_secret": {
-                      "sensitive": true,
-                      "allow_nil": true,
-                      "type": "Foobara::Auth::Types::Secret"
                     }
                   },
                   "required": [
-                    "email",
                     "username"
                   ],
                   "defaults": {
-                    "roles": [],
-                    "api_keys": [],
-                    "refresh_tokens": []
+                    "roles": []
                   }
                 },
                 "primary_key": "id"
@@ -4692,7 +5210,7 @@
       },
       "name": "Types::User",
       "target_classes": [
-        "Foobara::Auth::Types::User"
+        null
       ],
       "types_depended_on": [
         "Foobara::Auth::Types::Role",
@@ -4719,11 +5237,11 @@
       ],
       "processors": {
         "caster_classes": [
-          "entity::Casters::Hash",
-          "entity::Casters::PrimaryKey"
+          "detached_entity::Casters::Hash",
+          "detached_entity::Casters::PrimaryKey"
         ],
         "validator_classes": [
-          "entity::Validators::AttributesDeclaration"
+          "detached_entity::Validators::ModelInstanceIsValid"
         ]
       },
       "attributes_type": {
@@ -4736,6 +5254,7 @@
             "type": "string"
           },
           "email": {
+            "allow_nil": true,
             "type": "email"
           },
           "roles": {
@@ -4746,7 +5265,6 @@
           }
         },
         "required": [
-          "email",
           "username"
         ],
         "defaults": {
@@ -4756,22 +5274,18 @@
       "organization_name": "Foobara",
       "domain_name": "Auth",
       "model_name": "Types::User",
-      "model_base_class": "Foobara::Entity",
+      "model_base_class": "Foobara::DetachedEntity",
       "model_class": "Foobara::Auth::Types::User",
       "depends_on": [
-        "Foobara::Auth::Types::Role",
-        "Foobara::Auth::Types::Token"
+        "Foobara::Auth::Types::Role"
       ],
       "deep_depends_on": [
-        "Foobara::Auth::Types::Token",
         "Foobara::Auth::Types::Role"
       ],
       "associations": {
         "roles.#": "Foobara::Auth::Types::Role"
       },
       "deep_associations": {
-        "api_keys.#": "Foobara::Auth::Types::Token",
-        "refresh_tokens.#": "Foobara::Auth::Types::Token",
         "roles.#": "Foobara::Auth::Types::Role"
       },
       "entity_name": "Types::User",
@@ -4882,6 +5396,194 @@
         "validator_classes": [
           "duck::SupportedValidators::OneOf"
         ]
+      }
+    },
+    "Types::User": {
+      "scoped_path": [
+        "Types",
+        "User"
+      ],
+      "scoped_name": "Types::User",
+      "scoped_short_name": "User",
+      "scoped_prefix": [
+        "Types"
+      ],
+      "scoped_full_path": [
+        "Types",
+        "User"
+      ],
+      "scoped_full_name": "Types::User",
+      "scoped_category": "type",
+      "reference": "Types::User",
+      "domain": "global_organization::global_domain",
+      "organization": "global_organization",
+      "declaration_data": {
+        "type": "detached_entity",
+        "name": "Types::User",
+        "model_module": "Foobara::Auth",
+        "model_class": "Foobara::Auth::Types::User",
+        "model_base_class": "Foobara::DetachedEntity",
+        "attributes_declaration": {
+          "type": "attributes",
+          "element_type_declarations": {
+            "id": {
+              "type": "integer"
+            },
+            "username": {
+              "type": "string"
+            },
+            "email": {
+              "allow_nil": true,
+              "type": "email"
+            },
+            "roles": {
+              "type": "array",
+              "element_type_declaration": {
+                "type": "Foobara::Auth::Types::Role"
+              }
+            }
+          },
+          "required": [
+            "username"
+          ],
+          "defaults": {
+            "roles": []
+          }
+        },
+        "primary_key": "id"
+      },
+      "possible_errors": {
+        "data.cannot_cast": {
+          "category": "data",
+          "symbol": "cannot_cast",
+          "key": "data.cannot_cast",
+          "error": "Foobara::Value::Processor::Casting::CannotCastError",
+          "processor_class": "Foobara::Value::Processor::Casting",
+          "processor_manifest_data": {
+            "casting": {
+              "cast_to": {
+                "type": "detached_entity",
+                "name": "Types::User",
+                "model_module": "Foobara::Auth",
+                "model_class": "Foobara::Auth::Types::User",
+                "model_base_class": "Foobara::DetachedEntity",
+                "attributes_declaration": {
+                  "type": "attributes",
+                  "element_type_declarations": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "username": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "allow_nil": true,
+                      "type": "email"
+                    },
+                    "roles": {
+                      "type": "array",
+                      "element_type_declaration": {
+                        "type": "Foobara::Auth::Types::Role"
+                      }
+                    }
+                  },
+                  "required": [
+                    "username"
+                  ],
+                  "defaults": {
+                    "roles": []
+                  }
+                },
+                "primary_key": "id"
+              }
+            }
+          }
+        }
+      },
+      "name": "Types::User",
+      "target_classes": [
+        null
+      ],
+      "types_depended_on": [
+        "Foobara::Auth::Types::Role",
+        "array",
+        "attributes",
+        "detached_entity",
+        "duck",
+        "email",
+        "integer",
+        "string",
+        "symbol"
+      ],
+      "description": null,
+      "base_type": "detached_entity",
+      "supported_casters": [
+        "duck::SupportedCasters::AllowNil"
+      ],
+      "supported_transformers": [
+        "model::SupportedTransformers::Mutable"
+      ],
+      "supported_validators": [
+        "duck::SupportedValidators::InstanceOf",
+        "duck::SupportedValidators::OneOf"
+      ],
+      "processors": {
+        "caster_classes": [
+          "detached_entity::Casters::Hash",
+          "detached_entity::Casters::PrimaryKey"
+        ],
+        "validator_classes": [
+          "detached_entity::Validators::ModelInstanceIsValid"
+        ]
+      },
+      "attributes_type": {
+        "type": "attributes",
+        "element_type_declarations": {
+          "id": {
+            "type": "integer"
+          },
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "allow_nil": true,
+            "type": "email"
+          },
+          "roles": {
+            "type": "array",
+            "element_type_declaration": {
+              "type": "Foobara::Auth::Types::Role"
+            }
+          }
+        },
+        "required": [
+          "username"
+        ],
+        "defaults": {
+          "roles": []
+        }
+      },
+      "organization_name": "global_organization",
+      "domain_name": "global_domain",
+      "model_name": "Types::User",
+      "model_base_class": "Foobara::DetachedEntity",
+      "model_class": "Foobara::Auth::Types::User",
+      "depends_on": [
+        "Foobara::Auth::Types::Role"
+      ],
+      "deep_depends_on": [
+        "Foobara::Auth::Types::Role"
+      ],
+      "associations": {
+        "roles.#": "Foobara::Auth::Types::Role"
+      },
+      "deep_associations": {
+        "roles.#": "Foobara::Auth::Types::Role"
+      },
+      "entity_name": "Types::User",
+      "primary_key_attribute": "id",
+      "primary_key_type": {
+        "type": "integer"
       }
     },
     "array": {
@@ -5225,10 +5927,11 @@
       ],
       "processors": {
         "caster_classes": [
-          "detached_entity::Casters::Hash"
+          "detached_entity::Casters::Hash",
+          "detached_entity::Casters::PrimaryKey"
         ],
         "validator_classes": [
-          "detached_entity::Validators::AttributesDeclaration"
+          "detached_entity::Validators::ModelInstanceIsValid"
         ]
       }
     },
@@ -5589,7 +6292,7 @@
           "entity::Casters::PrimaryKey"
         ],
         "validator_classes": [
-          "entity::Validators::AttributesDeclaration"
+          "entity::Validators::ModelInstanceIsValid"
         ]
       }
     },
@@ -5727,7 +6430,7 @@
           "model::Casters::Hash"
         ],
         "validator_classes": [
-          "model::Validators::AttributesDeclaration"
+          "model::Validators::ModelInstanceIsValid"
         ]
       }
     },
@@ -5937,7 +6640,7 @@
     }
   },
   "metadata": {
-    "when": "2025-03-22 19:03:52 -0700",
+    "when": "2025-08-05 13:47:37 -0500",
     "url": "http://localhost:3000/manifest"
   }
 }

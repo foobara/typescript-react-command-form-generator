@@ -1,3 +1,8 @@
+## [0.0.13] - 2025-08-05
+
+- Properly cast values passed to set<State> functions
+- Properly build forms for detached entities as if they were proper entities
+
 ## [0.0.12] - 2025-04-15
 
 - Fix non-camelized get/set useState names for nested types
