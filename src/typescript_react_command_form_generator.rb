@@ -187,14 +187,15 @@ module Foobara
             end
 
             def one_of
-              real_type_declaration.one_of
+              unless real_type_declaration.primitive?
+                real_type_declaration.one_of
+              end
             end
 
             def sensitive?
               type_declaration.sensitive?
             end
 
-            # TODO: something feels kind of wrong here, hmmm
             def real_type_declaration
               @real_type_declaration ||= if custom?
                                            # We are dealing with a reference to a registered type
