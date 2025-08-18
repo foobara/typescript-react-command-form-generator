@@ -1,3 +1,7 @@
+## [1.1.0] - 2025-08-22
+
+- Handle new Foobara 0.1.0 type declarations
+
 ## [0.0.13] - 2025-08-05
 
 - Properly cast values passed to set<State> functions
