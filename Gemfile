@@ -7,8 +7,8 @@ gemspec
 
 gem "rake"
 
-gem "foobara", path: "../foobara"
-gem "foobara-typescript-remote-command-generator", path: "../typescript-remote-command-generator"
+# gem "foobara", path: "../foobara"
+# gem "foobara-typescript-remote-command-generator", path: "../typescript-remote-command-generator"
 
 group :development do
   gem "foobara-rubocop-rules", ">= 1.0.0"
