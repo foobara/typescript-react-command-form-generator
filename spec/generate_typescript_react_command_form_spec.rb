@@ -60,8 +60,8 @@ RSpec.describe Foobara::Generators::TypescriptReactCommandFormGenerator::Generat
       expect(result.keys).to eq(["forms/Foobara/Ai/AnswerBot/AskForm.tsx"])
 
       ask_form_text = result["forms/Foobara/Ai/AnswerBot/AskForm.tsx"]
-      expect(ask_form_text).to include("import { model } from")
-      expect(ask_form_text).to match(/setModel\(e.target.value as model/)
+      expect(ask_form_text).to include("import { model_enum } from")
+      expect(ask_form_text).to match(/setModel\(e.target.value as model_enum/)
       expect(ask_form_text).to match(/<select\s+value=\{model \?\? ""}/m)
     end
   end

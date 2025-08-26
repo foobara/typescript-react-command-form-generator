@@ -23,17 +23,18 @@
         "Foobara::Ai::AnswerBot"
       ],
       "types_depended_on": [
-        "Foobara::Ai::AnswerBot::model",
-        "Foobara::Ai::AnswerBot::service",
+        "Foobara::Ai::AnswerBot::model_enum",
+        "Foobara::Ai::AnswerBot::service_enum",
         "array",
+        "atomic_duck",
         "attributes",
         "duck",
         "string",
         "symbol"
       ],
       "inputs_types_depended_on": [
-        "Foobara::Ai::AnswerBot::model",
-        "Foobara::Ai::AnswerBot::service",
+        "Foobara::Ai::AnswerBot::model_enum",
+        "Foobara::Ai::AnswerBot::service_enum",
         "array",
         "attributes",
         "duck",
@@ -41,7 +42,11 @@
         "symbol"
       ],
       "result_types_depended_on": [
-        "string"
+        "array",
+        "atomic_duck",
+        "attributes",
+        "duck",
+        "symbol"
       ],
       "errors_types_depended_on": [
         "array",
@@ -65,21 +70,42 @@
                     "description": "whatever you want to know!",
                     "type": "string"
                   },
+                  "instructions": {
+                    "description": "Results in a system prompt. You can specify how you want the LLM to behave.",
+                    "type": "string"
+                  },
                   "service": {
                     "description": "If two services expose the same model, you can specify which one to use.",
-                    "type": "Foobara::Ai::AnswerBot::service"
+                    "type": "Foobara::Ai::AnswerBot::service_enum"
                   },
                   "model": {
                     "description": "The model to use.",
-                    "type": "Foobara::Ai::AnswerBot::model"
+                    "type": "Foobara::Ai::AnswerBot::model_enum"
                   }
                 },
                 "required": [
                   "question"
                 ],
                 "defaults": {
-                  "model": "gpt-3.5-turbo"
+                  "model": "claude-3-7-sonnet-20250219"
                 }
+              }
+            }
+          }
+        },
+        "data.instructions.cannot_cast": {
+          "path": [
+            "instructions"
+          ],
+          "category": "data",
+          "symbol": "cannot_cast",
+          "key": "data.instructions.cannot_cast",
+          "error": "Foobara::Value::Processor::Casting::CannotCastError",
+          "processor_manifest_data": {
+            "casting": {
+              "cast_to": {
+                "description": "Results in a system prompt. You can specify how you want the LLM to behave.",
+                "type": "string"
               }
             }
           }
@@ -106,7 +132,7 @@
             "casting": {
               "cast_to": {
                 "description": "The model to use.",
-                "type": "Foobara::Ai::AnswerBot::model"
+                "type": "Foobara::Ai::AnswerBot::model_enum"
               }
             }
           }
@@ -121,105 +147,15 @@
           "error": "duck::SupportedValidators::OneOf::ValueNotValidError",
           "processor_manifest_data": {
             "one_of": [
-              "babbage-002",
-              "bakllava:7b",
-              "chatgpt-4o-latest",
-              "claude-2.0",
-              "claude-2.1",
               "claude-3-5-haiku-20241022",
               "claude-3-5-sonnet-20240620",
               "claude-3-5-sonnet-20241022",
               "claude-3-7-sonnet-20250219",
               "claude-3-haiku-20240307",
               "claude-3-opus-20240229",
-              "claude-3-sonnet-20240229",
-              "codegemma:2b",
-              "codegemma:7b",
-              "codellama:34b",
-              "codestral:22b",
-              "dall-e-2",
-              "dall-e-3",
-              "davinci-002",
-              "deepseek-coder-v2:16b",
-              "deepseek-r1:1.5b",
-              "deepseek-r1:14b",
-              "deepseek-r1:14b-qwen-distill-q8_0",
-              "deepseek-r1:32b",
-              "deepseek-r1:32b-qwen-distill-q4_K_M",
-              "deepseek-r1:70b",
-              "deepseek-r1:7b",
-              "deepseek-r1:8b",
-              "deepseek-r1:8b-llama-distill-fp16",
-              "gemma2:27b",
-              "gemma2:2b",
-              "gemma2:9b",
-              "gemma:2b",
-              "gemma:7b",
-              "gpt-3.5-turbo",
-              "gpt-3.5-turbo-0125",
-              "gpt-3.5-turbo-1106",
-              "gpt-3.5-turbo-16k",
-              "gpt-3.5-turbo-instruct",
-              "gpt-3.5-turbo-instruct-0914",
-              "gpt-4",
-              "gpt-4-0125-preview",
-              "gpt-4-0613",
-              "gpt-4-1106-preview",
-              "gpt-4-turbo",
-              "gpt-4-turbo-2024-04-09",
-              "gpt-4-turbo-preview",
-              "gpt-4o",
-              "gpt-4o-2024-05-13",
-              "gpt-4o-2024-08-06",
-              "gpt-4o-2024-11-20",
-              "gpt-4o-audio-preview",
-              "gpt-4o-audio-preview-2024-10-01",
-              "gpt-4o-audio-preview-2024-12-17",
-              "gpt-4o-mini",
-              "gpt-4o-mini-2024-07-18",
-              "gpt-4o-mini-audio-preview",
-              "gpt-4o-mini-audio-preview-2024-12-17",
-              "gpt-4o-mini-realtime-preview",
-              "gpt-4o-mini-realtime-preview-2024-12-17",
-              "gpt-4o-realtime-preview",
-              "gpt-4o-realtime-preview-2024-10-01",
-              "gpt-4o-realtime-preview-2024-12-17",
-              "jaigouk/ruby-una-cybertron-7b-v2-bf16:latest",
-              "llama2:13b",
-              "llama2:7b",
-              "llama3.1:8b",
-              "llama3.2:1b",
-              "llama3.2:3b",
-              "llama3.3:70b",
-              "llama3:8b",
-              "llava-llama3:8b",
-              "llava:13b",
-              "llava:34b",
-              "llava:7b",
-              "mistral:7b",
-              "o1-mini",
-              "o1-mini-2024-09-12",
-              "o1-preview",
-              "o1-preview-2024-09-12",
-              "omni-moderation-2024-09-26",
-              "omni-moderation-latest",
-              "openthinker:32b",
-              "openthinker:7b",
-              "phi4:latest",
-              "smollm2:1.7b",
-              "smollm2:135m",
-              "smollm2:360m",
-              "smollm:135m",
-              "starcoder2:15b",
-              "starcoder2:7b",
-              "text-embedding-3-large",
-              "text-embedding-3-small",
-              "text-embedding-ada-002",
-              "tts-1",
-              "tts-1-1106",
-              "tts-1-hd",
-              "tts-1-hd-1106",
-              "whisper-1"
+              "claude-opus-4-1-20250805",
+              "claude-opus-4-20250514",
+              "claude-sonnet-4-20250514"
             ]
           }
         },
@@ -267,7 +203,7 @@
             "casting": {
               "cast_to": {
                 "description": "If two services expose the same model, you can specify which one to use.",
-                "type": "Foobara::Ai::AnswerBot::service"
+                "type": "Foobara::Ai::AnswerBot::service_enum"
               }
             }
           }
@@ -300,22 +236,24 @@
                 "description": "whatever you want to know!",
                 "type": "string"
               },
+              "instructions": {
+                "description": "Results in a system prompt. You can specify how you want the LLM to behave.",
+                "type": "string"
+              },
               "service": {
                 "description": "If two services expose the same model, you can specify which one to use.",
-                "type": "Foobara::Ai::AnswerBot::service"
+                "type": "Foobara::Ai::AnswerBot::service_enum"
               },
               "model": {
                 "description": "The model to use.",
-                "type": "Foobara::Ai::AnswerBot::model"
+                "type": "Foobara::Ai::AnswerBot::model_enum"
               }
             }
           }
         }
       },
       "depends_on": [
-        "Foobara::Ai::AnthropicApi::CreateMessage",
-        "Foobara::Ai::OllamaApi::GenerateChatCompletion",
-        "Foobara::Ai::OpenAiApi::CreateChatCompletion"
+        "Foobara::Ai::AnthropicApi::CreateMessage"
       ],
       "inputs_type": {
         "type": "attributes",
@@ -324,24 +262,454 @@
             "description": "whatever you want to know!",
             "type": "string"
           },
+          "instructions": {
+            "description": "Results in a system prompt. You can specify how you want the LLM to behave.",
+            "type": "string"
+          },
           "service": {
             "description": "If two services expose the same model, you can specify which one to use.",
-            "type": "Foobara::Ai::AnswerBot::service"
+            "type": "Foobara::Ai::AnswerBot::service_enum"
           },
           "model": {
             "description": "The model to use.",
-            "type": "Foobara::Ai::AnswerBot::model"
+            "type": "Foobara::Ai::AnswerBot::model_enum"
           }
         },
         "required": [
           "question"
         ],
         "defaults": {
-          "model": "gpt-3.5-turbo"
+          "model": "claude-3-7-sonnet-20250219"
         }
       },
       "description": "Ask a question and receive the knowledge you seek.",
       "result_type": "string",
+      "serializers": [
+        "Foobara::CommandConnectors::Serializers::ErrorsSerializer",
+        "Foobara::CommandConnectors::Serializers::JsonSerializer"
+      ]
+    },
+    "Foobara::Ai::AnswerBot::GenerateNextMessage": {
+      "scoped_path": [
+        "GenerateNextMessage"
+      ],
+      "scoped_name": "GenerateNextMessage",
+      "scoped_short_name": "GenerateNextMessage",
+      "scoped_prefix": null,
+      "scoped_full_path": [
+        "Foobara",
+        "Ai",
+        "AnswerBot",
+        "GenerateNextMessage"
+      ],
+      "scoped_full_name": "Foobara::Ai::AnswerBot::GenerateNextMessage",
+      "scoped_category": "command",
+      "reference": "Foobara::Ai::AnswerBot::GenerateNextMessage",
+      "domain": "Foobara::Ai::AnswerBot",
+      "organization": "Foobara::Ai",
+      "parent": [
+        "domain",
+        "Foobara::Ai::AnswerBot"
+      ],
+      "types_depended_on": [
+        "Foobara::Ai::AnswerBot::Types::Chat",
+        "Foobara::Ai::AnswerBot::Types::Message",
+        "Foobara::Ai::AnswerBot::model_enum",
+        "Foobara::Ai::AnswerBot::service_enum",
+        "array",
+        "attributes",
+        "duck",
+        "float",
+        "model",
+        "string",
+        "symbol"
+      ],
+      "inputs_types_depended_on": [
+        "Foobara::Ai::AnswerBot::Types::Chat",
+        "Foobara::Ai::AnswerBot::model_enum",
+        "Foobara::Ai::AnswerBot::service_enum",
+        "array",
+        "attributes",
+        "duck",
+        "float",
+        "symbol"
+      ],
+      "result_types_depended_on": [
+        "array",
+        "attributes",
+        "duck",
+        "model",
+        "string",
+        "symbol"
+      ],
+      "errors_types_depended_on": [
+        "array",
+        "attributes",
+        "duck",
+        "symbol"
+      ],
+      "possible_errors": {
+        "data.cannot_cast": {
+          "category": "data",
+          "symbol": "cannot_cast",
+          "key": "data.cannot_cast",
+          "error": "Foobara::Value::Processor::Casting::CannotCastError",
+          "processor_class": "Foobara::Value::Processor::Casting",
+          "processor_manifest_data": {
+            "casting": {
+              "cast_to": {
+                "type": "attributes",
+                "element_type_declarations": {
+                  "chat": "Foobara::Ai::AnswerBot::Types::Chat",
+                  "service": {
+                    "description": "If two services expose the same model, you can specify which one to use.",
+                    "type": "Foobara::Ai::AnswerBot::service_enum"
+                  },
+                  "model": {
+                    "description": "The model to use.",
+                    "type": "Foobara::Ai::AnswerBot::model_enum"
+                  },
+                  "temperature": "float"
+                },
+                "required": [
+                  "chat"
+                ],
+                "defaults": {
+                  "model": "claude-3-7-sonnet-20250219"
+                }
+              }
+            }
+          }
+        },
+        "data.chat.cannot_cast": {
+          "path": [
+            "chat"
+          ],
+          "category": "data",
+          "symbol": "cannot_cast",
+          "key": "data.chat.cannot_cast",
+          "error": "Foobara::Value::Processor::Casting::CannotCastError",
+          "processor_manifest_data": {
+            "casting": {
+              "cast_to": {
+                "type": "attributes",
+                "element_type_declarations": {
+                  "messages": {
+                    "type": "array",
+                    "element_type_declaration": "Foobara::Ai::AnswerBot::Types::Message"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "data.chat.messages.#.cannot_cast": {
+          "path": [
+            "chat",
+            "messages",
+            "#"
+          ],
+          "category": "data",
+          "symbol": "cannot_cast",
+          "key": "data.chat.messages.#.cannot_cast",
+          "error": "Foobara::Value::Processor::Casting::CannotCastError",
+          "processor_manifest_data": {
+            "casting": {
+              "cast_to": {
+                "type": "attributes",
+                "element_type_declarations": {
+                  "role": {
+                    "one_of": [
+                      "assistant",
+                      "user",
+                      "system"
+                    ],
+                    "type": "symbol"
+                  },
+                  "content": "string"
+                }
+              }
+            }
+          }
+        },
+        "data.chat.messages.#.content.cannot_cast": {
+          "path": [
+            "chat",
+            "messages",
+            "#",
+            "content"
+          ],
+          "category": "data",
+          "symbol": "cannot_cast",
+          "key": "data.chat.messages.#.content.cannot_cast",
+          "error": "Foobara::Value::Processor::Casting::CannotCastError",
+          "processor_manifest_data": {
+            "casting": {
+              "cast_to": "string"
+            }
+          }
+        },
+        "data.chat.messages.#.role.cannot_cast": {
+          "path": [
+            "chat",
+            "messages",
+            "#",
+            "role"
+          ],
+          "category": "data",
+          "symbol": "cannot_cast",
+          "key": "data.chat.messages.#.role.cannot_cast",
+          "error": "Foobara::Value::Processor::Casting::CannotCastError",
+          "processor_manifest_data": {
+            "casting": {
+              "cast_to": {
+                "one_of": [
+                  "assistant",
+                  "user",
+                  "system"
+                ],
+                "type": "symbol"
+              }
+            }
+          }
+        },
+        "data.chat.messages.#.role.value_not_valid": {
+          "path": [
+            "chat",
+            "messages",
+            "#",
+            "role"
+          ],
+          "category": "data",
+          "symbol": "value_not_valid",
+          "key": "data.chat.messages.#.role.value_not_valid",
+          "error": "duck::SupportedValidators::OneOf::ValueNotValidError",
+          "processor_manifest_data": {
+            "one_of": [
+              "assistant",
+              "user",
+              "system"
+            ]
+          }
+        },
+        "data.chat.messages.#.unexpected_attributes": {
+          "path": [
+            "chat",
+            "messages",
+            "#"
+          ],
+          "category": "data",
+          "symbol": "unexpected_attributes",
+          "key": "data.chat.messages.#.unexpected_attributes",
+          "error": "attributes::SupportedProcessors::ElementTypeDeclarations::UnexpectedAttributesError",
+          "processor_manifest_data": {
+            "element_type_declarations": {
+              "role": {
+                "one_of": [
+                  "assistant",
+                  "user",
+                  "system"
+                ],
+                "type": "symbol"
+              },
+              "content": "string"
+            }
+          }
+        },
+        "data.chat.messages.cannot_cast": {
+          "path": [
+            "chat",
+            "messages"
+          ],
+          "category": "data",
+          "symbol": "cannot_cast",
+          "key": "data.chat.messages.cannot_cast",
+          "error": "Foobara::Value::Processor::Casting::CannotCastError",
+          "processor_manifest_data": {
+            "casting": {
+              "cast_to": {
+                "type": "array",
+                "element_type_declaration": "Foobara::Ai::AnswerBot::Types::Message"
+              }
+            }
+          }
+        },
+        "data.chat.missing_required_attribute": {
+          "path": [
+            "chat"
+          ],
+          "category": "data",
+          "symbol": "missing_required_attribute",
+          "key": "data.chat.missing_required_attribute",
+          "error": "attributes::SupportedValidators::Required::MissingRequiredAttributeError",
+          "processor_class": "attributes::SupportedValidators::Required",
+          "processor_manifest_data": {
+            "required": [
+              "chat"
+            ]
+          }
+        },
+        "data.chat.unexpected_attributes": {
+          "path": [
+            "chat"
+          ],
+          "category": "data",
+          "symbol": "unexpected_attributes",
+          "key": "data.chat.unexpected_attributes",
+          "error": "attributes::SupportedProcessors::ElementTypeDeclarations::UnexpectedAttributesError",
+          "processor_manifest_data": {
+            "element_type_declarations": {
+              "messages": {
+                "type": "array",
+                "element_type_declaration": "Foobara::Ai::AnswerBot::Types::Message"
+              }
+            }
+          }
+        },
+        "data.missing_required_attribute": {
+          "category": "data",
+          "symbol": "missing_required_attribute",
+          "key": "data.missing_required_attribute",
+          "error": "attributes::SupportedValidators::Required::MissingRequiredAttributeError",
+          "processor_class": "Foobara::Value::Processor::Pipeline",
+          "processor_manifest_data": {
+            "pipeline": null
+          }
+        },
+        "data.model.cannot_cast": {
+          "path": [
+            "model"
+          ],
+          "category": "data",
+          "symbol": "cannot_cast",
+          "key": "data.model.cannot_cast",
+          "error": "Foobara::Value::Processor::Casting::CannotCastError",
+          "processor_manifest_data": {
+            "casting": {
+              "cast_to": {
+                "description": "The model to use.",
+                "type": "Foobara::Ai::AnswerBot::model_enum"
+              }
+            }
+          }
+        },
+        "data.model.value_not_valid": {
+          "path": [
+            "model"
+          ],
+          "category": "data",
+          "symbol": "value_not_valid",
+          "key": "data.model.value_not_valid",
+          "error": "duck::SupportedValidators::OneOf::ValueNotValidError",
+          "processor_manifest_data": {
+            "one_of": [
+              "claude-3-5-haiku-20241022",
+              "claude-3-5-sonnet-20240620",
+              "claude-3-5-sonnet-20241022",
+              "claude-3-7-sonnet-20250219",
+              "claude-3-haiku-20240307",
+              "claude-3-opus-20240229",
+              "claude-opus-4-1-20250805",
+              "claude-opus-4-20250514",
+              "claude-sonnet-4-20250514"
+            ]
+          }
+        },
+        "data.service.cannot_cast": {
+          "path": [
+            "service"
+          ],
+          "category": "data",
+          "symbol": "cannot_cast",
+          "key": "data.service.cannot_cast",
+          "error": "Foobara::Value::Processor::Casting::CannotCastError",
+          "processor_manifest_data": {
+            "casting": {
+              "cast_to": {
+                "description": "If two services expose the same model, you can specify which one to use.",
+                "type": "Foobara::Ai::AnswerBot::service_enum"
+              }
+            }
+          }
+        },
+        "data.service.value_not_valid": {
+          "path": [
+            "service"
+          ],
+          "category": "data",
+          "symbol": "value_not_valid",
+          "key": "data.service.value_not_valid",
+          "error": "duck::SupportedValidators::OneOf::ValueNotValidError",
+          "processor_manifest_data": {
+            "one_of": [
+              "anthropic",
+              "ollama",
+              "open-ai"
+            ]
+          }
+        },
+        "data.temperature.cannot_cast": {
+          "path": [
+            "temperature"
+          ],
+          "category": "data",
+          "symbol": "cannot_cast",
+          "key": "data.temperature.cannot_cast",
+          "error": "Foobara::Value::Processor::Casting::CannotCastError",
+          "processor_manifest_data": {
+            "casting": {
+              "cast_to": "float"
+            }
+          }
+        },
+        "data.unexpected_attributes": {
+          "category": "data",
+          "symbol": "unexpected_attributes",
+          "key": "data.unexpected_attributes",
+          "error": "attributes::SupportedProcessors::ElementTypeDeclarations::UnexpectedAttributesError",
+          "processor_class": "attributes::SupportedProcessors::ElementTypeDeclarations",
+          "processor_manifest_data": {
+            "element_type_declarations": {
+              "chat": "Foobara::Ai::AnswerBot::Types::Chat",
+              "service": {
+                "description": "If two services expose the same model, you can specify which one to use.",
+                "type": "Foobara::Ai::AnswerBot::service_enum"
+              },
+              "model": {
+                "description": "The model to use.",
+                "type": "Foobara::Ai::AnswerBot::model_enum"
+              },
+              "temperature": "float"
+            }
+          }
+        }
+      },
+      "depends_on": [
+        "Foobara::Ai::AnthropicApi::CreateMessage"
+      ],
+      "inputs_type": {
+        "type": "attributes",
+        "element_type_declarations": {
+          "chat": "Foobara::Ai::AnswerBot::Types::Chat",
+          "service": {
+            "description": "If two services expose the same model, you can specify which one to use.",
+            "type": "Foobara::Ai::AnswerBot::service_enum"
+          },
+          "model": {
+            "description": "The model to use.",
+            "type": "Foobara::Ai::AnswerBot::model_enum"
+          },
+          "temperature": "float"
+        },
+        "required": [
+          "chat"
+        ],
+        "defaults": {
+          "model": "claude-3-7-sonnet-20250219"
+        }
+      },
+      "description": "Takes a chat and generates the next message using the model of your choice.",
+      "result_type": "Foobara::Ai::AnswerBot::Types::Message",
       "serializers": [
         "Foobara::CommandConnectors::Serializers::ErrorsSerializer",
         "Foobara::CommandConnectors::Serializers::JsonSerializer"
@@ -374,7 +742,6 @@
         "array",
         "attributes",
         "duck",
-        "number",
         "symbol"
       ],
       "result_types_depended_on": [
@@ -391,373 +758,20 @@
         "number",
         "symbol"
       ],
-      "possible_errors": {
-        "foobara::ai::anthropic_api::list_models>data.api_token.cannot_cast": {
-          "path": [
-            "api_token"
-          ],
-          "runtime_path": [
-            "foobara::ai::anthropic_api::list_models"
-          ],
-          "category": "data",
-          "symbol": "cannot_cast",
-          "key": "foobara::ai::anthropic_api::list_models>data.api_token.cannot_cast",
-          "error": "Foobara::Value::Processor::Casting::CannotCastError",
-          "processor_manifest_data": {
-            "casting": {
-              "cast_to": {
-                "allow_nil": true,
-                "type": "string"
-              }
-            }
-          }
-        },
-        "foobara::ai::anthropic_api::list_models>data.cannot_cast": {
-          "runtime_path": [
-            "foobara::ai::anthropic_api::list_models"
-          ],
-          "category": "data",
-          "symbol": "cannot_cast",
-          "key": "foobara::ai::anthropic_api::list_models>data.cannot_cast",
-          "error": "Foobara::Value::Processor::Casting::CannotCastError",
-          "processor_manifest_data": {
-            "casting": {
-              "cast_to": {
-                "type": "attributes",
-                "element_type_declarations": {
-                  "page_size": {
-                    "max": 2000,
-                    "min": 1,
-                    "type": "integer"
-                  },
-                  "api_token": {
-                    "allow_nil": true,
-                    "type": "string"
-                  }
-                },
-                "defaults": {
-                  "page_size": 20
-                }
-              }
-            }
-          }
-        },
-        "foobara::ai::anthropic_api::list_models>data.page_size.below_minimum": {
-          "path": [
-            "page_size"
-          ],
-          "runtime_path": [
-            "foobara::ai::anthropic_api::list_models"
-          ],
-          "category": "data",
-          "symbol": "below_minimum",
-          "key": "foobara::ai::anthropic_api::list_models>data.page_size.below_minimum",
-          "error": "number::SupportedValidators::Min::BelowMinimumError",
-          "processor_manifest_data": {
-            "min": 1
-          }
-        },
-        "foobara::ai::anthropic_api::list_models>data.page_size.cannot_cast": {
-          "path": [
-            "page_size"
-          ],
-          "runtime_path": [
-            "foobara::ai::anthropic_api::list_models"
-          ],
-          "category": "data",
-          "symbol": "cannot_cast",
-          "key": "foobara::ai::anthropic_api::list_models>data.page_size.cannot_cast",
-          "error": "Foobara::Value::Processor::Casting::CannotCastError",
-          "processor_manifest_data": {
-            "casting": {
-              "cast_to": {
-                "max": 2000,
-                "min": 1,
-                "type": "integer"
-              }
-            }
-          }
-        },
-        "foobara::ai::anthropic_api::list_models>data.page_size.max_exceeded": {
-          "path": [
-            "page_size"
-          ],
-          "runtime_path": [
-            "foobara::ai::anthropic_api::list_models"
-          ],
-          "category": "data",
-          "symbol": "max_exceeded",
-          "key": "foobara::ai::anthropic_api::list_models>data.page_size.max_exceeded",
-          "error": "number::SupportedValidators::Max::MaxExceededError",
-          "processor_manifest_data": {
-            "max": 2000
-          }
-        },
-        "foobara::ai::anthropic_api::list_models>data.unexpected_attributes": {
-          "runtime_path": [
-            "foobara::ai::anthropic_api::list_models"
-          ],
-          "category": "data",
-          "symbol": "unexpected_attributes",
-          "key": "foobara::ai::anthropic_api::list_models>data.unexpected_attributes",
-          "error": "attributes::SupportedProcessors::ElementTypeDeclarations::UnexpectedAttributesError",
-          "processor_manifest_data": {
-            "element_type_declarations": {
-              "page_size": {
-                "max": 2000,
-                "min": 1,
-                "type": "integer"
-              },
-              "api_token": {
-                "allow_nil": true,
-                "type": "string"
-              }
-            }
-          }
-        },
-        "foobara::ai::anthropic_api::list_models>foobara::ai::anthropic_api::get_page_of_models>data.after_id.cannot_cast": {
-          "path": [
-            "after_id"
-          ],
-          "runtime_path": [
-            "foobara::ai::anthropic_api::list_models",
-            "foobara::ai::anthropic_api::get_page_of_models"
-          ],
-          "category": "data",
-          "symbol": "cannot_cast",
-          "key": "foobara::ai::anthropic_api::list_models>foobara::ai::anthropic_api::get_page_of_models>data.after_id.cannot_cast",
-          "error": "Foobara::Value::Processor::Casting::CannotCastError",
-          "processor_manifest_data": {
-            "casting": {
-              "cast_to": "string"
-            }
-          }
-        },
-        "foobara::ai::anthropic_api::list_models>foobara::ai::anthropic_api::get_page_of_models>data.anthropic_version.cannot_cast": {
-          "path": [
-            "anthropic_version"
-          ],
-          "runtime_path": [
-            "foobara::ai::anthropic_api::list_models",
-            "foobara::ai::anthropic_api::get_page_of_models"
-          ],
-          "category": "data",
-          "symbol": "cannot_cast",
-          "key": "foobara::ai::anthropic_api::list_models>foobara::ai::anthropic_api::get_page_of_models>data.anthropic_version.cannot_cast",
-          "error": "Foobara::Value::Processor::Casting::CannotCastError",
-          "processor_manifest_data": {
-            "casting": {
-              "cast_to": "string"
-            }
-          }
-        },
-        "foobara::ai::anthropic_api::list_models>foobara::ai::anthropic_api::get_page_of_models>data.api_token.cannot_cast": {
-          "path": [
-            "api_token"
-          ],
-          "runtime_path": [
-            "foobara::ai::anthropic_api::list_models",
-            "foobara::ai::anthropic_api::get_page_of_models"
-          ],
-          "category": "data",
-          "symbol": "cannot_cast",
-          "key": "foobara::ai::anthropic_api::list_models>foobara::ai::anthropic_api::get_page_of_models>data.api_token.cannot_cast",
-          "error": "Foobara::Value::Processor::Casting::CannotCastError",
-          "processor_manifest_data": {
-            "casting": {
-              "cast_to": "string"
-            }
-          }
-        },
-        "foobara::ai::anthropic_api::list_models>foobara::ai::anthropic_api::get_page_of_models>data.before_id.cannot_cast": {
-          "path": [
-            "before_id"
-          ],
-          "runtime_path": [
-            "foobara::ai::anthropic_api::list_models",
-            "foobara::ai::anthropic_api::get_page_of_models"
-          ],
-          "category": "data",
-          "symbol": "cannot_cast",
-          "key": "foobara::ai::anthropic_api::list_models>foobara::ai::anthropic_api::get_page_of_models>data.before_id.cannot_cast",
-          "error": "Foobara::Value::Processor::Casting::CannotCastError",
-          "processor_manifest_data": {
-            "casting": {
-              "cast_to": "string"
-            }
-          }
-        },
-        "foobara::ai::anthropic_api::list_models>foobara::ai::anthropic_api::get_page_of_models>data.cannot_cast": {
-          "runtime_path": [
-            "foobara::ai::anthropic_api::list_models",
-            "foobara::ai::anthropic_api::get_page_of_models"
-          ],
-          "category": "data",
-          "symbol": "cannot_cast",
-          "key": "foobara::ai::anthropic_api::list_models>foobara::ai::anthropic_api::get_page_of_models>data.cannot_cast",
-          "error": "Foobara::Value::Processor::Casting::CannotCastError",
-          "processor_manifest_data": {
-            "casting": {
-              "cast_to": {
-                "type": "attributes",
-                "element_type_declarations": {
-                  "api_token": "string",
-                  "anthropic_version": "string",
-                  "before_id": "string",
-                  "after_id": "string",
-                  "limit": {
-                    "max": 2000,
-                    "min": 1,
-                    "type": "integer"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "foobara::ai::anthropic_api::list_models>foobara::ai::anthropic_api::get_page_of_models>data.limit.below_minimum": {
-          "path": [
-            "limit"
-          ],
-          "runtime_path": [
-            "foobara::ai::anthropic_api::list_models",
-            "foobara::ai::anthropic_api::get_page_of_models"
-          ],
-          "category": "data",
-          "symbol": "below_minimum",
-          "key": "foobara::ai::anthropic_api::list_models>foobara::ai::anthropic_api::get_page_of_models>data.limit.below_minimum",
-          "error": "number::SupportedValidators::Min::BelowMinimumError",
-          "processor_manifest_data": {
-            "min": 1
-          }
-        },
-        "foobara::ai::anthropic_api::list_models>foobara::ai::anthropic_api::get_page_of_models>data.limit.cannot_cast": {
-          "path": [
-            "limit"
-          ],
-          "runtime_path": [
-            "foobara::ai::anthropic_api::list_models",
-            "foobara::ai::anthropic_api::get_page_of_models"
-          ],
-          "category": "data",
-          "symbol": "cannot_cast",
-          "key": "foobara::ai::anthropic_api::list_models>foobara::ai::anthropic_api::get_page_of_models>data.limit.cannot_cast",
-          "error": "Foobara::Value::Processor::Casting::CannotCastError",
-          "processor_manifest_data": {
-            "casting": {
-              "cast_to": {
-                "max": 2000,
-                "min": 1,
-                "type": "integer"
-              }
-            }
-          }
-        },
-        "foobara::ai::anthropic_api::list_models>foobara::ai::anthropic_api::get_page_of_models>data.limit.max_exceeded": {
-          "path": [
-            "limit"
-          ],
-          "runtime_path": [
-            "foobara::ai::anthropic_api::list_models",
-            "foobara::ai::anthropic_api::get_page_of_models"
-          ],
-          "category": "data",
-          "symbol": "max_exceeded",
-          "key": "foobara::ai::anthropic_api::list_models>foobara::ai::anthropic_api::get_page_of_models>data.limit.max_exceeded",
-          "error": "number::SupportedValidators::Max::MaxExceededError",
-          "processor_manifest_data": {
-            "max": 2000
-          }
-        },
-        "foobara::ai::anthropic_api::list_models>foobara::ai::anthropic_api::get_page_of_models>data.unexpected_attributes": {
-          "runtime_path": [
-            "foobara::ai::anthropic_api::list_models",
-            "foobara::ai::anthropic_api::get_page_of_models"
-          ],
-          "category": "data",
-          "symbol": "unexpected_attributes",
-          "key": "foobara::ai::anthropic_api::list_models>foobara::ai::anthropic_api::get_page_of_models>data.unexpected_attributes",
-          "error": "attributes::SupportedProcessors::ElementTypeDeclarations::UnexpectedAttributesError",
-          "processor_manifest_data": {
-            "element_type_declarations": {
-              "api_token": "string",
-              "anthropic_version": "string",
-              "before_id": "string",
-              "after_id": "string",
-              "limit": {
-                "max": 2000,
-                "min": 1,
-                "type": "integer"
-              }
-            }
-          }
-        },
-        "foobara::ai::open_ai_api::list_models>data.api_token.cannot_cast": {
-          "path": [
-            "api_token"
-          ],
-          "runtime_path": [
-            "foobara::ai::open_ai_api::list_models"
-          ],
-          "category": "data",
-          "symbol": "cannot_cast",
-          "key": "foobara::ai::open_ai_api::list_models>data.api_token.cannot_cast",
-          "error": "Foobara::Value::Processor::Casting::CannotCastError",
-          "processor_manifest_data": {
-            "casting": {
-              "cast_to": "string"
-            }
-          }
-        },
-        "foobara::ai::open_ai_api::list_models>data.cannot_cast": {
-          "runtime_path": [
-            "foobara::ai::open_ai_api::list_models"
-          ],
-          "category": "data",
-          "symbol": "cannot_cast",
-          "key": "foobara::ai::open_ai_api::list_models>data.cannot_cast",
-          "error": "Foobara::Value::Processor::Casting::CannotCastError",
-          "processor_manifest_data": {
-            "casting": {
-              "cast_to": {
-                "type": "attributes",
-                "element_type_declarations": {
-                  "api_token": "string"
-                }
-              }
-            }
-          }
-        },
-        "foobara::ai::open_ai_api::list_models>data.unexpected_attributes": {
-          "runtime_path": [
-            "foobara::ai::open_ai_api::list_models"
-          ],
-          "category": "data",
-          "symbol": "unexpected_attributes",
-          "key": "foobara::ai::open_ai_api::list_models>data.unexpected_attributes",
-          "error": "attributes::SupportedProcessors::ElementTypeDeclarations::UnexpectedAttributesError",
-          "processor_manifest_data": {
-            "element_type_declarations": {
-              "api_token": "string"
-            }
-          }
-        }
-      },
+      "possible_errors": {},
       "depends_on": [
-        "Foobara::Ai::AnthropicApi::ListModels",
-        "Foobara::Ai::OllamaApi::ListLocalModels",
-        "Foobara::Ai::OpenAiApi::ListModels"
+        "Foobara::Ai::AnthropicApi::ListModels"
       ],
       "inputs_type": {
-        "type": "::attributes",
-        "element_type_declarations": {},
-        "required": []
+        "type": "attributes",
+        "element_type_declarations": {}
       },
       "description": "List of all model strings you can use",
       "result_type": {
         "type": "array",
         "element_type_declaration": "Foobara::Ai::AnswerBot::Types::Model"
       },
+      "inputs_types_depended_on": [],
       "serializers": [
         "Foobara::CommandConnectors::Serializers::ErrorsSerializer",
         "Foobara::CommandConnectors::Serializers::JsonSerializer"
@@ -788,17 +802,18 @@
       ],
       "commands": [
         "Foobara::Ai::AnswerBot::Ask",
+        "Foobara::Ai::AnswerBot::GenerateNextMessage",
         "Foobara::Ai::AnswerBot::ListModels"
       ],
       "types": [
+        "Foobara::Ai::AnswerBot::Types::Chat",
+        "Foobara::Ai::AnswerBot::Types::Message",
         "Foobara::Ai::AnswerBot::Types::Model",
-        "Foobara::Ai::AnswerBot::model",
-        "Foobara::Ai::AnswerBot::service"
+        "Foobara::Ai::AnswerBot::model_enum",
+        "Foobara::Ai::AnswerBot::service_enum"
       ],
       "depends_on": [
-        "Foobara::Ai::AnthropicApi",
-        "Foobara::Ai::OllamaApi",
-        "Foobara::Ai::OpenAiApi"
+        "Foobara::Ai::AnthropicApi"
       ]
     },
     "global_organization::global_domain": {
@@ -824,6 +839,7 @@
         "attributes",
         "duck",
         "duckture",
+        "float",
         "integer",
         "model",
         "number",
@@ -835,11 +851,16 @@
   "error": {
     "Foobara::Value::DataError": {
       "scoped_path": [
+        "Foobara",
+        "Value",
         "DataError"
       ],
-      "scoped_name": "DataError",
+      "scoped_name": "Foobara::Value::DataError",
       "scoped_short_name": "DataError",
-      "scoped_prefix": null,
+      "scoped_prefix": [
+        "Foobara",
+        "Value"
+      ],
       "scoped_full_path": [
         "Foobara",
         "Value",
@@ -848,11 +869,11 @@
       "scoped_full_name": "Foobara::Value::DataError",
       "scoped_category": "error",
       "reference": "Foobara::Value::DataError",
-      "domain": "Foobara::Value",
-      "organization": "Foobara",
+      "domain": "global_organization::global_domain",
+      "organization": "global_organization",
       "parent": [
         "domain",
-        "Foobara::Value"
+        "global_organization::global_domain"
       ],
       "types_depended_on": [
         "array",
@@ -1446,6 +1467,58 @@
       ],
       "processor_class": "attributes::Casters::Hash"
     },
+    "float::Casters::integer": {
+      "scoped_path": [
+        "Casters",
+        "integer"
+      ],
+      "scoped_name": "Casters::integer",
+      "scoped_short_name": "integer",
+      "scoped_prefix": [
+        "Casters"
+      ],
+      "scoped_full_path": [
+        "float",
+        "Casters",
+        "integer"
+      ],
+      "scoped_full_name": "float::Casters::integer",
+      "scoped_category": "processor",
+      "reference": "float::Casters::integer",
+      "domain": "global_organization::global_domain",
+      "organization": "global_organization",
+      "parent": [
+        "type",
+        "float"
+      ],
+      "processor_class": "float::Casters::Integer"
+    },
+    "float::Casters::string": {
+      "scoped_path": [
+        "Casters",
+        "string"
+      ],
+      "scoped_name": "Casters::string",
+      "scoped_short_name": "string",
+      "scoped_prefix": [
+        "Casters"
+      ],
+      "scoped_full_path": [
+        "float",
+        "Casters",
+        "string"
+      ],
+      "scoped_full_name": "float::Casters::string",
+      "scoped_category": "processor",
+      "reference": "float::Casters::string",
+      "domain": "global_organization::global_domain",
+      "organization": "global_organization",
+      "parent": [
+        "type",
+        "float"
+      ],
+      "processor_class": "float::Casters::String"
+    },
     "integer::Casters::string": {
       "scoped_path": [
         "Casters",
@@ -1610,12 +1683,16 @@
     },
     "Foobara::Value::Processor::Casting": {
       "scoped_path": [
+        "Foobara",
+        "Value",
         "Processor",
         "Casting"
       ],
-      "scoped_name": "Processor::Casting",
+      "scoped_name": "Foobara::Value::Processor::Casting",
       "scoped_short_name": "Casting",
       "scoped_prefix": [
+        "Foobara",
+        "Value",
         "Processor"
       ],
       "scoped_full_path": [
@@ -1627,11 +1704,11 @@
       "scoped_full_name": "Foobara::Value::Processor::Casting",
       "scoped_category": "processor_class",
       "reference": "Foobara::Value::Processor::Casting",
-      "domain": "Foobara::Value",
-      "organization": "Foobara",
+      "domain": "global_organization::global_domain",
+      "organization": "global_organization",
       "parent": [
         "domain",
-        "Foobara::Value"
+        "global_organization::global_domain"
       ],
       "name": "Foobara::Value::Processor::Casting",
       "processor_type": "casting",
@@ -1641,12 +1718,16 @@
     },
     "Foobara::Value::Processor::Pipeline": {
       "scoped_path": [
+        "Foobara",
+        "Value",
         "Processor",
         "Pipeline"
       ],
-      "scoped_name": "Processor::Pipeline",
+      "scoped_name": "Foobara::Value::Processor::Pipeline",
       "scoped_short_name": "Pipeline",
       "scoped_prefix": [
+        "Foobara",
+        "Value",
         "Processor"
       ],
       "scoped_full_path": [
@@ -1658,11 +1739,11 @@
       "scoped_full_name": "Foobara::Value::Processor::Pipeline",
       "scoped_category": "processor_class",
       "reference": "Foobara::Value::Processor::Pipeline",
-      "domain": "Foobara::Value",
-      "organization": "Foobara",
+      "domain": "global_organization::global_domain",
+      "organization": "global_organization",
       "parent": [
         "domain",
-        "Foobara::Value"
+        "global_organization::global_domain"
       ],
       "name": "Foobara::Value::Processor::Pipeline",
       "processor_type": "pipeline"
@@ -2087,6 +2168,60 @@
         "duck::SupportedValidators::OneOf::ValueNotValidError"
       ]
     },
+    "float::Casters::Integer": {
+      "scoped_path": [
+        "Casters",
+        "Integer"
+      ],
+      "scoped_name": "Casters::Integer",
+      "scoped_short_name": "Integer",
+      "scoped_prefix": [
+        "Casters"
+      ],
+      "scoped_full_path": [
+        "float",
+        "Casters",
+        "Integer"
+      ],
+      "scoped_full_name": "float::Casters::Integer",
+      "scoped_category": "processor_class",
+      "reference": "float::Casters::Integer",
+      "domain": "global_organization::global_domain",
+      "organization": "global_organization",
+      "parent": [
+        "type",
+        "float"
+      ],
+      "name": "Foobara::BuiltinTypes::Float::Casters::Integer",
+      "processor_type": "caster"
+    },
+    "float::Casters::String": {
+      "scoped_path": [
+        "Casters",
+        "String"
+      ],
+      "scoped_name": "Casters::String",
+      "scoped_short_name": "String",
+      "scoped_prefix": [
+        "Casters"
+      ],
+      "scoped_full_path": [
+        "float",
+        "Casters",
+        "String"
+      ],
+      "scoped_full_name": "float::Casters::String",
+      "scoped_category": "processor_class",
+      "reference": "float::Casters::String",
+      "domain": "global_organization::global_domain",
+      "organization": "global_organization",
+      "parent": [
+        "type",
+        "float"
+      ],
+      "name": "Foobara::BuiltinTypes::Float::Casters::String",
+      "processor_type": "caster"
+    },
     "integer::Casters::String": {
       "scoped_path": [
         "Casters",
@@ -2168,31 +2303,31 @@
       "name": "Foobara::BuiltinTypes::Model::SupportedTransformers::Mutable",
       "processor_type": "transformer"
     },
-    "model::Validators::AttributesDeclaration": {
+    "model::Validators::ModelInstanceIsValid": {
       "scoped_path": [
         "Validators",
-        "AttributesDeclaration"
+        "ModelInstanceIsValid"
       ],
-      "scoped_name": "Validators::AttributesDeclaration",
-      "scoped_short_name": "AttributesDeclaration",
+      "scoped_name": "Validators::ModelInstanceIsValid",
+      "scoped_short_name": "ModelInstanceIsValid",
       "scoped_prefix": [
         "Validators"
       ],
       "scoped_full_path": [
         "model",
         "Validators",
-        "AttributesDeclaration"
+        "ModelInstanceIsValid"
       ],
-      "scoped_full_name": "model::Validators::AttributesDeclaration",
+      "scoped_full_name": "model::Validators::ModelInstanceIsValid",
       "scoped_category": "processor_class",
-      "reference": "model::Validators::AttributesDeclaration",
+      "reference": "model::Validators::ModelInstanceIsValid",
       "domain": "global_organization::global_domain",
       "organization": "global_organization",
       "parent": [
         "type",
         "model"
       ],
-      "name": "Foobara::BuiltinTypes::Model::Validators::AttributesDeclaration",
+      "name": "Foobara::BuiltinTypes::Model::Validators::ModelInstanceIsValid",
       "processor_type": "processor"
     },
     "number::SupportedValidators::Max": {
@@ -2425,6 +2560,454 @@
     }
   },
   "type": {
+    "Foobara::Ai::AnswerBot::Types::Chat": {
+      "scoped_path": [
+        "Types",
+        "Chat"
+      ],
+      "scoped_name": "Types::Chat",
+      "scoped_short_name": "Chat",
+      "scoped_prefix": [
+        "Types"
+      ],
+      "scoped_full_path": [
+        "Foobara",
+        "Ai",
+        "AnswerBot",
+        "Types",
+        "Chat"
+      ],
+      "scoped_full_name": "Foobara::Ai::AnswerBot::Types::Chat",
+      "scoped_category": "type",
+      "reference": "Foobara::Ai::AnswerBot::Types::Chat",
+      "domain": "Foobara::Ai::AnswerBot",
+      "organization": "Foobara::Ai",
+      "parent": [
+        "domain",
+        "Foobara::Ai::AnswerBot"
+      ],
+      "declaration_data": {
+        "type": "model",
+        "name": "Types::Chat",
+        "model_module": "Foobara::Ai::AnswerBot",
+        "model_class": "Foobara::Ai::AnswerBot::Types::Chat",
+        "model_base_class": "Foobara::Model",
+        "attributes_declaration": {
+          "type": "attributes",
+          "element_type_declarations": {
+            "messages": {
+              "type": "array",
+              "element_type_declaration": "Foobara::Ai::AnswerBot::Types::Message"
+            }
+          }
+        }
+      },
+      "possible_errors": {
+        "data.cannot_cast": {
+          "category": "data",
+          "symbol": "cannot_cast",
+          "key": "data.cannot_cast",
+          "error": "Foobara::Value::Processor::Casting::CannotCastError",
+          "processor_class": "Foobara::Value::Processor::Casting",
+          "processor_manifest_data": {
+            "casting": {
+              "cast_to": {
+                "type": "attributes",
+                "element_type_declarations": {
+                  "messages": {
+                    "type": "array",
+                    "element_type_declaration": "Foobara::Ai::AnswerBot::Types::Message"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "data.messages.#.cannot_cast": {
+          "path": [
+            "messages",
+            "#"
+          ],
+          "category": "data",
+          "symbol": "cannot_cast",
+          "key": "data.messages.#.cannot_cast",
+          "error": "Foobara::Value::Processor::Casting::CannotCastError",
+          "processor_manifest_data": {
+            "casting": {
+              "cast_to": {
+                "type": "attributes",
+                "element_type_declarations": {
+                  "role": {
+                    "one_of": [
+                      "assistant",
+                      "user",
+                      "system"
+                    ],
+                    "type": "symbol"
+                  },
+                  "content": "string"
+                }
+              }
+            }
+          }
+        },
+        "data.messages.#.content.cannot_cast": {
+          "path": [
+            "messages",
+            "#",
+            "content"
+          ],
+          "category": "data",
+          "symbol": "cannot_cast",
+          "key": "data.messages.#.content.cannot_cast",
+          "error": "Foobara::Value::Processor::Casting::CannotCastError",
+          "processor_manifest_data": {
+            "casting": {
+              "cast_to": "string"
+            }
+          }
+        },
+        "data.messages.#.role.cannot_cast": {
+          "path": [
+            "messages",
+            "#",
+            "role"
+          ],
+          "category": "data",
+          "symbol": "cannot_cast",
+          "key": "data.messages.#.role.cannot_cast",
+          "error": "Foobara::Value::Processor::Casting::CannotCastError",
+          "processor_manifest_data": {
+            "casting": {
+              "cast_to": {
+                "one_of": [
+                  "assistant",
+                  "user",
+                  "system"
+                ],
+                "type": "symbol"
+              }
+            }
+          }
+        },
+        "data.messages.#.role.value_not_valid": {
+          "path": [
+            "messages",
+            "#",
+            "role"
+          ],
+          "category": "data",
+          "symbol": "value_not_valid",
+          "key": "data.messages.#.role.value_not_valid",
+          "error": "duck::SupportedValidators::OneOf::ValueNotValidError",
+          "processor_manifest_data": {
+            "one_of": [
+              "assistant",
+              "user",
+              "system"
+            ]
+          }
+        },
+        "data.messages.#.unexpected_attributes": {
+          "path": [
+            "messages",
+            "#"
+          ],
+          "category": "data",
+          "symbol": "unexpected_attributes",
+          "key": "data.messages.#.unexpected_attributes",
+          "error": "attributes::SupportedProcessors::ElementTypeDeclarations::UnexpectedAttributesError",
+          "processor_manifest_data": {
+            "element_type_declarations": {
+              "role": {
+                "one_of": [
+                  "assistant",
+                  "user",
+                  "system"
+                ],
+                "type": "symbol"
+              },
+              "content": "string"
+            }
+          }
+        },
+        "data.messages.cannot_cast": {
+          "path": [
+            "messages"
+          ],
+          "category": "data",
+          "symbol": "cannot_cast",
+          "key": "data.messages.cannot_cast",
+          "error": "Foobara::Value::Processor::Casting::CannotCastError",
+          "processor_manifest_data": {
+            "casting": {
+              "cast_to": {
+                "type": "array",
+                "element_type_declaration": "Foobara::Ai::AnswerBot::Types::Message"
+              }
+            }
+          }
+        },
+        "data.unexpected_attributes": {
+          "category": "data",
+          "symbol": "unexpected_attributes",
+          "key": "data.unexpected_attributes",
+          "error": "attributes::SupportedProcessors::ElementTypeDeclarations::UnexpectedAttributesError",
+          "processor_class": "attributes::SupportedProcessors::ElementTypeDeclarations",
+          "processor_manifest_data": {
+            "element_type_declarations": {
+              "messages": {
+                "type": "array",
+                "element_type_declaration": "Foobara::Ai::AnswerBot::Types::Message"
+              }
+            }
+          }
+        }
+      },
+      "name": "Types::Chat",
+      "target_classes": [
+        "Foobara::Ai::AnswerBot::Types::Chat"
+      ],
+      "types_depended_on": [
+        "Foobara::Ai::AnswerBot::Types::Message",
+        "array",
+        "attributes",
+        "duck",
+        "model",
+        "symbol"
+      ],
+      "description": null,
+      "base_type": "model",
+      "supported_casters": [
+        "duck::SupportedCasters::AllowNil"
+      ],
+      "supported_transformers": [
+        "model::SupportedTransformers::Mutable"
+      ],
+      "supported_validators": [
+        "duck::SupportedValidators::InstanceOf",
+        "duck::SupportedValidators::OneOf"
+      ],
+      "processors": {
+        "caster_classes": [
+          "model::Casters::Hash"
+        ],
+        "validator_classes": [
+          "model::Validators::ModelInstanceIsValid"
+        ]
+      },
+      "attributes_type": {
+        "type": "attributes",
+        "element_type_declarations": {
+          "messages": {
+            "type": "array",
+            "element_type_declaration": "Foobara::Ai::AnswerBot::Types::Message"
+          }
+        }
+      },
+      "organization_name": "Foobara::Ai",
+      "domain_name": "AnswerBot",
+      "model_name": "Types::Chat",
+      "model_base_class": "Foobara::Model",
+      "model_class": "Foobara::Ai::AnswerBot::Types::Chat"
+    },
+    "Foobara::Ai::AnswerBot::Types::Message": {
+      "scoped_path": [
+        "Types",
+        "Message"
+      ],
+      "scoped_name": "Types::Message",
+      "scoped_short_name": "Message",
+      "scoped_prefix": [
+        "Types"
+      ],
+      "scoped_full_path": [
+        "Foobara",
+        "Ai",
+        "AnswerBot",
+        "Types",
+        "Message"
+      ],
+      "scoped_full_name": "Foobara::Ai::AnswerBot::Types::Message",
+      "scoped_category": "type",
+      "reference": "Foobara::Ai::AnswerBot::Types::Message",
+      "domain": "Foobara::Ai::AnswerBot",
+      "organization": "Foobara::Ai",
+      "parent": [
+        "domain",
+        "Foobara::Ai::AnswerBot"
+      ],
+      "declaration_data": {
+        "type": "model",
+        "name": "Types::Message",
+        "model_module": "Foobara::Ai::AnswerBot",
+        "model_class": "Foobara::Ai::AnswerBot::Types::Message",
+        "model_base_class": "Foobara::Model",
+        "attributes_declaration": {
+          "type": "attributes",
+          "element_type_declarations": {
+            "role": {
+              "one_of": [
+                "assistant",
+                "user",
+                "system"
+              ],
+              "type": "symbol"
+            },
+            "content": "string"
+          }
+        }
+      },
+      "possible_errors": {
+        "data.cannot_cast": {
+          "category": "data",
+          "symbol": "cannot_cast",
+          "key": "data.cannot_cast",
+          "error": "Foobara::Value::Processor::Casting::CannotCastError",
+          "processor_class": "Foobara::Value::Processor::Casting",
+          "processor_manifest_data": {
+            "casting": {
+              "cast_to": {
+                "type": "attributes",
+                "element_type_declarations": {
+                  "role": {
+                    "one_of": [
+                      "assistant",
+                      "user",
+                      "system"
+                    ],
+                    "type": "symbol"
+                  },
+                  "content": "string"
+                }
+              }
+            }
+          }
+        },
+        "data.content.cannot_cast": {
+          "path": [
+            "content"
+          ],
+          "category": "data",
+          "symbol": "cannot_cast",
+          "key": "data.content.cannot_cast",
+          "error": "Foobara::Value::Processor::Casting::CannotCastError",
+          "processor_manifest_data": {
+            "casting": {
+              "cast_to": "string"
+            }
+          }
+        },
+        "data.role.cannot_cast": {
+          "path": [
+            "role"
+          ],
+          "category": "data",
+          "symbol": "cannot_cast",
+          "key": "data.role.cannot_cast",
+          "error": "Foobara::Value::Processor::Casting::CannotCastError",
+          "processor_manifest_data": {
+            "casting": {
+              "cast_to": {
+                "one_of": [
+                  "assistant",
+                  "user",
+                  "system"
+                ],
+                "type": "symbol"
+              }
+            }
+          }
+        },
+        "data.role.value_not_valid": {
+          "path": [
+            "role"
+          ],
+          "category": "data",
+          "symbol": "value_not_valid",
+          "key": "data.role.value_not_valid",
+          "error": "duck::SupportedValidators::OneOf::ValueNotValidError",
+          "processor_manifest_data": {
+            "one_of": [
+              "assistant",
+              "user",
+              "system"
+            ]
+          }
+        },
+        "data.unexpected_attributes": {
+          "category": "data",
+          "symbol": "unexpected_attributes",
+          "key": "data.unexpected_attributes",
+          "error": "attributes::SupportedProcessors::ElementTypeDeclarations::UnexpectedAttributesError",
+          "processor_class": "attributes::SupportedProcessors::ElementTypeDeclarations",
+          "processor_manifest_data": {
+            "element_type_declarations": {
+              "role": {
+                "one_of": [
+                  "assistant",
+                  "user",
+                  "system"
+                ],
+                "type": "symbol"
+              },
+              "content": "string"
+            }
+          }
+        }
+      },
+      "name": "Types::Message",
+      "target_classes": [
+        "Foobara::Ai::AnswerBot::Types::Message"
+      ],
+      "types_depended_on": [
+        "array",
+        "attributes",
+        "duck",
+        "model",
+        "string",
+        "symbol"
+      ],
+      "description": null,
+      "base_type": "model",
+      "supported_casters": [
+        "duck::SupportedCasters::AllowNil"
+      ],
+      "supported_transformers": [
+        "model::SupportedTransformers::Mutable"
+      ],
+      "supported_validators": [
+        "duck::SupportedValidators::InstanceOf",
+        "duck::SupportedValidators::OneOf"
+      ],
+      "processors": {
+        "caster_classes": [
+          "model::Casters::Hash"
+        ],
+        "validator_classes": [
+          "model::Validators::ModelInstanceIsValid"
+        ]
+      },
+      "attributes_type": {
+        "type": "attributes",
+        "element_type_declarations": {
+          "role": {
+            "one_of": [
+              "assistant",
+              "user",
+              "system"
+            ],
+            "type": "symbol"
+          },
+          "content": "string"
+        }
+      },
+      "organization_name": "Foobara::Ai",
+      "domain_name": "AnswerBot",
+      "model_name": "Types::Message",
+      "model_base_class": "Foobara::Model",
+      "model_class": "Foobara::Ai::AnswerBot::Types::Message"
+    },
     "Foobara::Ai::AnswerBot::Types::Model": {
       "scoped_path": [
         "Types",
@@ -2460,8 +3043,8 @@
         "attributes_declaration": {
           "type": "attributes",
           "element_type_declarations": {
-            "id": "Foobara::Ai::AnswerBot::model",
-            "service": "Foobara::Ai::AnswerBot::service"
+            "id": "Foobara::Ai::AnswerBot::model_enum",
+            "service": "Foobara::Ai::AnswerBot::service_enum"
           },
           "required": [
             "id",
@@ -2481,8 +3064,8 @@
               "cast_to": {
                 "type": "attributes",
                 "element_type_declarations": {
-                  "id": "Foobara::Ai::AnswerBot::model",
-                  "service": "Foobara::Ai::AnswerBot::service"
+                  "id": "Foobara::Ai::AnswerBot::model_enum",
+                  "service": "Foobara::Ai::AnswerBot::service_enum"
                 },
                 "required": [
                   "id",
@@ -2502,110 +3085,7 @@
           "error": "Foobara::Value::Processor::Casting::CannotCastError",
           "processor_manifest_data": {
             "casting": {
-              "cast_to": {
-                "one_of": [
-                  "babbage-002",
-                  "bakllava:7b",
-                  "chatgpt-4o-latest",
-                  "claude-2.0",
-                  "claude-2.1",
-                  "claude-3-5-haiku-20241022",
-                  "claude-3-5-sonnet-20240620",
-                  "claude-3-5-sonnet-20241022",
-                  "claude-3-7-sonnet-20250219",
-                  "claude-3-haiku-20240307",
-                  "claude-3-opus-20240229",
-                  "claude-3-sonnet-20240229",
-                  "codegemma:2b",
-                  "codegemma:7b",
-                  "codellama:34b",
-                  "codestral:22b",
-                  "dall-e-2",
-                  "dall-e-3",
-                  "davinci-002",
-                  "deepseek-coder-v2:16b",
-                  "deepseek-r1:1.5b",
-                  "deepseek-r1:14b",
-                  "deepseek-r1:14b-qwen-distill-q8_0",
-                  "deepseek-r1:32b",
-                  "deepseek-r1:32b-qwen-distill-q4_K_M",
-                  "deepseek-r1:70b",
-                  "deepseek-r1:7b",
-                  "deepseek-r1:8b",
-                  "deepseek-r1:8b-llama-distill-fp16",
-                  "gemma2:27b",
-                  "gemma2:2b",
-                  "gemma2:9b",
-                  "gemma:2b",
-                  "gemma:7b",
-                  "gpt-3.5-turbo",
-                  "gpt-3.5-turbo-0125",
-                  "gpt-3.5-turbo-1106",
-                  "gpt-3.5-turbo-16k",
-                  "gpt-3.5-turbo-instruct",
-                  "gpt-3.5-turbo-instruct-0914",
-                  "gpt-4",
-                  "gpt-4-0125-preview",
-                  "gpt-4-0613",
-                  "gpt-4-1106-preview",
-                  "gpt-4-turbo",
-                  "gpt-4-turbo-2024-04-09",
-                  "gpt-4-turbo-preview",
-                  "gpt-4o",
-                  "gpt-4o-2024-05-13",
-                  "gpt-4o-2024-08-06",
-                  "gpt-4o-2024-11-20",
-                  "gpt-4o-audio-preview",
-                  "gpt-4o-audio-preview-2024-10-01",
-                  "gpt-4o-audio-preview-2024-12-17",
-                  "gpt-4o-mini",
-                  "gpt-4o-mini-2024-07-18",
-                  "gpt-4o-mini-audio-preview",
-                  "gpt-4o-mini-audio-preview-2024-12-17",
-                  "gpt-4o-mini-realtime-preview",
-                  "gpt-4o-mini-realtime-preview-2024-12-17",
-                  "gpt-4o-realtime-preview",
-                  "gpt-4o-realtime-preview-2024-10-01",
-                  "gpt-4o-realtime-preview-2024-12-17",
-                  "jaigouk/ruby-una-cybertron-7b-v2-bf16:latest",
-                  "llama2:13b",
-                  "llama2:7b",
-                  "llama3.1:8b",
-                  "llama3.2:1b",
-                  "llama3.2:3b",
-                  "llama3.3:70b",
-                  "llama3:8b",
-                  "llava-llama3:8b",
-                  "llava:13b",
-                  "llava:34b",
-                  "llava:7b",
-                  "mistral:7b",
-                  "o1-mini",
-                  "o1-mini-2024-09-12",
-                  "o1-preview",
-                  "o1-preview-2024-09-12",
-                  "omni-moderation-2024-09-26",
-                  "omni-moderation-latest",
-                  "openthinker:32b",
-                  "openthinker:7b",
-                  "phi4:latest",
-                  "smollm2:1.7b",
-                  "smollm2:135m",
-                  "smollm2:360m",
-                  "smollm:135m",
-                  "starcoder2:15b",
-                  "starcoder2:7b",
-                  "text-embedding-3-large",
-                  "text-embedding-3-small",
-                  "text-embedding-ada-002",
-                  "tts-1",
-                  "tts-1-1106",
-                  "tts-1-hd",
-                  "tts-1-hd-1106",
-                  "whisper-1"
-                ],
-                "type": "symbol"
-              }
+              "cast_to": "Foobara::Ai::AnswerBot::model_enum"
             }
           }
         },
@@ -2635,105 +3115,15 @@
           "error": "duck::SupportedValidators::OneOf::ValueNotValidError",
           "processor_manifest_data": {
             "one_of": [
-              "babbage-002",
-              "bakllava:7b",
-              "chatgpt-4o-latest",
-              "claude-2.0",
-              "claude-2.1",
               "claude-3-5-haiku-20241022",
               "claude-3-5-sonnet-20240620",
               "claude-3-5-sonnet-20241022",
               "claude-3-7-sonnet-20250219",
               "claude-3-haiku-20240307",
               "claude-3-opus-20240229",
-              "claude-3-sonnet-20240229",
-              "codegemma:2b",
-              "codegemma:7b",
-              "codellama:34b",
-              "codestral:22b",
-              "dall-e-2",
-              "dall-e-3",
-              "davinci-002",
-              "deepseek-coder-v2:16b",
-              "deepseek-r1:1.5b",
-              "deepseek-r1:14b",
-              "deepseek-r1:14b-qwen-distill-q8_0",
-              "deepseek-r1:32b",
-              "deepseek-r1:32b-qwen-distill-q4_K_M",
-              "deepseek-r1:70b",
-              "deepseek-r1:7b",
-              "deepseek-r1:8b",
-              "deepseek-r1:8b-llama-distill-fp16",
-              "gemma2:27b",
-              "gemma2:2b",
-              "gemma2:9b",
-              "gemma:2b",
-              "gemma:7b",
-              "gpt-3.5-turbo",
-              "gpt-3.5-turbo-0125",
-              "gpt-3.5-turbo-1106",
-              "gpt-3.5-turbo-16k",
-              "gpt-3.5-turbo-instruct",
-              "gpt-3.5-turbo-instruct-0914",
-              "gpt-4",
-              "gpt-4-0125-preview",
-              "gpt-4-0613",
-              "gpt-4-1106-preview",
-              "gpt-4-turbo",
-              "gpt-4-turbo-2024-04-09",
-              "gpt-4-turbo-preview",
-              "gpt-4o",
-              "gpt-4o-2024-05-13",
-              "gpt-4o-2024-08-06",
-              "gpt-4o-2024-11-20",
-              "gpt-4o-audio-preview",
-              "gpt-4o-audio-preview-2024-10-01",
-              "gpt-4o-audio-preview-2024-12-17",
-              "gpt-4o-mini",
-              "gpt-4o-mini-2024-07-18",
-              "gpt-4o-mini-audio-preview",
-              "gpt-4o-mini-audio-preview-2024-12-17",
-              "gpt-4o-mini-realtime-preview",
-              "gpt-4o-mini-realtime-preview-2024-12-17",
-              "gpt-4o-realtime-preview",
-              "gpt-4o-realtime-preview-2024-10-01",
-              "gpt-4o-realtime-preview-2024-12-17",
-              "jaigouk/ruby-una-cybertron-7b-v2-bf16:latest",
-              "llama2:13b",
-              "llama2:7b",
-              "llama3.1:8b",
-              "llama3.2:1b",
-              "llama3.2:3b",
-              "llama3.3:70b",
-              "llama3:8b",
-              "llava-llama3:8b",
-              "llava:13b",
-              "llava:34b",
-              "llava:7b",
-              "mistral:7b",
-              "o1-mini",
-              "o1-mini-2024-09-12",
-              "o1-preview",
-              "o1-preview-2024-09-12",
-              "omni-moderation-2024-09-26",
-              "omni-moderation-latest",
-              "openthinker:32b",
-              "openthinker:7b",
-              "phi4:latest",
-              "smollm2:1.7b",
-              "smollm2:135m",
-              "smollm2:360m",
-              "smollm:135m",
-              "starcoder2:15b",
-              "starcoder2:7b",
-              "text-embedding-3-large",
-              "text-embedding-3-small",
-              "text-embedding-ada-002",
-              "tts-1",
-              "tts-1-1106",
-              "tts-1-hd",
-              "tts-1-hd-1106",
-              "whisper-1"
+              "claude-opus-4-1-20250805",
+              "claude-opus-4-20250514",
+              "claude-sonnet-4-20250514"
             ]
           }
         },
@@ -2757,14 +3147,7 @@
           "error": "Foobara::Value::Processor::Casting::CannotCastError",
           "processor_manifest_data": {
             "casting": {
-              "cast_to": {
-                "one_of": [
-                  "anthropic",
-                  "ollama",
-                  "open-ai"
-                ],
-                "type": "symbol"
-              }
+              "cast_to": "Foobara::Ai::AnswerBot::service_enum"
             }
           }
         },
@@ -2808,8 +3191,8 @@
           "processor_class": "attributes::SupportedProcessors::ElementTypeDeclarations",
           "processor_manifest_data": {
             "element_type_declarations": {
-              "id": "Foobara::Ai::AnswerBot::model",
-              "service": "Foobara::Ai::AnswerBot::service"
+              "id": "Foobara::Ai::AnswerBot::model_enum",
+              "service": "Foobara::Ai::AnswerBot::service_enum"
             }
           }
         }
@@ -2819,8 +3202,8 @@
         "Foobara::Ai::AnswerBot::Types::Model"
       ],
       "types_depended_on": [
-        "Foobara::Ai::AnswerBot::model",
-        "Foobara::Ai::AnswerBot::service",
+        "Foobara::Ai::AnswerBot::model_enum",
+        "Foobara::Ai::AnswerBot::service_enum",
         "array",
         "attributes",
         "duck",
@@ -2844,14 +3227,14 @@
           "model::Casters::Hash"
         ],
         "validator_classes": [
-          "model::Validators::AttributesDeclaration"
+          "model::Validators::ModelInstanceIsValid"
         ]
       },
       "attributes_type": {
         "type": "attributes",
         "element_type_declarations": {
-          "id": "Foobara::Ai::AnswerBot::model",
-          "service": "Foobara::Ai::AnswerBot::service"
+          "id": "Foobara::Ai::AnswerBot::model_enum",
+          "service": "Foobara::Ai::AnswerBot::service_enum"
         },
         "required": [
           "id",
@@ -2864,22 +3247,22 @@
       "model_base_class": "Foobara::Model",
       "model_class": "Foobara::Ai::AnswerBot::Types::Model"
     },
-    "Foobara::Ai::AnswerBot::model": {
+    "Foobara::Ai::AnswerBot::model_enum": {
       "scoped_path": [
-        "model"
+        "model_enum"
       ],
-      "scoped_name": "model",
-      "scoped_short_name": "model",
+      "scoped_name": "model_enum",
+      "scoped_short_name": "model_enum",
       "scoped_prefix": null,
       "scoped_full_path": [
         "Foobara",
         "Ai",
         "AnswerBot",
-        "model"
+        "model_enum"
       ],
-      "scoped_full_name": "Foobara::Ai::AnswerBot::model",
+      "scoped_full_name": "Foobara::Ai::AnswerBot::model_enum",
       "scoped_category": "type",
-      "reference": "Foobara::Ai::AnswerBot::model",
+      "reference": "Foobara::Ai::AnswerBot::model_enum",
       "domain": "Foobara::Ai::AnswerBot",
       "organization": "Foobara::Ai",
       "parent": [
@@ -2888,105 +3271,15 @@
       ],
       "declaration_data": {
         "one_of": [
-          "babbage-002",
-          "bakllava:7b",
-          "chatgpt-4o-latest",
-          "claude-2.0",
-          "claude-2.1",
           "claude-3-5-haiku-20241022",
           "claude-3-5-sonnet-20240620",
           "claude-3-5-sonnet-20241022",
           "claude-3-7-sonnet-20250219",
           "claude-3-haiku-20240307",
           "claude-3-opus-20240229",
-          "claude-3-sonnet-20240229",
-          "codegemma:2b",
-          "codegemma:7b",
-          "codellama:34b",
-          "codestral:22b",
-          "dall-e-2",
-          "dall-e-3",
-          "davinci-002",
-          "deepseek-coder-v2:16b",
-          "deepseek-r1:1.5b",
-          "deepseek-r1:14b",
-          "deepseek-r1:14b-qwen-distill-q8_0",
-          "deepseek-r1:32b",
-          "deepseek-r1:32b-qwen-distill-q4_K_M",
-          "deepseek-r1:70b",
-          "deepseek-r1:7b",
-          "deepseek-r1:8b",
-          "deepseek-r1:8b-llama-distill-fp16",
-          "gemma2:27b",
-          "gemma2:2b",
-          "gemma2:9b",
-          "gemma:2b",
-          "gemma:7b",
-          "gpt-3.5-turbo",
-          "gpt-3.5-turbo-0125",
-          "gpt-3.5-turbo-1106",
-          "gpt-3.5-turbo-16k",
-          "gpt-3.5-turbo-instruct",
-          "gpt-3.5-turbo-instruct-0914",
-          "gpt-4",
-          "gpt-4-0125-preview",
-          "gpt-4-0613",
-          "gpt-4-1106-preview",
-          "gpt-4-turbo",
-          "gpt-4-turbo-2024-04-09",
-          "gpt-4-turbo-preview",
-          "gpt-4o",
-          "gpt-4o-2024-05-13",
-          "gpt-4o-2024-08-06",
-          "gpt-4o-2024-11-20",
-          "gpt-4o-audio-preview",
-          "gpt-4o-audio-preview-2024-10-01",
-          "gpt-4o-audio-preview-2024-12-17",
-          "gpt-4o-mini",
-          "gpt-4o-mini-2024-07-18",
-          "gpt-4o-mini-audio-preview",
-          "gpt-4o-mini-audio-preview-2024-12-17",
-          "gpt-4o-mini-realtime-preview",
-          "gpt-4o-mini-realtime-preview-2024-12-17",
-          "gpt-4o-realtime-preview",
-          "gpt-4o-realtime-preview-2024-10-01",
-          "gpt-4o-realtime-preview-2024-12-17",
-          "jaigouk/ruby-una-cybertron-7b-v2-bf16:latest",
-          "llama2:13b",
-          "llama2:7b",
-          "llama3.1:8b",
-          "llama3.2:1b",
-          "llama3.2:3b",
-          "llama3.3:70b",
-          "llama3:8b",
-          "llava-llama3:8b",
-          "llava:13b",
-          "llava:34b",
-          "llava:7b",
-          "mistral:7b",
-          "o1-mini",
-          "o1-mini-2024-09-12",
-          "o1-preview",
-          "o1-preview-2024-09-12",
-          "omni-moderation-2024-09-26",
-          "omni-moderation-latest",
-          "openthinker:32b",
-          "openthinker:7b",
-          "phi4:latest",
-          "smollm2:1.7b",
-          "smollm2:135m",
-          "smollm2:360m",
-          "smollm:135m",
-          "starcoder2:15b",
-          "starcoder2:7b",
-          "text-embedding-3-large",
-          "text-embedding-3-small",
-          "text-embedding-ada-002",
-          "tts-1",
-          "tts-1-1106",
-          "tts-1-hd",
-          "tts-1-hd-1106",
-          "whisper-1"
+          "claude-opus-4-1-20250805",
+          "claude-opus-4-20250514",
+          "claude-sonnet-4-20250514"
         ],
         "type": "symbol"
       },
@@ -2999,110 +3292,7 @@
           "processor_class": "Foobara::Value::Processor::Casting",
           "processor_manifest_data": {
             "casting": {
-              "cast_to": {
-                "one_of": [
-                  "babbage-002",
-                  "bakllava:7b",
-                  "chatgpt-4o-latest",
-                  "claude-2.0",
-                  "claude-2.1",
-                  "claude-3-5-haiku-20241022",
-                  "claude-3-5-sonnet-20240620",
-                  "claude-3-5-sonnet-20241022",
-                  "claude-3-7-sonnet-20250219",
-                  "claude-3-haiku-20240307",
-                  "claude-3-opus-20240229",
-                  "claude-3-sonnet-20240229",
-                  "codegemma:2b",
-                  "codegemma:7b",
-                  "codellama:34b",
-                  "codestral:22b",
-                  "dall-e-2",
-                  "dall-e-3",
-                  "davinci-002",
-                  "deepseek-coder-v2:16b",
-                  "deepseek-r1:1.5b",
-                  "deepseek-r1:14b",
-                  "deepseek-r1:14b-qwen-distill-q8_0",
-                  "deepseek-r1:32b",
-                  "deepseek-r1:32b-qwen-distill-q4_K_M",
-                  "deepseek-r1:70b",
-                  "deepseek-r1:7b",
-                  "deepseek-r1:8b",
-                  "deepseek-r1:8b-llama-distill-fp16",
-                  "gemma2:27b",
-                  "gemma2:2b",
-                  "gemma2:9b",
-                  "gemma:2b",
-                  "gemma:7b",
-                  "gpt-3.5-turbo",
-                  "gpt-3.5-turbo-0125",
-                  "gpt-3.5-turbo-1106",
-                  "gpt-3.5-turbo-16k",
-                  "gpt-3.5-turbo-instruct",
-                  "gpt-3.5-turbo-instruct-0914",
-                  "gpt-4",
-                  "gpt-4-0125-preview",
-                  "gpt-4-0613",
-                  "gpt-4-1106-preview",
-                  "gpt-4-turbo",
-                  "gpt-4-turbo-2024-04-09",
-                  "gpt-4-turbo-preview",
-                  "gpt-4o",
-                  "gpt-4o-2024-05-13",
-                  "gpt-4o-2024-08-06",
-                  "gpt-4o-2024-11-20",
-                  "gpt-4o-audio-preview",
-                  "gpt-4o-audio-preview-2024-10-01",
-                  "gpt-4o-audio-preview-2024-12-17",
-                  "gpt-4o-mini",
-                  "gpt-4o-mini-2024-07-18",
-                  "gpt-4o-mini-audio-preview",
-                  "gpt-4o-mini-audio-preview-2024-12-17",
-                  "gpt-4o-mini-realtime-preview",
-                  "gpt-4o-mini-realtime-preview-2024-12-17",
-                  "gpt-4o-realtime-preview",
-                  "gpt-4o-realtime-preview-2024-10-01",
-                  "gpt-4o-realtime-preview-2024-12-17",
-                  "jaigouk/ruby-una-cybertron-7b-v2-bf16:latest",
-                  "llama2:13b",
-                  "llama2:7b",
-                  "llama3.1:8b",
-                  "llama3.2:1b",
-                  "llama3.2:3b",
-                  "llama3.3:70b",
-                  "llama3:8b",
-                  "llava-llama3:8b",
-                  "llava:13b",
-                  "llava:34b",
-                  "llava:7b",
-                  "mistral:7b",
-                  "o1-mini",
-                  "o1-mini-2024-09-12",
-                  "o1-preview",
-                  "o1-preview-2024-09-12",
-                  "omni-moderation-2024-09-26",
-                  "omni-moderation-latest",
-                  "openthinker:32b",
-                  "openthinker:7b",
-                  "phi4:latest",
-                  "smollm2:1.7b",
-                  "smollm2:135m",
-                  "smollm2:360m",
-                  "smollm:135m",
-                  "starcoder2:15b",
-                  "starcoder2:7b",
-                  "text-embedding-3-large",
-                  "text-embedding-3-small",
-                  "text-embedding-ada-002",
-                  "tts-1",
-                  "tts-1-1106",
-                  "tts-1-hd",
-                  "tts-1-hd-1106",
-                  "whisper-1"
-                ],
-                "type": "symbol"
-              }
+              "cast_to": "Foobara::Ai::AnswerBot::model_enum"
             }
           }
         },
@@ -3114,105 +3304,15 @@
           "processor_class": "duck::SupportedValidators::OneOf",
           "processor_manifest_data": {
             "one_of": [
-              "babbage-002",
-              "bakllava:7b",
-              "chatgpt-4o-latest",
-              "claude-2.0",
-              "claude-2.1",
               "claude-3-5-haiku-20241022",
               "claude-3-5-sonnet-20240620",
               "claude-3-5-sonnet-20241022",
               "claude-3-7-sonnet-20250219",
               "claude-3-haiku-20240307",
               "claude-3-opus-20240229",
-              "claude-3-sonnet-20240229",
-              "codegemma:2b",
-              "codegemma:7b",
-              "codellama:34b",
-              "codestral:22b",
-              "dall-e-2",
-              "dall-e-3",
-              "davinci-002",
-              "deepseek-coder-v2:16b",
-              "deepseek-r1:1.5b",
-              "deepseek-r1:14b",
-              "deepseek-r1:14b-qwen-distill-q8_0",
-              "deepseek-r1:32b",
-              "deepseek-r1:32b-qwen-distill-q4_K_M",
-              "deepseek-r1:70b",
-              "deepseek-r1:7b",
-              "deepseek-r1:8b",
-              "deepseek-r1:8b-llama-distill-fp16",
-              "gemma2:27b",
-              "gemma2:2b",
-              "gemma2:9b",
-              "gemma:2b",
-              "gemma:7b",
-              "gpt-3.5-turbo",
-              "gpt-3.5-turbo-0125",
-              "gpt-3.5-turbo-1106",
-              "gpt-3.5-turbo-16k",
-              "gpt-3.5-turbo-instruct",
-              "gpt-3.5-turbo-instruct-0914",
-              "gpt-4",
-              "gpt-4-0125-preview",
-              "gpt-4-0613",
-              "gpt-4-1106-preview",
-              "gpt-4-turbo",
-              "gpt-4-turbo-2024-04-09",
-              "gpt-4-turbo-preview",
-              "gpt-4o",
-              "gpt-4o-2024-05-13",
-              "gpt-4o-2024-08-06",
-              "gpt-4o-2024-11-20",
-              "gpt-4o-audio-preview",
-              "gpt-4o-audio-preview-2024-10-01",
-              "gpt-4o-audio-preview-2024-12-17",
-              "gpt-4o-mini",
-              "gpt-4o-mini-2024-07-18",
-              "gpt-4o-mini-audio-preview",
-              "gpt-4o-mini-audio-preview-2024-12-17",
-              "gpt-4o-mini-realtime-preview",
-              "gpt-4o-mini-realtime-preview-2024-12-17",
-              "gpt-4o-realtime-preview",
-              "gpt-4o-realtime-preview-2024-10-01",
-              "gpt-4o-realtime-preview-2024-12-17",
-              "jaigouk/ruby-una-cybertron-7b-v2-bf16:latest",
-              "llama2:13b",
-              "llama2:7b",
-              "llama3.1:8b",
-              "llama3.2:1b",
-              "llama3.2:3b",
-              "llama3.3:70b",
-              "llama3:8b",
-              "llava-llama3:8b",
-              "llava:13b",
-              "llava:34b",
-              "llava:7b",
-              "mistral:7b",
-              "o1-mini",
-              "o1-mini-2024-09-12",
-              "o1-preview",
-              "o1-preview-2024-09-12",
-              "omni-moderation-2024-09-26",
-              "omni-moderation-latest",
-              "openthinker:32b",
-              "openthinker:7b",
-              "phi4:latest",
-              "smollm2:1.7b",
-              "smollm2:135m",
-              "smollm2:360m",
-              "smollm:135m",
-              "starcoder2:15b",
-              "starcoder2:7b",
-              "text-embedding-3-large",
-              "text-embedding-3-small",
-              "text-embedding-ada-002",
-              "tts-1",
-              "tts-1-1106",
-              "tts-1-hd",
-              "tts-1-hd-1106",
-              "whisper-1"
+              "claude-opus-4-1-20250805",
+              "claude-opus-4-20250514",
+              "claude-sonnet-4-20250514"
             ]
           }
         }
@@ -3248,22 +3348,22 @@
         ]
       }
     },
-    "Foobara::Ai::AnswerBot::service": {
+    "Foobara::Ai::AnswerBot::service_enum": {
       "scoped_path": [
-        "service"
+        "service_enum"
       ],
-      "scoped_name": "service",
-      "scoped_short_name": "service",
+      "scoped_name": "service_enum",
+      "scoped_short_name": "service_enum",
       "scoped_prefix": null,
       "scoped_full_path": [
         "Foobara",
         "Ai",
         "AnswerBot",
-        "service"
+        "service_enum"
       ],
-      "scoped_full_name": "Foobara::Ai::AnswerBot::service",
+      "scoped_full_name": "Foobara::Ai::AnswerBot::service_enum",
       "scoped_category": "type",
-      "reference": "Foobara::Ai::AnswerBot::service",
+      "reference": "Foobara::Ai::AnswerBot::service_enum",
       "domain": "Foobara::Ai::AnswerBot",
       "organization": "Foobara::Ai",
       "parent": [
@@ -3287,14 +3387,7 @@
           "processor_class": "Foobara::Value::Processor::Casting",
           "processor_manifest_data": {
             "casting": {
-              "cast_to": {
-                "one_of": [
-                  "anthropic",
-                  "ollama",
-                  "open-ai"
-                ],
-                "type": "symbol"
-              }
+              "cast_to": "Foobara::Ai::AnswerBot::service_enum"
             }
           }
         },
@@ -3350,7 +3443,7 @@
       ],
       "scoped_name": "array",
       "scoped_short_name": "array",
-      "scoped_prefix": null,
+      "scoped_prefix": [],
       "scoped_full_path": [
         "array"
       ],
@@ -3417,7 +3510,7 @@
       ],
       "scoped_name": "associative_array",
       "scoped_short_name": "associative_array",
-      "scoped_prefix": null,
+      "scoped_prefix": [],
       "scoped_full_path": [
         "associative_array"
       ],
@@ -3485,7 +3578,7 @@
       ],
       "scoped_name": "atomic_duck",
       "scoped_short_name": "atomic_duck",
-      "scoped_prefix": null,
+      "scoped_prefix": [],
       "scoped_full_path": [
         "atomic_duck"
       ],
@@ -3540,7 +3633,7 @@
       ],
       "scoped_name": "attributes",
       "scoped_short_name": "attributes",
-      "scoped_prefix": null,
+      "scoped_prefix": [],
       "scoped_full_path": [
         "attributes"
       ],
@@ -3614,7 +3707,7 @@
       ],
       "scoped_name": "duck",
       "scoped_short_name": "duck",
-      "scoped_prefix": null,
+      "scoped_prefix": [],
       "scoped_full_path": [
         "duck"
       ],
@@ -3668,7 +3761,7 @@
       ],
       "scoped_name": "duckture",
       "scoped_short_name": "duckture",
-      "scoped_prefix": null,
+      "scoped_prefix": [],
       "scoped_full_path": [
         "duckture"
       ],
@@ -3717,13 +3810,81 @@
         "duck::SupportedValidators::OneOf"
       ]
     },
+    "float": {
+      "scoped_path": [
+        "float"
+      ],
+      "scoped_name": "float",
+      "scoped_short_name": "float",
+      "scoped_prefix": [],
+      "scoped_full_path": [
+        "float"
+      ],
+      "scoped_full_name": "float",
+      "scoped_category": "type",
+      "reference": "float",
+      "domain": "global_organization::global_domain",
+      "organization": "global_organization",
+      "parent": [
+        "domain",
+        "global_organization::global_domain"
+      ],
+      "declaration_data": "float",
+      "possible_errors": {
+        "data.cannot_cast": {
+          "category": "data",
+          "symbol": "cannot_cast",
+          "key": "data.cannot_cast",
+          "error": "Foobara::Value::Processor::Casting::CannotCastError",
+          "processor_class": "Foobara::Value::Processor::Casting",
+          "processor_manifest_data": {
+            "casting": {
+              "cast_to": "float"
+            }
+          }
+        }
+      },
+      "name": "float",
+      "target_classes": [
+        "Float"
+      ],
+      "types_depended_on": [
+        "array",
+        "attributes",
+        "duck",
+        "number",
+        "symbol"
+      ],
+      "builtin": true,
+      "description": "Built-in float type",
+      "base_type": "number",
+      "supported_casters": [
+        "duck::SupportedCasters::AllowNil"
+      ],
+      "supported_validators": [
+        "duck::SupportedValidators::InstanceOf",
+        "duck::SupportedValidators::OneOf",
+        "number::SupportedValidators::Max",
+        "number::SupportedValidators::Min"
+      ],
+      "processors": {
+        "casters": [
+          "float::Casters::integer",
+          "float::Casters::string"
+        ],
+        "caster_classes": [
+          "float::Casters::Integer",
+          "float::Casters::String"
+        ]
+      }
+    },
     "integer": {
       "scoped_path": [
         "integer"
       ],
       "scoped_name": "integer",
       "scoped_short_name": "integer",
-      "scoped_prefix": null,
+      "scoped_prefix": [],
       "scoped_full_path": [
         "integer"
       ],
@@ -3789,7 +3950,7 @@
       ],
       "scoped_name": "model",
       "scoped_short_name": "model",
-      "scoped_prefix": null,
+      "scoped_prefix": [],
       "scoped_full_path": [
         "model"
       ],
@@ -3843,7 +4004,7 @@
           "model::Casters::Hash"
         ],
         "validator_classes": [
-          "model::Validators::AttributesDeclaration"
+          "model::Validators::ModelInstanceIsValid"
         ]
       }
     },
@@ -3853,7 +4014,7 @@
       ],
       "scoped_name": "number",
       "scoped_short_name": "number",
-      "scoped_prefix": null,
+      "scoped_prefix": [],
       "scoped_full_path": [
         "number"
       ],
@@ -3911,7 +4072,7 @@
       ],
       "scoped_name": "string",
       "scoped_short_name": "string",
-      "scoped_prefix": null,
+      "scoped_prefix": [],
       "scoped_full_path": [
         "string"
       ],
@@ -3982,7 +4143,7 @@
       ],
       "scoped_name": "symbol",
       "scoped_short_name": "symbol",
-      "scoped_prefix": null,
+      "scoped_prefix": [],
       "scoped_full_path": [
         "symbol"
       ],
@@ -4041,7 +4202,8 @@
     }
   },
   "metadata": {
-    "when": "2025-02-26 13:11:08 -0800",
-    "url": "http://localhost:9292/manifest"
+    "when": "2025-08-25 21:23:03 -0700",
+    "foobara_version": "0.1.6",
+    "url": "http://localhost:9292/manifest?detached=false&include_processors=true"
   }
 }
