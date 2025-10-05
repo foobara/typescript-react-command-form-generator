@@ -1,3 +1,7 @@
+## [1.1.1] - 2025-10-05
+
+- Allow using non-absolute command names
+
 ## [1.1.0] - 2025-08-22
 
 - Handle new Foobara 0.1.0 type declarations

@@ -27,6 +27,17 @@ RSpec.describe Foobara::Generators::TypescriptReactCommandFormGenerator::WriteTy
     ).to include("const [firstName, setFirstName] = useState<string | undefined>(undefined)")
   end
 
+  context "with a partial command name" do
+    let(:command_name) { "CommandWithDomainButNoOrg" }
+
+    it "is success" do
+      expect(outcome).to be_success
+      expect(
+        command.paths_to_source_code.keys
+      ).to include("forms/SomeDomainWithoutOrg/CommandWithDomainButNoOrgForm.tsx")
+    end
+  end
+
   context "without a manifest or url" do
     let(:raw_manifest) { nil }
 
