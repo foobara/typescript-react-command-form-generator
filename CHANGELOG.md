@@ -1,3 +1,7 @@
+## [1.2.0] - 2026-02-26
+
+- Handle recent changes in foobara-typescript-remote-command-generator
+
 ## [1.1.1] - 2025-10-05
 
 - Allow using non-absolute command names

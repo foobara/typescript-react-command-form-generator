@@ -74,6 +74,10 @@ module Foobara
         def add_command_manifest_to_set_of_elements_to_generate
           elements_to_generate << command_manifest
         end
+
+        # We don't need this behavior from WriteTypescriptToDisk so we removed its input,
+        # but it will explode if we don't provide it to inherited code
+        def auto_dirty_queries = nil
       end
     end
   end

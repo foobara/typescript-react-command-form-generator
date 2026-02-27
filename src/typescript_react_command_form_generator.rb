@@ -2,7 +2,7 @@ module Foobara
   module Generators
     module TypescriptReactCommandFormGenerator
       module Generators
-        class TypescriptReactCommandFormGenerator < RemoteGenerator::Services::TypescriptFromManifestBaseGenerator
+        class TypescriptReactCommandFormGenerator < RemoteGenerator::Generators::TypescriptFromManifestBaseGenerator
           class << self
             def manifest_to_generator_classes(manifest)
               case manifest
@@ -29,7 +29,7 @@ module Foobara
           end
 
           def command_generator
-            @command_generator ||= RemoteGenerator::Services::CommandGenerator.new(command_manifest)
+            @command_generator ||= RemoteGenerator::Generators::CommandGenerator.new(command_manifest)
           end
 
           def type_generators(type_declaration = inputs_type, initial = true)
@@ -43,11 +43,11 @@ module Foobara
                            # :nocov:
                            type_generators(type_declaration.to_type.primary_key_type, false)
                            # :nocov:
-                           # generator_class = RemoteGenerator::Services::UnloadedEntityGenerator
+                           # generator_class = RemoteGenerator::Generators::UnloadedEntityGenerator
                            # [generator_class.new(type_declaration.to_entity)]
                          elsif type_declaration.model?
                            type_generators(type_declaration.to_type.attributes_type, false)
-                           # generator_class = RemoteGenerator::Services::AtomModelGenerator
+                           # generator_class = RemoteGenerator::Generators::AtomModelGenerator
                            # [generator_class.new(type_declaration.to_model)]
                          elsif type_declaration.type.to_sym == :attributes
                            type_declaration.attribute_declarations.values.map do |attribute_declaration|

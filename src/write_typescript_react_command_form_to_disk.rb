@@ -22,7 +22,8 @@ module Foobara
           raw_manifest :associative_array, :allow_nil
           manifest_url :string, :allow_nil
           command_name :string, :required
-          output_directory :string
+          output_directory :string, default: "src/domains"
+          fail_if_does_not_pass_linter :boolean, default: false
         end
 
         depends_on GenerateTypescriptReactCommandForm
@@ -59,16 +60,6 @@ module Foobara
           end
         end
 
-        def output_directory
-          inputs[:output_directory] || default_output_directory
-        end
-
-        def default_output_directory
-          # :nocov:
-          "src/domains"
-          # :nocov:
-        end
-
         def generate_typescript
           # TODO: we need a way to allow values to be nil in type declarations
           inputs = raw_manifest ? { raw_manifest: } : { manifest_url: }
@@ -80,6 +71,10 @@ module Foobara
         def run_post_generation_tasks
           eslint_fix
         end
+
+        # We don't need this behavior from WriteTypescriptToDisk so we removed its input,
+        # but it will explode if we don't provide it to inherited code
+        def auto_dirty_queries = nil
       end
     end
   end
