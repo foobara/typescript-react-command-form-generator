@@ -1,3 +1,7 @@
+## [1.3.0] - 2026-03-19
+
+- Handle recent lint rules related to the Vite -> CRA move
+
 ## [1.2.0] - 2026-02-26
 
 - Handle recent changes in foobara-typescript-remote-command-generator
