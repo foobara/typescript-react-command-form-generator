@@ -11,9 +11,9 @@ module Foobara
                   Generators::TypescriptReactCommandFormGenerator
                 ]
               else
-                # :nocov:
+                # simplecov:disable
                 super
-                # :nocov:
+                # simplecov:enable
               end
             end
           end
@@ -40,9 +40,9 @@ module Foobara
                            # This simplifies things a bit re: form generation and setting UI
                            # inputs into the inputs value.
                            # TODO: test this path or delete it if unreachable!
-                           # :nocov:
+                           # simplecov:disable
                            type_generators(type_declaration.to_type.primary_key_type, false)
-                           # :nocov:
+                           # simplecov:enable
                            # generator_class = RemoteGenerator::Generators::UnloadedEntityGenerator
                            # [generator_class.new(type_declaration.to_entity)]
                          elsif type_declaration.model?
@@ -113,9 +113,9 @@ module Foobara
             elsif type_declaration.detached_entity?
               # TODO: figure out how to not pass self here...
               # TODO: test this path or delete it if unreachable!
-              # :nocov:
+              # simplecov:disable
               result << FlattenedAttribute.new(self, path, type_declaration.to_type.primary_key_type)
-              # :nocov:
+              # simplecov:enable
             elsif type_declaration.model?
               non_colliding_inputs(type_declaration.to_type.attributes_type, result, path)
             elsif type_declaration.array?
@@ -167,9 +167,9 @@ module Foobara
             elsif result.is_a?(::String)
               result
             else
-              # :nocov:
+              # simplecov:disable
               raise "Not sure how to handle #{result}"
-              # :nocov:
+              # simplecov:enable
             end
           end
 
@@ -260,9 +260,9 @@ module Foobara
                                "parseInt(e.target.value)"
                              elsif type.name.to_s == "float" || type.extends_symbol?(:float)
                                # TODO: test this path
-                               # :nocov:
+                               # simplecov:disable
                                "parseFloat(e.target.value)"
-                               # :nocov:
+                               # simplecov:enable
                              else
                                ts_type = generator.foobara_type_to_ts_type(type_declaration)
                                "e.target.value as #{ts_type}"
